@@ -1,13 +1,13 @@
 @extends('partial.main')
 
 @section('title', 'View Form')
-    
+
 @section('content')
 
 <div class="col d-flex justify-content-center">
 
   <div class="col-lg-5">
-    
+
     <div class="card">
         @foreach ($form as $forms)
         <div class="text-center pt-2">
@@ -16,7 +16,7 @@
 @endphp
           <a class="btn btn-outline-success btn-sm" href="{{ route('form.publish', ['type' => $forms->type , 'id' => Auth::user()->id]) }}" target="_blank">Publish Form</a>
           <!-- Readonly input field styled like a label to store the link -->
-         
+
 
           <button id="copyLinkBtn" class="btn btn-outline-primary btn-sm">Copy Link</button>
           <input type="text" id="formLink" value="http://e-form.lashility.com/form-publish/{{$forms->type}}/{{Auth::user()->id}}" readonly>
@@ -25,7 +25,7 @@
         <center><img style="padding-top: 30px" width="300" height="100" src="{{asset('images/Artboard-5.png')}}" alt=""></center>
               <h5 class="card-title text-center formType">{{$forms->type}} Form <span>(Created by: {{$forms->user->name}})</span></h5>
               <hr>
-             
+
                   @php
                      $fieldsData = json_decode($forms->fields, true);
                   @endphp
@@ -57,30 +57,30 @@
                             {{ $field['label'] }}
                           </label>
                         </div>
-                       
+
                           @elseif ($field['type'] === 'text')
                               <div class="col-12 pt-2 fieldType">
                                 @if (isset($field['approval']))
                                     <input class="formFieldHide" name="approval" type="approval" value="{{$field['approval']}}">
                                 @else
-                                    
+
                                 @endif
                                 <label for="inputText" class="form-label"><b>{{ $field['label'] }}</b></label>
                                 <input type="text" name="text" class="form-control val">
                                 <input type="{{$field['type']}}" class="inputType formFieldHide">
-                                
+
                               </div><br>
                           @elseif ($field['type'] === 'email')
                               <div class="col-12 pt-2 fieldType">
                                 @if (isset($field['approval']))
                                     <input class="formFieldHide" name="approval" type="approval" value="{{$field['approval']}}">
                                 @else
-                                    
+
                                 @endif
                                 <label for="inputText" class="form-label"><b>{{ $field['label'] }}</b></label>
                                 <input type="text" name="text" class="form-control val">
                                 <input type="{{$field['type']}}" class="inputType formFieldHide">
-                                
+
                               </div><br>
                           @elseif ($field['type'] === 'textarea')
                               <div class="col-12 pt-2 fieldType">
@@ -96,7 +96,7 @@
                               </div><br>
                           @elseif ($field['type'] === 'date')
                               <div class="col-12 pt-2 fieldType">
-                                <label for="inputDate" class="form-label"><b>{{$field['label']}}</b></label>                              
+                                <label for="inputDate" class="form-label"><b>{{$field['label']}}</b></label>
                                 <input type="date" class="form-control val" name="date">
                                 <input type="{{$field['type']}}" class="inputType formFieldHide">
                               </div><br>
@@ -106,7 +106,7 @@
                                 <input type="time" class="form-control val" name="time">
                                 <input type="{{$field['type']}}" class="inputType formFieldHide">
                               </div><br>
-                          @elseif ($field['type'] === 'select') 
+                          @elseif ($field['type'] === 'select')
                               <div class="col-12 pt-2 fieldType">
                                 <label class="form-label"><b>{{$field['label']}}</b></label>
                                   <select class="form-select val" aria-label="Default select example" name="select">
@@ -157,36 +157,36 @@
                                     <div id="mapGetLocation"></div>
                                     <input type="{{$field['type']}}" class="inputType formFieldHide">
                                 </div>
-                                
+
                                  <script>
                                     // Declare the map variable outside the function for global access
                                    // Declare the marker variable
-                               
+
                                    // Function to initialize the map and marker
                                    function initMap(currentLocation) {
                                       var mapGet = new google.maps.Map(document.getElementById('mapGetLocation'), {
                                            center: currentLocation,
                                            zoom: 15
                                        });
-                               
+
                                        // Add a draggable marker for the current location
                                       var markerGet = new google.maps.Marker({
                                            position: currentLocation,
                                            map: mapGet,
                                            draggable: true
                                        });
-                               
+
                                        // Handle marker dragend event
                                        markerGet.addListener('dragend', function(event) {
                                            const updatedLatLng = event.latLng;
                                            const lat = updatedLatLng.lat().toFixed(6);
                                            const lng = updatedLatLng.lng().toFixed(6);
-                               
+
                                            // Update displayed coordinates and location name
                                            reverseGeocodeGet(updatedLatLng, lat, lng);
                                        });
                                    }
-                               
+
                                    // Function to get the current location
                                    function getCurrentLocationCurrent() {
                                        if (navigator.geolocation) {
@@ -194,10 +194,10 @@
                                                var latitude = position.coords.latitude;
                                                var longitude = position.coords.longitude;
                                                var currentLocation = { lat: latitude, lng: longitude };
-                               
+
                                                // Display the coordinates and location name
                                                reverseGeocodeGet(currentLocation, latitude, longitude);
-                               
+
                                                // Initialize the map with draggable marker
                                                initMap(currentLocation);
                                            }, function(error) {
@@ -207,7 +207,7 @@
                                            console.error("Geolocation is not supported by this browser.");
                                        }
                                    }
-                               
+
                                    // Function to reverse geocode the coordinates and display location name
                                    function reverseGeocodeGet(location, lat, lng) {
                                        var geocoder = new google.maps.Geocoder();
@@ -222,7 +222,7 @@
                                            }
                                        });
                                    }
-                               
+
                                    // Call the function to get the current location when the button is clicked
                                    document.getElementById("getLocationBtnGetLocation").addEventListener("click", getCurrentLocationCurrent);
                                </script>
@@ -239,7 +239,7 @@
                                      <p id="locationName{{$field['fieldID']}}"></p>
                                      <div id="map{{$field['fieldID']}}" style="height: 400px;"></div>
                                      <input type="{{$field['type']}}" class="inputType formFieldHide">
-                                     
+
                                </div><br>
 
                           @elseif ($field['type'] === 'hidden')
@@ -256,7 +256,7 @@
                                          <input type="hidden" name="starrating" id="rating-value">
                                          <input type="{{$field['type']}}" class="inputType formFieldHide">
                                    </div>
-                               
+
                                </div><br>
                           @elseif ($field['type'] === 'text youtube')
                             <div class="col-12 pt-2 fieldType">
@@ -302,30 +302,30 @@
                              <canvas class="canvasBack" name="signature" id="signatureCanvas" width="400" height="200"></canvas>
                              <br>
                              <button id="clearButton">Clear</button>
-                             
+
                              <input type="{{$field['type']}}" class="inputType formFieldHide">
                           </div>
                         </div>
                           @endif
-                          
+
                         @endforeach
                       </div>
                     @endforeach
                   @else
                       No fields
                   @endif
-                  
-                       
-                 
-                    
-              
-                  
+
+
+
+
+
+
                   <div class="d-grid gap-2 d-md-flex justify-content-center pt-2 mb-4">
                     <button type="button" class="btn btn-primary" id="prev-btn" onclick="navigatePage(-1)">Previous</button>
                     <button type="button" class="btn btn-primary" id="next-btn" onclick="navigatePage(1)">Next</button>
                     <button type="button" class="btn btn-success" id="submit" style="display: none;">Submit</button>
                   </div>
-                  
+
                 <!-- End General Form Elements -->
       @endforeach
 
@@ -399,7 +399,7 @@
 
 
 
-<script> 
+<script>
 document.addEventListener('DOMContentLoaded', function () {
     const canvas = document.getElementById('signatureCanvas');
     const clearButton = document.getElementById('clearButton');
@@ -408,7 +408,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const context = canvas.getContext('2d');
     let isDrawing = false;
-    
+
     canvas.addEventListener('mousedown', (event) => {
         isDrawing = true;
         const x = event.clientX - canvas.getBoundingClientRect().left;
@@ -456,7 +456,7 @@ document.addEventListener('DOMContentLoaded', function () {
        new google.maps.LatLng(-1.0, 99.6),
        new google.maps.LatLng(7.4, 119.3)
    );
- 
+
    const maps = {}; // Create an object to store map instances
 
 function initMap(fieldIDMap) {
@@ -501,10 +501,10 @@ function addMarker(lat, lng, fieldIDMap) {
 }
 
 
- 
+
    function reverseGeocode(latLng, fieldIDMap) {
        const geocoder = new google.maps.Geocoder();
- 
+
        geocoder.geocode({ location: latLng }, (results, status) => {
            if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
                const locationNameElement = document.getElementById('locationName' + fieldIDMap);
@@ -512,14 +512,14 @@ function addMarker(lat, lng, fieldIDMap) {
            }
        });
    }
- 
+
    function searchLocation() {
     const fieldIDMap = this.getAttribute('data-field-id');
     const searchInput = document.getElementById('searchInput' + fieldIDMap).value;
     const geocoder = new google.maps.Geocoder();
-    
+
     const map = maps[fieldIDMap]; // Retrieve the correct map instance
-    
+
     geocoder.geocode({ address: searchInput }, (results, status) => {
         if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
             const latLng = results[0].geometry.location;
@@ -527,10 +527,10 @@ function addMarker(lat, lng, fieldIDMap) {
             if (malaysiaBounds.contains(latLng)) {
                 map.setCenter(latLng);
                 addMarker(latLng.lat(), latLng.lng(), fieldIDMap);
-                
+
                 const coordinatesElement = document.getElementById('coordinatesSearch' + fieldIDMap);
                 coordinatesElement.textContent = `Latitude: ${latLng.lat().toFixed(6)}, Longitude: ${latLng.lng().toFixed(6)}`;
-                
+
                 reverseGeocode(latLng, fieldIDMap);
             } else {
                 alert('Location is outside of Malaysia.');
@@ -541,7 +541,7 @@ function addMarker(lat, lng, fieldIDMap) {
     });
 }
 
- 
+
    const searchButtonGetAll = document.querySelectorAll('.search-buttonSearch');
     searchButtonGetAll.forEach(function (searchButton) {
     searchButton.addEventListener('click', searchLocation);
@@ -551,7 +551,7 @@ function addMarker(lat, lng, fieldIDMap) {
  </script>
 
 
-  
+
 @endsection
 
 

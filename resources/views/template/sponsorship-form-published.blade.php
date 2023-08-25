@@ -1,13 +1,13 @@
 @extends('partial.publishmain')
 
 @section('title', 'View Form')
-    
+
 @section('content')
 
 <div class="col d-flex justify-content-center">
 
   <div class="col-lg-6">
-    
+
     <div class="card">
       <div id="loading-screen-published" style="display: none;">
         Sending Your Form...  <div class="spinner-border" style="width: 50px; height: 50px;" role="status">
@@ -15,7 +15,7 @@
           </div>
     </div>
         <div class="text-center pt-2">
-          
+
         </div>
 
         <!--<div class="text-center pt-2">
@@ -58,47 +58,47 @@
                                new google.maps.LatLng(-1.0, 99.6),
                                new google.maps.LatLng(7.4, 119.3)
                            );
-                         
+
                            function initMap() {
                                map = new google.maps.Map(document.getElementById('map'), {
                                    center: { lat: 4.2105, lng: 101.9758 }, // Initial focus on Malaysia
                                    zoom: 6
                                });
-                         
+
                                map.addListener('click', (event) => {
                                    addMarker(event.latLng.lat(), event.latLng.lng());
                                });
-                         
+
                                const searchInput = document.getElementById('searchInput');
                                const autocomplete = new google.maps.places.Autocomplete(searchInput);
                            }
-                         
+
                            function addMarker(lat, lng) {
                                if (marker) {
                                    marker.setMap(null); // Remove the previous marker from the map
                                }
-                         
+
                                marker = new google.maps.Marker({
                                    position: { lat: lat, lng: lng },
                                    map: map,
                                    draggable: true
                                });
-                         
+
                                marker.addListener('dragend', (event) => {
                                    const updatedLatLng = event.latLng;
                                    const lat = updatedLatLng.lat().toFixed(6);
                                    const lng = updatedLatLng.lng().toFixed(6);
-                         
+
                                    const coordinatesElement = document.getElementById('coordinatesSearch');
                                    coordinatesElement.textContent = `Latitude: ${lat}, Longitude: ${lng}`;
-                         
+
                                    reverseGeocode(updatedLatLng);
                                });
                            }
-                         
+
                            function reverseGeocode(latLng) {
                                const geocoder = new google.maps.Geocoder();
-                         
+
                                geocoder.geocode({ location: latLng }, (results, status) => {
                                    if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
                                        const locationNameElement = document.getElementById('locationName');
@@ -106,22 +106,22 @@
                                    }
                                });
                            }
-                         
+
                            function searchLocation() {
                                const searchInput = document.getElementById('searchInput').value;
                                const geocoder = new google.maps.Geocoder();
-                         
+
                                geocoder.geocode({ address: searchInput }, (results, status) => {
                                    if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
                                        const latLng = results[0].geometry.location;
-                         
+
                                        if (malaysiaBounds.contains(latLng)) {
                                            map.setCenter(latLng);
                                            addMarker(latLng.lat(), latLng.lng());
-                         
+
                                            const coordinatesElement = document.getElementById('coordinatesSearch');
                                            coordinatesElement.textContent = `Latitude: ${latLng.lat().toFixed(6)}, Longitude: ${latLng.lng().toFixed(6)}`;
-                         
+
                                            reverseGeocode(latLng);
                                        } else {
                                            alert('Location is outside of Malaysia.');
@@ -131,10 +131,10 @@
                                    }
                                });
                            }
-                         
+
                            const searchButton = document.getElementById('searchButton');
                            searchButton.addEventListener('click', searchLocation);
-                         
+
                            initMap();
                          </script>
                     </div><br>
@@ -155,7 +155,7 @@
                             Website
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="gridCheck2" value="Tiktok">
                           <label class="form-check-label">
@@ -168,14 +168,14 @@
                             Google/Social Media
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="gridCheck2" value="Friends">
                           <label class="form-check-label">
                             Friends
                           </label>
                         </div>
-                        
+
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="eventType" value="">
                           <input type="text" placeholder="other" class="form-control" onchange="updateCheckboxValue1(this)">
@@ -184,7 +184,7 @@
                           function updateCheckboxValue1(inputElement) {
                               // Get the checkbox element by ID
                               var checkbox = document.getElementById('eventType');
-                              
+
                               // Set the value of the checkbox to the value of the text input
                               checkbox.value = inputElement.value;
                           }
@@ -199,7 +199,7 @@
                           Bangsar Telawi
                         </label>
                       </div>
-  
+
                       <div class="form-check">
                         <input class="form-check-input" type="radio" id="gridCheck2" value="Bangsar Shopping Mall">
                         <label class="form-check-label">
@@ -212,7 +212,7 @@
                           IOI City Mall
                         </label>
                       </div>
-  
+
                       <div class="form-check">
                         <input class="form-check-input" type="radio" id="gridCheck2" value="My Town">
                         <label class="form-check-label">
@@ -225,14 +225,14 @@
                           Pavilion 2
                         </label>
                       </div>
-  
+
                       <div class="form-check">
                         <input class="form-check-input" type="radio" id="gridCheck2" value="Camp">
                         <label class="form-check-label">
                          Setia City Mall
                         </label>
                       </div>
-                      
+
                   </div><br>
                     <hr>
                     <h2>Questions</h2>
@@ -246,7 +246,7 @@
                             Yes
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="gridCheck2" value="No">
                           <label class="form-check-label">
@@ -263,7 +263,7 @@
                             Curl
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="gridCheck2" value="Perm">
                           <label class="form-check-label">
@@ -292,7 +292,7 @@
                             a special occasion
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="gridCheck2" value="regular daily use">
                           <label class="form-check-label">
@@ -309,7 +309,7 @@
                             Yes
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="gridCheck2" value="No">
                           <label class="form-check-label">
@@ -326,7 +326,7 @@
                             Yes
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="gridCheck2" value="No">
                           <label class="form-check-label">
@@ -343,7 +343,7 @@
                             Yes
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="radio" id="gridCheck2" value="No">
                           <label class="form-check-label">
@@ -360,7 +360,7 @@
                             Lash Eye Surgery
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="gridCheck2" value="Permanent Eye Make Up">
                           <label class="form-check-label">
@@ -373,7 +373,7 @@
                             Blepharoplasty (Eye Lift)
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="gridCheck2" value="Allergies to adhesives or synthetics">
                           <label class="form-check-label">
@@ -386,7 +386,7 @@
                             Hypersensitivity to cyanoacrylate or formaldehyde or certain adhesives/glues
                           </label>
                         </div>
-    
+
                         <div class="form-check">
                           <input class="form-check-input" type="checkbox" id="gridCheck2" value="Major surgery within last 120 days">
                           <label class="form-check-label">
@@ -448,7 +448,7 @@ growth, and natural look of the client's natural eyelashes.
 
 c) I understand as part of the procedure eye irritation, eye pain, eye itching, discomfort and in rare cases eye infection may occur.
 
-d) I understand and agree that if I experience any of these issues with my lashes that I will contact my technician and have to remove eyelashes immediately and consult a physician at my own expense. understand that even though my technician may apply and remove the eyelash properly, that adhesive materials may become dislodged during or after the procedure. 
+d) I understand and agree that if I experience any of these issues with my lashes that I will contact my technician and have to remove eyelashes immediately and consult a physician at my own expense. understand that even though my technician may apply and remove the eyelash properly, that adhesive materials may become dislodged during or after the procedure.
 
 e) I understand and agree to follow the after care instructions provided by the technician. Failure to follow the after care instructions can cause the eyelash to fall off.
 
@@ -467,19 +467,19 @@ g) This agreement will remain in effect of the procedure and all future procedur
                       <div class="col-12 pt-2 fieldTypeTemp">
                         <label class="form-label form-labelTemp"><b>Signature</b></label>
                         <div class="col-sm-10">
-                           <canvas class="canvasBack" name="signature" id="signatureCanvas" width="400" height="200"></canvas>
+                           <canvas class="canvasBack" name="signature" id="signatureCanvas" width="250" height="200"></canvas>
                            <br>
                            <button type="button" id="clearButton">Clear</button>
-                           
+
                            <input type="Signature" class="inputTypeTemp formFieldHide">
                         </div>
                       </div>
                   </div>
-              
-                  
+
+
                   <div class="text-center d-grid gap-2 d-md-flex justify-content-center pt-2 mb-4">
                     <hr>
-                    
+
                     <button type="button" class="btn btn-success" id="tempsubmit-btn">Submit</button>
                   </div>
                 </form><!-- End Multi Columns Form -->
@@ -532,7 +532,7 @@ g) This agreement will remain in effect of the procedure and all future procedur
     const nextBtn = document.getElementById('nextBtn');
     const submitBtn = document.getElementById('tempsubmit-btn');
     const resetBtn = document.getElementById('resetBtn');
-  
+
     function showPage(pageNum) {
       formPages.forEach((page, index) => {
         if (index + 1 === pageNum) {
@@ -542,7 +542,7 @@ g) This agreement will remain in effect of the procedure and all future procedur
         }
       });
     }
-  
+
     function updateButtonVisibility() {
     if (currentPage === 1) {
         prevBtn.style.display = 'none';
@@ -568,7 +568,7 @@ function topFunction() {
   document.body.scrollTop = 0;
   document.documentElement.scrollTop = 0;
 }
-  
+
     function nextPage() {
       if (currentPage < formPages.length) {
         currentPage++;
@@ -577,7 +577,7 @@ function topFunction() {
         updateButtonVisibility();
       }
     }
-  
+
     function prevPage() {
       if (currentPage > 1) {
         currentPage--;
@@ -586,7 +586,7 @@ function topFunction() {
         updateButtonVisibility();
       }
     }
-  
+
     showPage(currentPage);
     updateButtonVisibility();
 
@@ -620,18 +620,18 @@ function topFunction() {
         }
     }
   </script>
-  
+
   <script>
     // Get the URL of the current page
     var currentUrl = window.location.href;
-    
+
     // Use regular expression to extract the dynamic segment and ID from the URL
     var dynamicSegmentRegex = /\/sponsor-publish\/([^/]+)/;
     var matches = currentUrl.match(dynamicSegmentRegex);
-    
+
     if (matches && matches.length >= 2) {
         var dynamicValue = matches[1];
-        
+
         // Set the value of the input field to the extracted dynamic value
         document.getElementById('idInput').value = dynamicValue;
     }
@@ -691,54 +691,71 @@ function topFunction() {
     rowaterbottleLvalue.textContent = totalbottlesL + " Bottles"
   }
 </script>
-<script> 
-  document.addEventListener('DOMContentLoaded', function () {
-      const canvas = document.getElementById('signatureCanvas');
-      const clearButton = document.getElementById('clearButton');
-      const saveButton = document.getElementById('saveButton');
-      const savedSignature = document.getElementById('savedSignature');
-  
-      const context = canvas.getContext('2d');
-      let isDrawing = false;
-      
-      canvas.addEventListener('mousedown', (event) => {
-          isDrawing = true;
-          const x = event.clientX - canvas.getBoundingClientRect().left;
-          const y = event.clientY - canvas.getBoundingClientRect().top;
-          context.beginPath();
-          context.moveTo(x, y);
-      });
-  
-      canvas.addEventListener('mousemove', (event) => {
-          if (!isDrawing) return;
-  
-          const x = event.clientX - canvas.getBoundingClientRect().left;
-          const y = event.clientY - canvas.getBoundingClientRect().top;
-  
-          context.lineWidth = 2;
-          context.lineCap = 'round';
-          context.strokeStyle = '#000';
-  
-          context.lineTo(x, y);
-          context.stroke();
-          context.beginPath();
-          context.moveTo(x, y);
-      });
-  
-      canvas.addEventListener('mouseup', () => {
-          isDrawing = false;
-      });
-  
-      clearButton.addEventListener('click', () => {
-          context.clearRect(0, 0, canvas.width, canvas.height);
-      });
-  
-      saveButton.addEventListener('click', () => {
-          const signatureImage = canvas.toDataURL();
-          savedSignature.src = signatureImage;
-      });
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+  const canvas = document.getElementById('signatureCanvas');
+  const clearButton = document.getElementById('clearButton');
+  const savedSignature = document.getElementById('savedSignature');
+
+  const context = canvas.getContext('2d');
+  let isDrawing = false;
+
+  function getEventPos(canvasDom, event) {
+    const rect = canvasDom.getBoundingClientRect();
+    const clientX = event.clientX || event.touches[0].clientX;
+    const clientY = event.clientY || event.touches[0].clientY;
+    return {
+      x: clientX - rect.left,
+      y: clientY - rect.top
+    };
+  }
+
+  function startDrawing(event) {
+    const pos = getEventPos(canvas, event);
+    context.beginPath();
+    context.moveTo(pos.x, pos.y);
+    isDrawing = true;
+  }
+
+  function continueDrawing(event) {
+    if (!isDrawing) return;
+
+    const pos = getEventPos(canvas, event);
+
+    context.lineWidth = 2;
+    context.lineCap = 'round';
+    context.strokeStyle = '#000';
+
+    context.lineTo(pos.x, pos.y);
+    context.stroke();
+    context.beginPath();
+    context.moveTo(pos.x, pos.y);
+  }
+
+  function stopDrawing() {
+    isDrawing = false;
+  }
+
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('touchstart', (event) => {
+    event.preventDefault(); // Prevent touch event from scrolling
+    startDrawing(event.touches[0]);
   });
-  
+
+  canvas.addEventListener('mousemove', continueDrawing);
+  canvas.addEventListener('touchmove', (event) => {
+    event.preventDefault(); // Prevent touch event from scrolling
+    continueDrawing(event.touches[0]);
+  });
+
+  canvas.addEventListener('mouseup', stopDrawing);
+  canvas.addEventListener('touchend', stopDrawing);
+
+  clearButton.addEventListener('click', () => {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  });
+});
+
   </script>
-  
+
 @endsection

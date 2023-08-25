@@ -55,12 +55,12 @@
 
 <body>
 
-  <!-- ======= Header ======= 
+  <!-- ======= Header =======
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
       <a href="/"  class="logo d-flex align-items-center">
-        
+
         <span style="color: white" class="d-none d-lg-block">E-Form</span>
       </a>
       <i style="color: white" class="bi bi-list toggle-sidebar-btn"></i>
@@ -79,13 +79,12 @@
 
   <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-  
+
   <ul class="sidebar-nav" id="sidebar-nav">
     @auth
     <div class="d-flex align-items-center justify-content-center">
-      <img src="{{asset('images/whale.png')}}" alt="">&nbsp;&nbsp;
-      <h2 class="pt-2" style="font-weight: bold;">E-FORM</h2> 
-     
+      <h2 class="pt-2" style="font-weight: bold;">E-FORM</h2>
+
     </div><br>
     <div class="d-flex align-items-center justify-content-center">
       <a href="/form-builder" class="btn btn-primary btn-lg btn-block">Create Form</a>
@@ -100,10 +99,10 @@
       </a>
     </li><!-- End Dashboard Nav -->
 
-    
+
    @auth
-   
-   
+
+
   <li class="nav-item">
     <a class="nav-link {{ Request::is('ready-forms') ? ' ' : 'collapsed' }}" href="/ready-forms">
       <i class="bi bi-ui-checks"></i>
@@ -157,8 +156,8 @@
             <i class="bi bi-circle"></i><span>Deleted Submission</span>
           </a>
         </li>
-        
-        
+
+
       </ul>
     </li><!-- End Forms Nav -->
 @endif
@@ -174,7 +173,7 @@
             @else
             <img src='{{Auth::user()->image}}' alt="Profile" class="rounded-circle">
             @endif
-              
+
           </div>
           <p class="text-center">{{Auth::user()->name}}</p>
       </li>
@@ -210,14 +209,14 @@
           </div>
           <div class="flex-grow-1 text-center">
               <!-- Centered content here -->
-              <img src="{{asset('images/logo.png')}}" alt="" class="img-fluid" width="200px" height="300px">
+              <img src="{{asset('images/Artboard-5.png')}}" alt="" class="img-fluid" width="200px" height="300px">
           </div>
       </div>
   </div>
-  
-  
-  
-  
+
+
+
+
     <div class="pagetitle">
         <h1>@yield('title')</h1>
         <nav>
@@ -235,17 +234,17 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      
+
     </div>
     <div class="credits">
-      
+
     </div>
   </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  
+
 <!-- Vendor JS Files -->
 <script src="{{asset('assets/vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -261,12 +260,12 @@
 
 
 
-  
+
 
   <!-- Template Main JS File -->
   <script src="{{asset('assets/js/main.js')}}"></script>
 
-  
+
   <!-- Add the initialization script -->
   <script>
     $(document).ready(function() {
@@ -303,7 +302,7 @@
   function exportToPDF() {
     const contentDiv = document.querySelector('.card-exportPDF');
     contentDiv.s
-    
+
     if (!contentDiv) {
       alert('No content to export.');
       return;
