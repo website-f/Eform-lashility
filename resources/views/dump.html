@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps Search with Draggable Marker</title>
+    <!-- Include the Google Maps JavaScript API -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places"></script>
+</head>
+<body>
+    <!-- Display the map here -->
+    <div id="map" style="height: 400px;"></div>
+    <!-- Search input and button -->
+    <input type="text" id="searchInput" placeholder="Search for a location">
+    <button id="searchButton">Search</button>
+    <!-- Display the current coordinates here -->
+    <p id="coordinates">Click the map to drop a draggable marker.</p>
+
+    <script>
+        let map;
+        let marker;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 4.2105, lng: 101.9758 }, // Initial focus on Malaysia
+                zoom: 6
+            });
+
+            map.addListener('click', (event) => {
+                addMarker(event.latLng.lat(), event.latLng.lng());
+            });
+
+            const searchInput = document.getElementById('searchInput');
+            const autocomplete = new google.maps.places.Autocomplete(searchInput);
+        }
+
+        function addMarker(lat, lng) {
+            if (marker) {
+                marker.setMap(null); // Remove the previous marker from the map
+            }
+
+            marker = new google.maps.Marker({
+                position: { lat: lat, lng: lng },
+                map: map,
+                draggable: true
+            });
+
+            marker.addListener('dragend', (event) => {
+                const updatedLatLng = event.latLng;
+                const lat = updatedLatLng.lat().toFixed(6);
+                const lng = updatedLatLng.lng().toFixed(6);
+
+                const coordinatesElement = document.getElementById('coordinates');
+                coordinatesElement.textContent = `Latitude: ${lat}, Longitude: ${lng}`;
+            });
+        }
+
+        function searchLocation() {
+            const searchInput = document.getElementById('searchInput').value;
+            const geocoder = new google.maps.Geocoder();
+
+            geocoder.geocode({ address: searchInput }, (results, status) => {
+                if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
+                    const latLng = results[0].geometry.location;
+
+                    if (malaysiaBounds.contains(latLng)) {
+                        map.setCenter(latLng);
+                        addMarker(latLng.lat(), latLng.lng());
+
+                        const coordinatesElement = document.getElementById('coordinates');
+                        coordinatesElement.textContent = `Latitude: ${latLng.lat().toFixed(6)}, Longitude: ${latLng.lng().toFixed(6)}`;
+                    } else {
+                        alert('Location is outside of Malaysia.');
+                    }
+                } else {
+                    alert('Location not found.');
+                }
+            });
+        }
+
+        const malaysiaBounds = new google.maps.LatLngBounds(
+            new google.maps.LatLng(-1.0, 99.6),
+            new google.maps.LatLng(7.4, 119.3)
+        );
+
+        const searchButton = document.getElementById('searchButton');
+        searchButton.addEventListener('click', searchLocation);
+
+        initMap();
+    </script>
+</body>
+</html>
+
+<div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Reports</h5>
+
+        <!-- Column Chart -->
+        <div id="columnChart"></div>
+
+        <script>
+            // Get the counts of each table from the Blade variables
+          //const userCounts = {!! $user !!};
+          //const formCounts = {!! $forms !!};
+          //const submittedCounts = {!! $submitted !!};
+         
+          // Function to generate an array of dates (current date until next day)
+          function generateDateArray() {
+            const dateArray = [];
+            const currentDate = new Date();
+            currentDate.setHours(0, 0, 0, 0); // Set time to midnight
+          
+            for (let i = 0; i < 24; i++) {
+              dateArray.push(currentDate.toISOString().slice(0, 10)); // Get only the date part
+              currentDate.setDate(currentDate.getDate() + 1); // Move to the next day
+            }
+          
+            return dateArray;
+          }
+
+          function getCountsByDate(objects) {
+            if (!Array.isArray(objects)) {
+              console.error('Input is not an array:', objects);
+              return {};
+            }
+        
+            const dateCounts = {};
+        
+            objects.forEach((obj) => {
+              const date = obj.created_at.split('T')[0]; // Get the date part only
+              dateCounts[date] = (dateCounts[date] || 0) + 1;
+            });
+        
+            return dateCounts;
+          }
+
+          const formsByDate = getCountsByDate(formCounts);
+          const submittedByDate = getCountsByDate(submittedCounts);
+          const usersByDate = getCountsByDate(userCounts);
+          
+          const categoryDate = generateDateArray();
+          document.addEventListener("DOMContentLoaded", () => {
+            new ApexCharts(document.querySelector("#columnChart"), {
+              series: [{
+                name: 'Form Built',
+                data: categoryDate.map((date) => formsByDate[date] || 0),
+              }, {
+                name: 'Submission',
+                data:  categoryDate.map((date) => submittedByDate[date] || 0),
+              }, {
+                name: 'Users',
+                data:  categoryDate.map((date) => usersByDate[date] || 0),
+              }],
+              chart: {
+                type: 'bar',
+                height: 350
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: false,
+                  columnWidth: '55%',
+                  endingShape: 'rounded'
+                },
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+              },
+              xaxis: {
+                categories: categoryDate,
+              },
+              yaxis: {
+                title: {
+                  text: ''
+                }
+              },
+              fill: {
+                opacity: 1
+              },
+              tooltip: {
+                y: {
+                  formatter: function(val) {
+                    return  val 
+                  }
+                }
+              }
+            }).render();
+          });
+        </script>
+        <!-- End Column Chart -->
+
+      </div>
+    </div>
+  </div>
+
