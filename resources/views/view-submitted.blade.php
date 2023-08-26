@@ -1,18 +1,18 @@
 @extends('partial.main')
 
 @section('title', 'View Form')
-    
+
 @section('content')
 
 <div class="col d-flex justify-content-center">
 
   <div class="col-lg-8">
    <div class="text-center">
-   
+
    </div>
     <div class="card">
                 <!-- Vertically centered Modal -->
-     
+
                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#verticalycentered">
                 Export to PDF
                </button>
@@ -36,21 +36,21 @@
                               <div class="card-body">
                                 @foreach ($fields as $field)
                                   @if ($field['fieldType'] === 'text')
-                                      <div class="row mb-3"> 
+                                      <div class="row mb-3">
                                         <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                         <div class="col-sm-8">
                                          <p>{{$field['value']}}</p>
                                         </div>
                                       </div>
                                       @elseif ($field['fieldType'] === 'email')
-                                      <div class="row mb-3"> 
+                                      <div class="row mb-3">
                                         <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                         <div class="col-sm-8">
                                          <p>{{$field['value']}}</p>
                                         </div>
                                       </div>
                                   @elseif ($field['fieldType'] === 'approval')
-                                      <div class="row mb-3"> 
+                                      <div class="row mb-3">
                                         <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                         <div class="col-sm-8">
                                          <p>{{$field['value']}}</p>
@@ -69,15 +69,15 @@
                                         <div class="col-sm-8">
                                           @if ($field['value'] == "No File")
                                           No File Given
-                                          @else 
+                                          @else
                                           <a href="{{asset($field['value'])}}">View File</a>
                                           @endif
-                                         
+
                                          </div>
                                       </div>
                                   @elseif ($field['fieldType'] === 'date')
                                       <div class="row mb-3">
-                                        <label for="inputDate" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>                              
+                                        <label for="inputDate" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                         <div class="col-sm-8">
                                           <p>{{$field['value']}}</p>
                                          </div>
@@ -89,7 +89,7 @@
                                           <p>{{$field['value']}}</p>
                                          </div>
                                       </div>
-                                  @elseif ($field['fieldType'] === 'select') 
+                                  @elseif ($field['fieldType'] === 'select')
                                       <div class="row mb-3">
                                         <label class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                         <div class="col-sm-8">
@@ -139,23 +139,23 @@
                                        @endphp
                                         <div class="row mb-3">
                                          <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
-                                        
-                                         
+
+
                                              @php
                                                  $locationValue = $field['value'];
-        
+
                                                  // Extract latitude and longitude using regular expressions
                                                  preg_match('/Latitude:\s*([\d.]+),\s*Longitude:\s*([\d.]+)/', $locationValue, $matches);
                                                  $latitude = $matches[1];
                                                  $longitude = $matches[2];
-        
+
                                              @endphp
                                              <div class="col-sm-8">
                                               <p>{{$field['value']}}</p>
-                                              
+
                                              </div>
-                                             
-                                         
+
+
                                        </div>
                                        @elseif ($field['fieldType'] === 'location')
                                        @php
@@ -171,8 +171,8 @@
                                               @endforeach
 
                                              </div>
-                                             
-                                         
+
+
                                        </div>
                                        @elseif ($field['fieldType'] === 'search')
                                        @php
@@ -180,34 +180,34 @@
                                        @endphp
                                         <div class="row mb-3">
                                          <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
-                                        
-                                         
+
+
                                              @php
                                              if (!empty($field['value'])) {
                                               $locationValue = $field['value'];
-        
+
                                                  // Extract latitude and longitude using regular expressions
                                                  preg_match('/Latitude:\s*([\d.]+),\s*Longitude:\s*([\d.]+)/', $locationValue, $matches);
                                                  $latitude = $matches[1];
                                                  $longitude = $matches[2];
                                              }
-                                                 
-        
+
+
                                              @endphp
                                              @if (!empty($field['value']))
                                              <div class="col-sm-8">
                                               <p>{{$field['value']}}</p>
                                               <p>{{$field['location']}}</p>
-                                              
+
                                              </div>
-                                             @else 
+                                             @else
                                              <div class="col-sm-8">
                                                <p>No location included</p>
                                              </div>
                                              @endif
-                                             
-                                             
-                                         
+
+
+
                                        </div>
                                     @elseif ($field['fieldType'] === 'hidden')
                                        <div class="row mb-3">
@@ -224,21 +224,21 @@
                                     </div>
                                 </div>
                                     @elseif ($field['fieldType'] === 'Signature')
-                                    <div class="row mb-3"> 
+                                    <div class="row mb-3">
                                       <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                       <div class="col-sm-8">
-                                       <img src="{{$field['value']}}" alt="">
+                                       <img src="{{asset( $field['value'] )}}" alt="">
                                       </div>
                                     </div>
                                   @endif
-                                  
+
                                 @endforeach
                               </div>
-                           
+
                           @else
                               No fields
                           @endif
-                          
+
                       </form><!-- End General Form Elements -->
                      </div>
                      <div class="modal-footer">
@@ -260,14 +260,14 @@
                       <div class="card-body">
                         @foreach ($fields as $field)
                           @if ($field['fieldType'] === 'text')
-                              <div class="row mb-3"> 
+                              <div class="row mb-3">
                                 <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                 <div class="col-sm-8">
                                  <p>{{$field['value']}}</p>
                                 </div>
                               </div>
                           @elseif ($field['fieldType'] === 'email')
-                              <div class="row mb-3"> 
+                              <div class="row mb-3">
                                 <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                 <div class="col-sm-8">
                                  <p>{{$field['value']}}</p>
@@ -286,15 +286,15 @@
                                 <div class="col-sm-8">
                                   @if ($field['value'] == "No File")
                                   No File Given
-                                  @else 
+                                  @else
                                   <a href="{{asset($field['value'])}}">View File</a>
                                   @endif
-                                 
+
                                  </div>
                               </div>
                           @elseif ($field['fieldType'] === 'date')
                               <div class="row mb-3">
-                                <label for="inputDate" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>                              
+                                <label for="inputDate" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                 <div class="col-sm-8">
                                   <p>{{$field['value']}}</p>
                                  </div>
@@ -306,7 +306,7 @@
                                   <p>{{$field['value']}}</p>
                                  </div>
                               </div>
-                          @elseif ($field['fieldType'] === 'select') 
+                          @elseif ($field['fieldType'] === 'select')
                               <div class="row mb-3">
                                 <label class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                 <div class="col-sm-8">
@@ -353,7 +353,7 @@
                                              <a class="btn btn-danger" href="#">Reject</a>
                                          @endif
                                  </div>
-                                 
+
                               </div>
                             @elseif ($field['fieldType'] === 'text location')
                                @php
@@ -361,8 +361,8 @@
                                @endphp
                                 <div class="row mb-3">
                                  <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
-                                
-                                 
+
+
                                      @php
                                          $locationValue = $field['value'];
 
@@ -374,10 +374,10 @@
                                      @endphp
                                      <div class="col-sm-8">
                                       <p>{{$field['value']}}</p>
-                                      
+
                                      </div>
-                                     
-                                 
+
+
                                </div>
                                @elseif ($field['fieldType'] === 'location')
                                @php
@@ -392,8 +392,8 @@
                                           <p><b>Coordinates:</b> {{ $location['coordinates'] }}</p>
                                       @endforeach
                                      </div>
-                                     
-                                 
+
+
                                </div>
                                @elseif ($field['fieldType'] === 'search')
                                @php
@@ -401,8 +401,8 @@
                                @endphp
                                 <div class="row mb-3">
                                  <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
-                                
-                                 
+
+
                                      @php
                                      if (!empty($field['value'])) {
                                       $locationValue = $field['value'];
@@ -412,23 +412,23 @@
                                          $latitude = $matches[1];
                                          $longitude = $matches[2];
                                      }
-                                         
+
 
                                      @endphp
                                      @if (!empty($field['value']))
                                      <div class="col-sm-8">
                                       <p>{{$field['value']}}</p>
                                       <p>{{$field['location']}}</p>
-                                      
+
                                      </div>
-                                     @else 
+                                     @else
                                      <div class="col-sm-8">
                                        <p>No location included</p>
                                      </div>
                                      @endif
-                                     
-                                     
-                                 
+
+
+
                                </div>
                             @elseif ($field['fieldType'] === 'hidden')
                                <div class="row mb-3">
@@ -445,23 +445,23 @@
                             </div>
                           </div>
                             @elseif ($field['fieldType'] === 'Signature')
-                            <div class="row mb-3"> 
+                            <div class="row mb-3">
                               <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                               <div class="col-sm-8">
-                               <img src="{{$field['value']}}" alt="">
+                               <img src="{{asset( $field['value'] )}}" alt="">
                               </div>
                             </div>
                           @endif
-                          
+
                         @endforeach
                       </div>
-                   
+
                   @else
                       No fields
                   @endif
                   @if ($submitted['approval'] == 'pending' && Auth::user()->role->role == "SuperAdmin")
                   <div class="d-grid gap-2 d-md-flex justify-content-center pt-2 mb-4">
-                    <div class="row mb-3"> 
+                    <div class="row mb-3">
                       <p><b>Approval Status : </b> {{$submitted['approval']}}</p>
                       <div class="col-sm-8">
                         <button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#approveSubmission">
@@ -513,7 +513,7 @@
 
     </div>
 
-    
+
   </div>
 
 </div>
@@ -550,14 +550,14 @@
   document.addEventListener('DOMContentLoaded', function() {
       var approveBtn = document.getElementById('approveBtn');
       var spinnerIcon = approveBtn.querySelector('.fa-spinner');
-      
+
       approveBtn.addEventListener('click', function() {
           // Show the loading spinner
           spinnerIcon.style.display = 'block';
-          
+
           // Disable the button to prevent multiple clicks
           approveBtn.setAttribute('disabled', 'disabled');
-          
+
           // Optionally, you can redirect to the link after a short delay
           // setTimeout(function() {
           //     window.location.href = approveBtn.getAttribute('href');
@@ -565,9 +565,9 @@
       });
   });
 </script>
- 
- 
+
+
  @endif
 @endif
-  
+
 @endsection
