@@ -89,7 +89,7 @@ class FormBuilderController extends Controller
 
                 // Replace the base64 image with the image URL or path
                 $field['image'] = '/images/' . $imageName; // Change the URL as per your requirements
-            } 
+            }
         }
         if ($formData[2] == "No") {
             $form = new Form;
@@ -111,7 +111,7 @@ class FormBuilderController extends Controller
             $form->save();
             return redirect("/forms");
         }
-       
+
 
     }
 
@@ -192,15 +192,15 @@ class FormBuilderController extends Controller
             'formData.0.unique' => 'A form with this type already exists.',
             // Add other custom error messages here
         ]);
-        
+
                 /*if($formLogo) {
                         $logo = $formLogo;
                         $logoImage = base64_decode($logo);
                         $logoName = time().'.png'; // You can generate a unique name or use the original name if available
                         $path = public_path('logo/' . $logoName); // Change the path as per your requirements
-        
+
                         file_put_contents($path, $logoImage);
-        
+
                         // Replace the base64 image with the image URL or path
                         $formLogo = '/logo/' . $logoName; // Change the URL as per your requirements
                 }*/
@@ -214,13 +214,13 @@ class FormBuilderController extends Controller
                         $imageData = base64_decode($base64Image);
                         $imageName = time().'.png'; // You can generate a unique name or use the original name if available
                         $path = public_path('images/' . $imageName); // Change the path as per your requirements
-        
+
                         file_put_contents($path, $imageData);
-        
+
                         // Replace the base64 image with the image URL or path
                         $field['image'] = '/images/' . $imageName; // Change the URL as per your requirements
                         }
-                    } 
+                    }
                 }
                 if ($formData[2] == "No") {
                     $form->type = $formData[0];
@@ -238,9 +238,9 @@ class FormBuilderController extends Controller
                     $form->save();
                     return redirect("/forms");
                 }
-        
-        
-    } 
+
+
+    }
 //=====================================================================================================================================
     public function publish($type, $id) {
 
@@ -268,7 +268,6 @@ class FormBuilderController extends Controller
 
         $form = new Submitted;
         $form->type = $formData[0];
-        $form->fields = json_encode($formFields) ;
         $form->approval = $formData[2];
         $form->publisher_id = $formData[3];
 
@@ -280,9 +279,9 @@ class FormBuilderController extends Controller
                     $imageData = base64_decode($base64Image);
                     $imageName = time().'.'.$field['fileExtension']; // You can generate a unique name or use the original name if available
                     $path = public_path('uploads/' . $imageName); // Change the path as per your requirements
-    
+
                     file_put_contents($path, $imageData);
-    
+
                     // Replace the base64 image with the image URL or path
                     $field['value'] = '/uploads/' . $imageName; // Change the URL as per your requirements
                 } else {
@@ -309,6 +308,7 @@ class FormBuilderController extends Controller
             Notification::route('mail', $recipientEmail)
                 ->notify(new approvalNotification());
 
+            $form->fields = json_encode($formFields) ;
             $form->usermail = $formData[6];
             $form->notify = $formNotify;
             $form->save();
@@ -326,16 +326,18 @@ class FormBuilderController extends Controller
             Notification::route('mail', $formData[6])
             ->notify(new userNotifyNotification($pdf->output()));
 
+            $form->fields = json_encode($formFields) ;
             $form->save();
             return redirect("/thankyou");
         }
 
+        $form->fields = json_encode($formFields) ;
         $form->save();
         return redirect("/thankyou");
-    
+
     }
 
-    
+
 
     public function submittedView() {
         $submitted = Submitted::orderBy('created_at', 'desc')->get();
@@ -397,6 +399,6 @@ class FormBuilderController extends Controller
         $submitted->save();
         return redirect('forms');
     }
-    
+
 
 }
