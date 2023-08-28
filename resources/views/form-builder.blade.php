@@ -43,6 +43,8 @@
                          <br>
                          <img id="preview" src="#" alt="Preview" style="display: none; max-width: 200px;">-->
                        </div>
+                       <input class="form-control"  type="file" onchange="previewImageEdit(event, 'formLogo')">
+                       <img src="#" alt="" id="preview-formLogo" class="imgPreview">
                        <center><img style="padding-top: 30px; padding-bottom: 20px" width="300" height="120" src="{{asset('images/Artboard-5.png')}}" alt=""></center>
                        <input type="hidden" name="creator" class="form-creator" value="{{Auth::user()->id}}">
                        <hr><br>
@@ -209,7 +211,21 @@
     });
 
 </script>
-
+<script>
+  function previewImage(event, idValueImage) {
+    const input = event.target;
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const preview = document.getElementById(idValueImage);
+            console.log(preview)
+            preview.src = event.target.result;
+            preview.style.display = 'block';
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
 
 @endsection
 
