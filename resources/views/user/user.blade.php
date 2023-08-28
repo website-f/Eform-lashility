@@ -1,6 +1,6 @@
 @extends('partial.main')
 @section('title', 'Users')
-    
+
 @section('content')
 <section class="section">
     <div class="row">
@@ -11,7 +11,7 @@
         <div class="alert alert-danger" role="alert">{{ Session::get('message') }}</div>
     @endif
         <div class="card">
-          <div class="card-body">
+          <div class="card-body overflow-auto">
             <a href="/add-user" class="btn btn-success" style="margin-top: 10px">Add User <i class="bi bi-plus-lg"></i></a>
 
             <!-- Table with stripped rows -->
@@ -55,7 +55,7 @@
                         </div>
                       </div>
                     </td>
-                    
+
                   </tr>
                 @endforeach
               </tbody>

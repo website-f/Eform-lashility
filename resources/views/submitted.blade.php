@@ -1,7 +1,7 @@
 @extends('partial.main')
 
 @section('title', 'All Forms Submission')
-    
+
 @section('content')
 <section class="section">
     <div class="row">
@@ -10,7 +10,7 @@
         <div class="alert alert-success" role="alert">{{Session::get('message')}}</div>
      @endif
         <div class="card">
-          <div class="card-body">
+          <div class="card-body overflow-auto">
             <h5 class="card-title">Datatables</h5>
 
             <!-- Table with stripped rows -->
@@ -34,12 +34,12 @@
                       <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye-fill"></i></a>
                       <a class="btn btn-outline-danger btn-sm" href="/submitted-delete/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash3-fill"></i></a>
                     </td>
-                    
+
                   </tr>
                 @endforeach
-                @else 
+                @else
                 @php
-                    $currentSubmitted = $submitted->where("publisher_id", Auth::user()->id) 
+                    $currentSubmitted = $submitted->where("publisher_id", Auth::user()->id)
                 @endphp
                 @foreach ($currentSubmitted as $item)
                 <tr>
@@ -48,13 +48,13 @@
                     <td>{{$item['created_at']->format('d-m-Y')}}</td>
                     <td>
                       <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View">View Form</a>
-                      
+
                     </td>
-                    
+
                   </tr>
                 @endforeach
                 @endif
-                
+
               </tbody>
             </table>
             <!-- End Table with stripped rows -->

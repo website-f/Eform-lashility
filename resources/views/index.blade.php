@@ -1,9 +1,9 @@
 @extends('partial.main')
 @section('title', 'Dashboard')
-    
+
 @section('content')
 @auth
-    
+
 <section class="section dashboard">
     <div class="row">
     @if (Auth::user()->role->role == "Admin" || Auth::user()->role->role == "SuperAdmin")
@@ -33,7 +33,7 @@
           </div>
         </div><!-- End Sales Card -->
 
-        
+
 
         <!-- Recent Sales -->
         <div class="col-12">
@@ -50,7 +50,7 @@
                     <th scope="col">Created Date</th>
                     <th scope="col">Created Time</th>
                     <th scope="col">Action</th>
-                   
+
                   </tr>
                 </thead>
                 <tbody>
@@ -79,28 +79,28 @@
           <!-- Revenue Card -->
           <div class="col-xxl-12 col-md-6">
            <div class="card info-card revenue-card">
-         
+
              <div class="card-body">
                <h5 class="card-title">Submission</h5>
-         
+
                <div class="d-flex align-items-center">
                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                    <i class="bi bi-layout-text-window"></i>
                  </div>
                  <div class="ps-3">
                    <h6 class="text-success pt-1 fw-bold">{{$submitted->count()}}</h6>
-                   
-         
+
+
                  </div>
                </div>
              </div>
-         
+
            </div>
           </div><!-- End Revenue Card -->
       <!-- Website Traffic -->
       <div class="card">
 
-        <div class="card-body pb-0">
+        <div class="card-body pb-0 overflow-auto">
           <h5 class="card-title">Recent Submission</h5>
 
           <table class="table table-borderless datatable">
@@ -124,16 +124,16 @@
             </tbody>
           </table>
 
-          
+
         </div>
       </div><!-- End Website Traffic -->
 
-     
+
 
     </div><!-- End Right side columns -->
 
     @else
-       
+
 
       <!-- Right side columns -->
       <div class="col-lg-4">
@@ -160,7 +160,7 @@
 
         </div>
 
-       
+
 
       </div><!-- End Right side columns -->
     @endif
@@ -170,7 +170,7 @@
 @endauth
 @guest
 <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
-  
+
   <h2>Create forms and publish it your way</h2>
   <a class="btn" href="/login">Sign In</a>
   <img src="assets/img/home3.svg" class="img-fluid py-5" alt="Page Not Found" width="500px" height="500px">
