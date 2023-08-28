@@ -24,7 +24,7 @@
                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                      </div>
                      <div class="modal-body card-exportPDF">
-                      <center><img style="padding-top: 30px" width="300" height="100" src="{{asset('images/Artboard-5.png')}}" alt=""></center>
+                      <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{asset('images/lash.jpg')}}" alt=""></center>
                       <h5 class="card-title text-center formType">{{$submitted['type']}}</h5>
                       <hr>
                       <form>
@@ -248,7 +248,7 @@
                    </div>
                  </div>
                </div><!-- End Vertically centered Modal-->
-              <center><img style="padding-top: 30px" width="300" height="100" src="{{asset('images/Artboard-5.png')}}" alt=""></center>
+               <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{asset('images/lash.jpg')}}" alt=""></center>
               <h5 class="card-title text-center formType">{{$submitted['type']}}</h5>
               <hr>
               <form>

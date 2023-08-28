@@ -21,7 +21,7 @@
         <!--<div class="text-center pt-2">
         <img src="" alt="" class="img-fluid" width="200px" height="200px">
         </div>-->
-        <center><img style="padding-top: 30px" width="300" height="100" src="{{asset('images/Artboard-5.png')}}" alt=""></center>
+        <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{asset('images/lash.jpg')}}" alt=""></center>
               <h5 class="card-title text-center formTypeTemp">Intake & Consent Form</h5>
               <input type="hidden" id="idInput" class="formPublisher" value="">
               <input type="approval" name="approval" id="approval" class="formFieldHide" value="No">
@@ -41,102 +41,8 @@
                       <input type="date" name="date" class="form-control inputTypeTemp" required>
                     </div><br>
                     <div class="col-md-12 fieldTypeTemp">
-                      <label for="inputText" class="form-label form-labelTemp"><b>Address</b></label>
-                      <input type="location" class="inputTypeTemp formFieldHide">
-                      <div class="col-sm-10 input-group">
-                          <input class="form-control" type="text" id="searchInput" placeholder="Search for a location">
-                          <a class="btn btn-success" id="searchButton">Search</a>
-                      </div>
-                          <div class="val" id="coordinatesSearch"></div>
-                          <p id="locationName"></p>
-                          <div id="map"></div>
-                          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBPyDbSSao5JOxiTLETXEU7neCpLqpxiwE&libraries=places"></script>
-                          <script>
-                           let map;
-                           let marker;
-                           const malaysiaBounds = new google.maps.LatLngBounds(
-                               new google.maps.LatLng(-1.0, 99.6),
-                               new google.maps.LatLng(7.4, 119.3)
-                           );
-
-                           function initMap() {
-                               map = new google.maps.Map(document.getElementById('map'), {
-                                   center: { lat: 4.2105, lng: 101.9758 }, // Initial focus on Malaysia
-                                   zoom: 6
-                               });
-
-                               map.addListener('click', (event) => {
-                                   addMarker(event.latLng.lat(), event.latLng.lng());
-                               });
-
-                               const searchInput = document.getElementById('searchInput');
-                               const autocomplete = new google.maps.places.Autocomplete(searchInput);
-                           }
-
-                           function addMarker(lat, lng) {
-                               if (marker) {
-                                   marker.setMap(null); // Remove the previous marker from the map
-                               }
-
-                               marker = new google.maps.Marker({
-                                   position: { lat: lat, lng: lng },
-                                   map: map,
-                                   draggable: true
-                               });
-
-                               marker.addListener('dragend', (event) => {
-                                   const updatedLatLng = event.latLng;
-                                   const lat = updatedLatLng.lat().toFixed(6);
-                                   const lng = updatedLatLng.lng().toFixed(6);
-
-                                   const coordinatesElement = document.getElementById('coordinatesSearch');
-                                   coordinatesElement.textContent = `Latitude: ${lat}, Longitude: ${lng}`;
-
-                                   reverseGeocode(updatedLatLng);
-                               });
-                           }
-
-                           function reverseGeocode(latLng) {
-                               const geocoder = new google.maps.Geocoder();
-
-                               geocoder.geocode({ location: latLng }, (results, status) => {
-                                   if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-                                       const locationNameElement = document.getElementById('locationName');
-                                       locationNameElement.textContent = `Location: ${results[0].formatted_address}`;
-                                   }
-                               });
-                           }
-
-                           function searchLocation() {
-                               const searchInput = document.getElementById('searchInput').value;
-                               const geocoder = new google.maps.Geocoder();
-
-                               geocoder.geocode({ address: searchInput }, (results, status) => {
-                                   if (status === google.maps.GeocoderStatus.OK && results.length > 0) {
-                                       const latLng = results[0].geometry.location;
-
-                                       if (malaysiaBounds.contains(latLng)) {
-                                           map.setCenter(latLng);
-                                           addMarker(latLng.lat(), latLng.lng());
-
-                                           const coordinatesElement = document.getElementById('coordinatesSearch');
-                                           coordinatesElement.textContent = `Latitude: ${latLng.lat().toFixed(6)}, Longitude: ${latLng.lng().toFixed(6)}`;
-
-                                           reverseGeocode(latLng);
-                                       } else {
-                                           alert('Location is outside of Malaysia.');
-                                       }
-                                   } else {
-                                       alert('Location not found.');
-                                   }
-                               });
-                           }
-
-                           const searchButton = document.getElementById('searchButton');
-                           searchButton.addEventListener('click', searchLocation);
-
-                           initMap();
-                         </script>
+                      <label class="form-label form-labelTemp"><b>Address</b></label>
+                      <input type="text" name="text" class="form-control inputTypeTemp" required>
                     </div><br>
                     <div class="col-md-12 fieldTypeTemp">
                       <label class="form-label form-labelTemp"><b>Telephone</b></label>

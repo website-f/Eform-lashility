@@ -156,7 +156,7 @@
          
         </div> -->
         <div class="text-center">
-          <button type="button" class="btn btn-success" data-bs-dismiss="modal" id="saveBuild">Create</button>
+          <button type="button" class="btn btn-success btn-lg btn-block" data-bs-dismiss="modal" id="saveBuild">Create</button>
       </div>
       </div>
       <div class="col-lg-2">
