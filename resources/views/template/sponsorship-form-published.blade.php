@@ -33,7 +33,7 @@
                     <h2>Client Information</h2>
                     <hr>
                     <div class="col-md-12 fieldTypeTemp">
-                      <label class="form-label form-labelTemp"><b>Your Name *</b></label>
+                      <label class="form-label form-labelTemp"><b>Your Name</b></label>
                       <input type="text" name="text" class="form-control inputTypeTemp" required>
                     </div><br>
                     <div class="col-md-12 fieldTypeTemp">
