@@ -66,17 +66,15 @@ class FormBuilderController extends Controller
     // Add other custom error messages here
 ]);
 
-        /*if($formLogo) {
-                $logo = $formLogo;
-                $logoImage = base64_decode($logo);
-                $logoName = time().'.png'; // You can generate a unique name or use the original name if available
-                $path = public_path('logo/' . $logoName); // Change the path as per your requirements
-
-                file_put_contents($path, $logoImage);
-
-                // Replace the base64 image with the image URL or path
-                $formLogo = '/logo/' . $logoName; // Change the URL as per your requirements
-        }*/
+         if (!empty($formData[6])) {
+             $base64Image = $formData[6];
+             $imageData = base64_decode($base64Image);
+             $imageName = time().'.png'; // You can generate a unique name or use the original name if available
+             $path = public_path('uploads/' . $imageName); // Change the path as per your requiremen   
+             file_put_contents($path, $imageData);
+             // Replace the base64 image with the image URL or path
+             $formData[6] = '/uploads/' . $imageName; // Change the URL as per your requirements
+         }
         // Loop through formFields and process the image, if available
         foreach ($formFields as &$field) {
             if ($field['type'] == 'file') {
@@ -93,6 +91,7 @@ class FormBuilderController extends Controller
         }
         if ($formData[2] == "No") {
             $form = new Form;
+            $form->logo = $formData[6];
             $form->type = $formData[0];
             $form->fields = json_encode($formFields);
             $form->approval = $formData[2];
@@ -102,6 +101,7 @@ class FormBuilderController extends Controller
             return redirect("/forms");
         } else {
             $form = new Form;
+            $form->logo = $formData[6];
             $form->type = $formData[0];
             $form->fields = json_encode($formFields);
             $form->approval = $formData[2];
@@ -307,7 +307,6 @@ class FormBuilderController extends Controller
             $recipientEmail = $formData[4]; // Replace with the desired recipient email address
             Notification::route('mail', $recipientEmail)
                 ->notify(new approvalNotification());
-
             $form->fields = json_encode($formFields) ;
             $form->usermail = $formData[6];
             $form->notify = $formNotify;

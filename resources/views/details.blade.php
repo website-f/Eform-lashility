@@ -22,7 +22,7 @@
           <input type="text" id="formLink" value="http://e-form.lashility.com/form-publish/{{$forms->slug}}/{{Auth::user()->id}}" readonly>
           <span id="copyStatus" class="ms-3" style="display: none;">Link Copied!</span>
         </div>
-        <center><img style="padding-top: 30px" width="300" height="100" src="{{asset('images/Artboard-5.png')}}" alt=""></center>
+        <center><img style="padding-top: 30px" width="500" height="300" src="{{$forms->logo}}" alt=""></center>
               <h5 class="card-title text-center formType">{{$forms->type}} Form <span>(Created by: {{$forms->user->name}})</span></h5>
               <hr>
 

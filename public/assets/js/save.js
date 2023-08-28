@@ -21,7 +21,7 @@ function convertImageToBase64(file, formFields, fieldID, label, type, pageNumber
 }
 
 // Update the function to use Promise for image conversion
-/*function convertLogoImageToBase64(logoFile) {
+function convertLogoImageToBase64(logoFile) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(logoFile);
@@ -34,7 +34,7 @@ function convertImageToBase64(file, formFields, fieldID, label, type, pageNumber
       reject(error);
     };
   });
-}*/
+}
 
 async function saveFormData() {
     // Fetch all the form elements within the container
@@ -48,10 +48,11 @@ async function saveFormData() {
     notifyOption.push(notify)
     const completeNotify = JSON.stringify(notifyOption);
     
- //const formLogo = document.querySelector('.form-logo');
-    //let logo = ''
-    //const logoImageConversionPromises = []
-    /*if (formLogo && formLogo.files.length > 0) {
+    let logo = ''
+    const logoImageConversionPromises = []
+    const formLogo = document.querySelector('.form-logo-create');
+    console.log(formLogo)
+    if (formLogo && formLogo.files.length > 0) {
       // If an image is selected, convert it to base64 using a Promise
       const logoFile = formLogo.files[0];
 
@@ -60,8 +61,9 @@ async function saveFormData() {
         convertLogoImageToBase64(logoFile)
       );
     } else {
-      let logo = '';
-    }*/
+      logo = '';
+    }
+    
     const formFields = [];
 
     const imageConversionPromises = [];
@@ -212,21 +214,21 @@ async function saveFormData() {
     console.error('Image Conversion Error:', error);
   }
   // Wait for all image conversion promises to complete
-  /*try {
+  try {
     const base64LogoImages = await Promise.all(logoImageConversionPromises);
     if (base64LogoImages.length > 0) {
       logo = base64LogoImages[0];
     }
   } catch (error) {
     console.error('Image Conversion Error:', error);
-  }*/
+  }
     // Convert the formData array to JSON
     //const formDataJSON = JSON.stringify(formData);
     if (!formType || formFields.length === 0) {
         alert("form title and form fields cant be empty")
     }
 
-    let forms = [formType, formFields, approval, formCreator, approver, completeNotify]
+    let forms = [formType, formFields, approval, formCreator, approver, completeNotify, logo]
     let formsComplete = JSON.stringify(forms)
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
