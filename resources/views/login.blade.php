@@ -69,8 +69,8 @@
                     @csrf
                     @method('POST')
       
-                        <div class="d-flex align-items-center mb-0">
-                          <img src="{{asset('images/Artboard-5.png')}}" alt="" class="img-fluid" width="200px" height="300px">
+                        <div class="d-flex align-items-center mb-0 loginBackground">
+                          
                         </div>
                         <p class="h1 fw-bold mb-3">EForm</p>
                         

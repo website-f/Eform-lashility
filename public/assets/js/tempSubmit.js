@@ -3,7 +3,32 @@
 -----------------------------------------TEMPLATE BSUBMIT-----------------------------------------------------------------------------
 ==================================================================================================================================
 */
-document.getElementById('tempsubmit-btn').addEventListener('click', saveTempSubmit);
+document.getElementById('tempsubmit-btn').addEventListener('click', function(event) {
+  if (areRequiredFieldsFilled()) {
+      saveTempSubmit();
+  } else {
+      event.preventDefault(); // Prevent form submission
+      alert('Please fill out all required fields.');
+  }
+});
+
+function areRequiredFieldsFilled() {
+  const requiredInputs = document.querySelectorAll('[required]');
+  let allFilled = true;
+
+  requiredInputs.forEach(input => {
+      if (input.value.trim() === '') {
+          allFilled = false;
+          input.classList.add('is-invalid');
+      } else {
+          input.classList.remove('is-invalid');
+      }
+  });
+
+  return allFilled;
+}
+
+
 
 // Update the function to use Promise for image conversion
 //function convertImageToBase64(File,label, fieldType, submitedForm) {

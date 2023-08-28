@@ -46,7 +46,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Form Type</th>
+                    <th scope="col">Form Title</th>
                     <th scope="col">Created Date</th>
                     <th scope="col">Created Time</th>
                     <th scope="col">Action</th>
@@ -107,7 +107,7 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Form Type</th>
+                <th scope="col">Form Title</th>
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
               </tr>

@@ -22,7 +22,7 @@
                      @php
                         $submittedCount = $submitted->where('type', 'Intake & Consent Form')->count();
                     @endphp
-              <h5 class=""><a href="/sponsorship"><b>Intake & Consent Form</b></a></h5>
+              <h5 class=""><a href="/ready-made"><b>Intake & Consent Form</b></a></h5>
               <span style="font-size: 12px">{{$submittedCount}} Submission</span>
           </div>
       
@@ -58,7 +58,7 @@
               </li><!-- End Messages Nav -->
               <li class="nav-item dropdown p-1">
                
-                <a class="btn btn-outline-secondary btn-sm" href="/sponsorship" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                <a class="btn btn-outline-secondary btn-sm" href="/ready-made" data-bs-toggle="tooltip" data-bs-placement="top" title="View">
                   <i class="bi bi-eye-fill"></i>
                 </a><!-- End Messages Icon -->
           

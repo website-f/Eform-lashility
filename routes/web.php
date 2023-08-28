@@ -58,14 +58,13 @@ Route::get('/reject/{id}', [FormBuilderController::class, 'rejected'])->middlewa
 //Ready Made and template Routes
 Route::get('/ready-forms', [TemplateController::class, 'readyMade'])->middleware('auth');
 Route::get('/template', [TemplateController::class, 'template'])->middleware('auth');
-Route::get('/sponsorship', [TemplateController::class, 'sponsor'])->middleware('auth');
-Route::get('/sponsor-publish/{name}', [TemplateController::class, 'sponsorPublish']);
-Route::get('/19LsignupForm', [TemplateController::class, 'signupForm'])->middleware('auth');
-Route::get('/19LsignupForm-publish/{id}', [TemplateController::class, 'signupFormPublish']);
+Route::get('/ready-made', [TemplateController::class, 'sponsor'])->middleware('auth');
+Route::get('/sponsor/{name}', [TemplateController::class, 'sponsorPublish']);
 Route::post('/submitTemp', [TemplateController::class, 'submitTemp']);
 Route::post('/submitTempSign', [TemplateController::class, 'submitTempSign']);
 Route::get('/sponsorship-submission', [TemplateController::class, 'sponsorshipSubmission'])->middleware('auth');
 Route::get('/signup-submission', [TemplateController::class, 'signupSubmission'])->middleware('auth');
+Route::get('/form-slug-update', [TemplateController::class, 'massUpdate'])->middleware('auth');
 
 //users Routes
 Route::get('/users', [UserController::class, 'users'])->middleware('auth');

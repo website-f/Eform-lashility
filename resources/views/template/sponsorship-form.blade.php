@@ -11,9 +11,9 @@
     <div class="card" >
 
         <div class="text-center pt-2">
-          <a class="btn btn-outline-success btn-sm" href="/sponsor-publish/{{Auth::user()->id}}" target="_blank">Publish Form</a>
+          <a class="btn btn-outline-success btn-sm" href="/sponsor/{{Auth::user()->id}}" target="_blank">Publish Form</a>
           <button id="copyLinkBtn" class="btn btn-outline-primary btn-sm">Copy Link</button>
-          <input type="text" id="formLink" value="#" readonly>
+          <input type="text" id="formLink" value="https://e-form.lashility.com/sponsor/{{Auth::user()->id}}" readonly>
           <span id="copyStatus" class="ms-3" style="display: none;">Link Copied!</span>
         </div>
 

@@ -1610,3 +1610,7 @@ h6 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.loginBackground {
+  background-image: url('images/Artboard-5.png');
+}

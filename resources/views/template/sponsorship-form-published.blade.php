@@ -33,7 +33,7 @@
                     <h2>Client Information</h2>
                     <hr>
                     <div class="col-md-12 fieldTypeTemp">
-                      <label class="form-label form-labelTemp"><b>Your Name</b></label>
+                      <label class="form-label form-labelTemp"><b>Your Name *</b></label>
                       <input type="text" name="text" class="form-control inputTypeTemp" required>
                     </div><br>
                     <div class="col-md-12 fieldTypeTemp">
@@ -386,7 +386,7 @@ g) This agreement will remain in effect of the procedure and all future procedur
                   <div class="text-center d-grid gap-2 d-md-flex justify-content-center pt-2 mb-4">
                     <hr>
 
-                    <button type="button" class="btn btn-success" id="tempsubmit-btn">Submit</button>
+                    <button type="submit" class="btn btn-success" id="tempsubmit-btn">Submit</button>
                   </div>
                 </form><!-- End Multi Columns Form -->
 
@@ -431,108 +431,12 @@ g) This agreement will remain in effect of the procedure and all future procedur
     document.getElementById("getLocationBtn").addEventListener("click", getCurrentLocation);
 </script>
 
-<script>
-    let currentPage = 1;
-    const formPages = document.querySelectorAll('.page');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('tempsubmit-btn');
-    const resetBtn = document.getElementById('resetBtn');
-
-    function showPage(pageNum) {
-      formPages.forEach((page, index) => {
-        if (index + 1 === pageNum) {
-          page.style.display = 'block';
-        } else {
-          page.style.display = 'none';
-        }
-      });
-    }
-
-    function updateButtonVisibility() {
-    if (currentPage === 1) {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'block';
-        submitBtn.style.display = 'none';
-        resetBtn.style.display = 'none';
-    } else if (currentPage === formPages.length) {
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'none';
-
-        // Show the submit button on the last page
-        submitBtn.style.display = 'block';
-
-        resetBtn.style.display = 'block';
-    } else {
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'block';
-        submitBtn.style.display = 'none';
-        resetBtn.style.display = 'none';
-    }
-}
-function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
-
-    function nextPage() {
-      if (currentPage < formPages.length) {
-        currentPage++;
-        showPage(currentPage);
-        topFunction()
-        updateButtonVisibility();
-      }
-    }
-
-    function prevPage() {
-      if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
-        topFunction()
-        updateButtonVisibility();
-      }
-    }
-
-    showPage(currentPage);
-    updateButtonVisibility();
-
-    function validatePage(pageNum) {
-        // Skip validation on the last page
-        if (pageNum === formPages.length) {
-            return true;
-        }
-
-        const currentPageInputs = formPages[pageNum - 1].querySelectorAll('input[required]');
-        let isValid = true;
-
-        currentPageInputs.forEach(input => {
-            if (input.value.trim() === '') {
-                isValid = false;
-                input.classList.add('is-invalid');
-            } else {
-                input.classList.remove('is-invalid');
-            }
-        });
-
-        return isValid;
-    }
-
-
-    function nextPage() {
-        if (currentPage < formPages.length && validatePage(currentPage)) {
-            currentPage++;
-            showPage(currentPage);
-            updateButtonVisibility();
-        }
-    }
-  </script>
-
   <script>
     // Get the URL of the current page
     var currentUrl = window.location.href;
 
     // Use regular expression to extract the dynamic segment and ID from the URL
-    var dynamicSegmentRegex = /\/sponsor-publish\/([^/]+)/;
+    var dynamicSegmentRegex = /\/sponsor\/([^/]+)/;
     var matches = currentUrl.match(dynamicSegmentRegex);
 
     if (matches && matches.length >= 2) {
@@ -542,61 +446,6 @@ function topFunction() {
         document.getElementById('idInput').value = dynamicValue;
     }
   </script>
-  <script>
-    const quantityInputs = document.querySelectorAll('.quantityInput');
-    const totalCartonsInput = document.getElementById('totalCartons');
-
-    quantityInputs.forEach(input => {
-        input.addEventListener('input', calculateTotalCartons);
-    });
-
-    function calculateTotalCartons() {
-        let totalCartons = 0;
-        quantityInputs.forEach(input => {
-            const quantity = parseInt(input.value) || 0;
-            totalCartons += quantity;
-        });
-        totalCartonsInput.value = totalCartons;
-    }
-</script>
-<script>
-  let rowater = document.querySelector('.rowater')
-  let rowatervalue = document.querySelector('.rowaterValue')
-  let rowaterbottle = document.querySelector('.rowaterbottle')
-  let rowaterbottlevalue = document.querySelector('.rowaterBottleValue')
-  let rowaterbottleL = document.querySelector('.rowaterBottleL')
-  let rowaterbottleLvalue = document.querySelector('.rowaterBottleLValue')
-
-  rowater.addEventListener('input', calculaterowater);
-
-  function calculaterowater() {
-    let totalcups = 48;
-    const quantity = parseInt(rowater.value) || 0
-    totalcups *= quantity;
-
-    rowatervalue.textContent = totalcups + " Cups"
-  }
-
-  rowaterbottle.addEventListener('input', calculaterowaterbottle);
-
-  function calculaterowaterbottle() {
-    let totalbottles = 24;
-    const quantityBottle = parseInt(rowaterbottle.value) || 0
-    totalbottles *= quantityBottle;
-
-    rowaterbottlevalue.textContent = totalbottles + " Bottles"
-  }
-
-  rowaterbottleL.addEventListener('input', calculaterowaterbottleL);
-
-  function calculaterowaterbottleL() {
-    let totalbottlesL = 12;
-    const quantityBottleL = parseInt(rowaterbottleL.value) || 0
-    totalbottlesL *= quantityBottleL;
-
-    rowaterbottleLvalue.textContent = totalbottlesL + " Bottles"
-  }
-</script>
 <script>
  document.addEventListener('DOMContentLoaded', function () {
   const canvas = document.getElementById('signatureCanvas');

@@ -14,12 +14,12 @@
           @php
     $encodedType = str_replace(' ', '%20', urlencode($forms->type));
 @endphp
-          <a class="btn btn-outline-success btn-sm" href="{{ route('form.publish', ['type' => $forms->type , 'id' => Auth::user()->id]) }}" target="_blank">Publish Form</a>
+          <a class="btn btn-outline-success btn-sm" href="{{ route('form.publish', ['type' => $forms->slug , 'id' => Auth::user()->id]) }}" target="_blank">Publish Form</a>
           <!-- Readonly input field styled like a label to store the link -->
 
 
           <button id="copyLinkBtn" class="btn btn-outline-primary btn-sm">Copy Link</button>
-          <input type="text" id="formLink" value="http://e-form.lashility.com/form-publish/{{$forms->type}}/{{Auth::user()->id}}" readonly>
+          <input type="text" id="formLink" value="http://e-form.lashility.com/form-publish/{{$forms->slug}}/{{Auth::user()->id}}" readonly>
           <span id="copyStatus" class="ms-3" style="display: none;">Link Copied!</span>
         </div>
         <center><img style="padding-top: 30px" width="300" height="100" src="{{asset('images/Artboard-5.png')}}" alt=""></center>

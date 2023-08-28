@@ -134,4 +134,12 @@ class TemplateController extends Controller
         $form->save();
         return redirect("/thankyou");
     }
+
+    public function massUpdate() {
+        $form = Form::all();
+        collect($form)->map(function($item){
+            $item->slug = Str::slug($item->type, '-');
+            $item->save();
+        });
+    }
 }
