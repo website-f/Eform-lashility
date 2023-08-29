@@ -1537,6 +1537,20 @@
     });
 
   </script>
+  <script>
+    function previewImageFormLogo(event, idValueImage) {
+      const input = event.target;
+      if (input.files && input.files[0]) {
+          const reader = new FileReader();
+          reader.onload = function (event) {
+              const preview = document.getElementById('preview-formLogo');
+              preview.src = event.target.result;
+              preview.style.display = 'block';
+          };
+          reader.readAsDataURL(input.files[0]);
+      }
+  }
+  </script>
 @endsection
 
 

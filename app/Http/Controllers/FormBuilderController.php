@@ -195,17 +195,17 @@ class FormBuilderController extends Controller
             // Add other custom error messages here
         ]);
 
-                /*if($formLogo) {
-                        $logo = $formLogo;
-                        $logoImage = base64_decode($logo);
-                        $logoName = time().'.png'; // You can generate a unique name or use the original name if available
-                        $path = public_path('logo/' . $logoName); // Change the path as per your requirements
-
-                        file_put_contents($path, $logoImage);
-
-                        // Replace the base64 image with the image URL or path
-                        $formLogo = '/logo/' . $logoName; // Change the URL as per your requirements
-                }*/
+                 if(!empty($formData[5]) && base64_decode($formData[5], true) !== false) {
+                     $logo = $formData[5];
+                     $logoImage = base64_decode($logo);
+                     $logoName = time().'.png'; // You can generate a unique name or use the original name if available
+                     $path = public_path('uploads/' . $logoName); // Change the path as per your requirements
+         
+                     file_put_contents($path, $logoImage);
+         
+                     // Replace the base64 image with the image URL or path
+                     $formData[5] = '/uploads/' . $logoName; // Change the URL as per your requirements
+                 }
                 // Loop through formFields and process the image, if available
                 foreach ($formFields as &$field) {
                     if ($field['type'] == 'file') {
