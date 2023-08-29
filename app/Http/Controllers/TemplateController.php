@@ -7,14 +7,14 @@ use App\Models\Submitted;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Notifications\approvalNotification;
+use App\Notifications\notifyNotification;
 use Illuminate\Support\Facades\Notification;
 
 class TemplateController extends Controller
 {
     public function readyMade() {
        $submitted = Submitted::all();
-       return view('readyMade', ['submitted'=> $submitted]); 
+       return view('readyMade', ['submitted'=> $submitted]);
     }
 
     public function sponsor() {
@@ -57,18 +57,9 @@ class TemplateController extends Controller
 
         unset($field);
 
-        if ($formData[2] == "pending") { // Replace with the desired recipient email address
-            Notification::route('mail', 'gitdev1234@gmail.com')
-                ->notify(new approvalNotification());
-        
-            $form = new Submitted;
-            $form->type = $formData[0];
-            $form->fields = json_encode($formFields) ;
-            $form->approval = $formData[2];
-            $form->publisher_id = $formData[3];
-            $form->save();
-            return redirect("/thankyou");
-        }
+       // Replace with the desired recipient email address
+            Notification::route('mail', 'Thehairtric@gmail.com')
+                ->notify(new notifyNotification());
 
         $form = new Submitted;
         $form->type = $formData[0];
@@ -77,7 +68,7 @@ class TemplateController extends Controller
         $form->publisher_id = $formData[3];
         $form->save();
         return redirect("/thankyou");
-    
+
     }
 
     public function sponsorshipSubmission() {
@@ -90,7 +81,13 @@ class TemplateController extends Controller
         return view('template.19LSignUp-submission', ['submitted'=>$submitted]);
     }
 
-    public function submitTempSign(Request $request) {
+    public function delSponsor($id) {
+        $submitted = Submitted::findOrFail($id);
+        $submitted->delete();
+        return redirect('/sponsorship-submission');
+    }
+
+    /*public function submitTempSign(Request $request) {
         $formData = $request->input('formData');
 
         $formFields = $formData[1];
@@ -104,9 +101,9 @@ class TemplateController extends Controller
                     $imageData = base64_decode($base64Image);
                     $imageName = time().'.'.$field['fileExtension']; // You can generate a unique name or use the original name if available
                     $path = public_path('uploads/' . $imageName); // Change the path as per your requirements
-    
+
                     file_put_contents($path, $imageData);
-    
+
                     // Replace the base64 image with the image URL or path
                     $field['value'] = '/uploads/' . $imageName; // Change the URL as per your requirements
                 } else {
@@ -134,7 +131,7 @@ class TemplateController extends Controller
         $form->publisher_id = $formData[2];
         $form->save();
         return redirect("/thankyou");
-    }
+    }*/
 
     public function massUpdate() {
         $form = Form::all();

@@ -1,23 +1,23 @@
 @extends('partial.main')
 
 @section('title', 'Sponsorship Form Submission')
-    
+
 @section('content')
 <section class="section">
     <div class="row">
       <div class="col-lg-12">
-      
+
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Datatables</h5>
-            
+
             <div class="form-check form-switch" style="margin-left: 30px; margin-bottom: 20px">
               <input style="font-size: 21px" class="form-check-input" type="checkbox" id="selectAllCheckbox">
               <label style="font-size: 18px" class="form-check-label" for="flexSwitchCheckChecked"><b>Select All</b></label>
-              
+
             </div>
-           
-            
+
+
             <!-- Table with stripped rows -->
             <div style="overflow: auto">
             <table class="table datatable">
@@ -66,7 +66,7 @@
                     @else
                     <td>No Approval</td>
                     @endif
-                    
+
                     @php
                      $fields = json_decode($item->fields, true);
                      $hasTextLocation = false;
@@ -108,17 +108,17 @@
                     <td>
                       @if (Auth::user()->role->role == "SuperAdmin" || Auth::user()->role->role == "Admin"  )
                       <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye-fill"></i></a>
-                      <a class="btn btn-outline-danger btn-sm" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash3-fill"></i></a>
+                      <a class="btn btn-outline-danger btn-sm" href="/submit-temp-del/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash3-fill"></i></a>
                       @else
                       <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye-fill"></i></a>
                       @endif
 
                     </td>
-                    
+
                   </tr>
                 @endforeach
               </tbody>
-              
+
             </table>
             <button class="btn btn-outline-success" onclick="exportToExcel()">Export to Excel</button>
             <!-- End Table with stripped rows -->

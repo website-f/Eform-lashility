@@ -36,6 +36,50 @@
                       <input type="date" class="form-control" required>
                     </div><br>
                     <div class="col-md-12">
+                      <label class="form-label"><b>Age</b></label>
+                      <input type="text" class="form-control" required>
+                    </div><br>
+                     <div class="col-md-12 fieldTypeTemp">
+                      <label class="form-label form-labelTemp"><b>Race</b></label>
+                      <input type="radio" class="formFieldHide inputTypeTemp">
+                       <div class="form-check">
+                          <input class="form-check-input" type="radio" id="gridCheck1" value="Malay">
+                          <label class="form-check-label">
+                            Malay
+                          </label>
+                        </div>
+
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="gridCheck2" value="Chinese">
+                          <label class="form-check-label">
+                            Chinese
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="gridCheck1" value="Indian">
+                          <label class="form-check-label">
+                            Indian
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="eventType" value="">
+                          <input type="text" placeholder="other" class="form-control" onchange="updateCheckboxValue1(this)">
+                        </div>
+                        <script>
+                          function updateCheckboxValue1(inputElement) {
+                              // Get the checkbox element by ID
+                              var checkbox = document.getElementById('eventType');
+
+                              // Set the value of the checkbox to the value of the text input
+                              checkbox.value = inputElement.value;
+                          }
+                      </script>
+                  </div><br>
+                    <div class="col-md-12">
+                      <label class="form-label"><b>Occupation</b></label>
+                      <input type="text" class="form-control" required>
+                    </div><br>
+                    <div class="col-md-12">
                       <label class="form-label"><b>Address</b></label>
                       <input type="text" class="form-control" >
                     </div><br>

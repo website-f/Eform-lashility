@@ -42,6 +42,50 @@
                       <input type="date" name="date" class="form-control inputTypeTemp" required>
                     </div><br>
                     <div class="col-md-12 fieldTypeTemp">
+                      <label class="form-label form-labelTemp"><b>Age</b></label>
+                      <input type="text" name="text" class="form-control inputTypeTemp" required>
+                    </div><br>
+                    <div class="col-md-12 fieldTypeTemp">
+                      <label class="form-label form-labelTemp"><b>Race</b></label>
+                      <input type="radio" class="formFieldHide inputTypeTemp">
+                       <div class="form-check">
+                          <input class="form-check-input" type="radio" id="gridCheck1" value="Malay">
+                          <label class="form-check-label">
+                            Malay
+                          </label>
+                        </div>
+
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="gridCheck2" value="Chinese">
+                          <label class="form-check-label">
+                           Chinese
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="gridCheck1" value="Indian">
+                          <label class="form-check-label">
+                            Indian
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" id="eventType" value="">
+                          <input type="text" placeholder="other" class="form-control" onchange="updateCheckboxValue1(this)">
+                        </div>
+                        <script>
+                          function updateCheckboxValue1(inputElement) {
+                              // Get the checkbox element by ID
+                              var checkbox = document.getElementById('eventType');
+
+                              // Set the value of the checkbox to the value of the text input
+                              checkbox.value = inputElement.value;
+                          }
+                      </script>
+                  </div><br>
+                    <div class="col-md-12 fieldTypeTemp">
+                      <label class="form-label form-labelTemp"><b>Occupation</b></label>
+                      <input type="text" name="text" class="form-control inputTypeTemp" required>
+                    </div><br>
+                    <div class="col-md-12 fieldTypeTemp">
                       <label class="form-label form-labelTemp"><b>Address</b></label>
                       <input type="text" name="text" class="form-control inputTypeTemp" required>
                     </div><br>
@@ -387,7 +431,7 @@ g) This agreement will remain in effect of the procedure and all future procedur
                   <div class="text-center d-grid gap-2 d-md-flex justify-content-center pt-2 mb-4">
                     <hr>
 
-                    <button type="submit" class="btn btn-success" id="tempsubmit-btn">Submit</button>
+                    <button type="button" class="btn btn-success" id="tempsubmit-btn">Submit</button>
                   </div>
                 </form><!-- End Multi Columns Form -->
 
