@@ -1614,3 +1614,7 @@ h6 {
 .loginBackground {
   background-image: url('images/Artboard-5.png');
 }
+
+.loginImageView {
+  background-image: url('../../images/Asset-7.png');
+}
