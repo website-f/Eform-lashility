@@ -22,8 +22,13 @@
           <input type="text" id="formLink" value="http://e-form.lashility.com/form-publish/{{$forms->slug}}/{{Auth::user()->id}}" readonly>
           <span id="copyStatus" class="ms-3" style="display: none;">Link Copied!</span>
         </div>
+        @if ($forms->logo !== null)
         <center><img style="padding-top: 30px" width="500" height="300" src="{{$forms->logo}}" alt=""></center>
-              <h5 class="card-title text-center formType">{{$forms->type}} Form <span>(Created by: {{$forms->user->name}})</span></h5>
+        @else
+        @endif
+              <h5 class="card-title text-center formType"><span>(Created by: {{$forms->user->name}})</span></h5>
+              <h3 class="pt-3 text-center formTypeTemp">{{$forms->type}} Form</h3>
+              <p style="font-size: 13px" class="pt-0 text-center formTypeTemp">{{$forms->subtitle}}</p>
               <hr>
 
                   @php

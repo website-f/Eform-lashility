@@ -18,7 +18,8 @@
         </div>
 
         <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{asset('images/lash.jpg')}}" alt=""></center>
-              <h5 class="card-title text-center formType">Intake & Consent Form</h5>
+        <h3 class="pt-3 text-center formTypeTemp">INTAKE & CONSENT FORM</h3>
+        <p style="font-size: 13px" class="pt-0 text-center formTypeTemp">Eyelash Extensions | Keratin Lash lift | Brow Lamination</p>
               <hr>
               <!-- Multi Columns Form -->
               <form class="row g-3" id="paginationForm">

@@ -18,7 +18,7 @@ use App\Http\Controllers\FormBuilderController;
 |
 */
 
-Route::get('/', [FormBuilderController::class, 'index']);
+Route::get('/', [FormBuilderController::class, 'index'])->middleware('auth');
 
 Route::get('/test', function () {
     return 'Test Route Works!';

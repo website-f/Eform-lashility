@@ -40,6 +40,7 @@ async function saveFormData() {
     // Fetch all the form elements within the container
     const formPage = document.querySelectorAll(".form-page");
     const formType = document.querySelector('.form-type').value;
+    const formSub = document.querySelector('.formSubtitle').value;
     const formCreator = document.querySelector('.form-creator').value;
     const approval = document.querySelector('select[name="approval"]').value;
     const approver = document.querySelector('select[name="approver"]').value;
@@ -228,7 +229,7 @@ async function saveFormData() {
         alert("form title and form fields cant be empty")
     }
 
-    let forms = [formType, formFields, approval, formCreator, approver, completeNotify, logo]
+    let forms = [formType, formFields, approval, formCreator, approver, completeNotify, logo, formSub]
     let formsComplete = JSON.stringify(forms)
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

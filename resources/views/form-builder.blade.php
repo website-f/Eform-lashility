@@ -43,7 +43,7 @@
                          <br>
                          <img id="preview" src="#" alt="Preview" style="display: none; max-width: 200px;">-->
                        </div>
-                       <label class="form-label"><b>Choose Your Logo (If needed)</b></label>
+                       <label class="form-label"><b>Add Logo (optional)</b></label>
                        <input class="form-control form-logo-create" type="file" onchange="previewImageFormLogo(event)">
                        <center><img src="#" alt="No Logo" id="preview-formLogo" style="padding-top: 30px" width="700" height="300" class="img-fluid imgPreview"></center>
                        <input type="hidden" name="creator" class="form-creator" value="{{Auth::user()->id}}">
@@ -90,6 +90,10 @@
             <div class="col-12 pt-2">
               <label class="form-label" ><b>Form Title*</b></label>
               <input type="text" name="formType" class="form-control form-type" placeholder="Form Title (required)" required>
+            </div>
+            <div class="col-12 pt-2">
+              <label class="form-label" ><b>Form Subtitle (optional)</b></label>
+              <input type="text" name="formSubtitle" class="form-control formSubtitle">
             </div>
           </div>
         </div>

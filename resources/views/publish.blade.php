@@ -25,8 +25,12 @@
           <div class="card">
           <form id="myForm">
             @foreach ($form as $forms)
-            <center><img style="padding-top: 30px" width="300" height="100" src="{{asset('images/Artboard-5.png')}}" alt=""></center>
-                  <h5 class="card-title text-center formType">{{$forms->type}} Form</h5>
+            @if ($forms->logo !== null)
+            <center><img style="padding-top: 30px" width="500" height="300" src="{{$forms->logo}}" alt=""></center>
+            @else
+            @endif
+            <h3 class="pt-3 text-center formTypeTemp">{{$forms->type}} Form</h3>
+            <p style="font-size: 13px" class="pt-0 text-center formTypeTemp">{{$forms->subtitle}}</p>
                   <input type="hidden" class="formPublisher" id="idInput" value="{{$user->id}}">
                   <input type="approval" name="approval" class="formFieldHide formApproval" id="approval" value="{{$forms->approval}}">
                   <input type="approver" name="approver" class="formFieldHide formApprover" id="approver" value="{{$forms->approveBy}}">

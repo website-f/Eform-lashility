@@ -93,6 +93,7 @@ class FormBuilderController extends Controller
             $form = new Form;
             $form->logo = $formData[6];
             $form->type = $formData[0];
+            $form->subtitle = $formData[7];
             $form->fields = json_encode($formFields);
             $form->approval = $formData[2];
             $form->user_id = $formData[3];
@@ -103,6 +104,7 @@ class FormBuilderController extends Controller
             $form = new Form;
             $form->logo = $formData[6];
             $form->type = $formData[0];
+            $form->subtitle = $formData[7];
             $form->fields = json_encode($formFields);
             $form->approval = $formData[2];
             $form->approveBy = $formData[4];

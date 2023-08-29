@@ -19,6 +19,7 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">Form Type</th>
+                  <th scope="col">Email</th>
                   <th scope="col">Submission date</th>
                   <th scope="col">Action</th>
                 </tr>
@@ -29,6 +30,11 @@
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$item['type']}}</td>
+                    @if ($item['usermail'] !== null)
+                       <td>{{$item['usermail']}}</td>
+                    @else
+                        <td>No Email Given</td>
+                    @endif
                     <td>{{$item['created_at']->format('d-m-Y')}}</td>
                     <td>
                       <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye-fill"></i></a>

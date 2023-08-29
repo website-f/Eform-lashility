@@ -108,6 +108,7 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Form Title</th>
+                <th scope="col">Email</th>
                 <th scope="col">Date</th>
                 <th scope="col">Time</th>
               </tr>
@@ -117,6 +118,11 @@
               <tr>
                   <th scope="row">{{$loop->iteration}}</th>
                   <td>{{$item['type']}}</td>
+                  @if ($item['usermail'] !== null)
+                     <td>{{$item['usermail']}}</td>
+                  @else
+                     <td>No Email *</td>
+                  @endif
                   <td>{{$item['created_at']->format('d-m-Y')}}</td>
                   <td>{{$item['created_at']->format('h:i')}}</td>
                 </tr>
