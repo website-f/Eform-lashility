@@ -158,9 +158,9 @@ async function saveFormData() {
                 formFields.push({ label, type, fieldID, youtubeLink, pageNumber})
               }
               else if (type == "termscondition") {
-          
+                let terms = document.querySelector('input[id="termsconditiontext"]').value;
                 
-                  formFields.push({ label, type, fieldID, pageNumber, required: 'yes'})
+                  formFields.push({ label, type, terms, fieldID, pageNumber, required: 'yes'})
                 
               }
               else if (type == "Heading") {

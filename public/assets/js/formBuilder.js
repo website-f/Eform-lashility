@@ -2985,6 +2985,11 @@ else if (data == " Terms & Condition") {
      inputype.type = "termscondition"
      inputype.classList.add("typeForm")
      inputype.classList.add("formFieldHide")
+
+     const tandc = document.createElement('input');
+     tandc.type = "hidden";
+     tandc.name = "termsconditiontext";
+     tandc.setAttribute("id", "termsconditiontext")
  
      const fieldID = document.createElement("input");
          fieldID.type = "fieldID"
@@ -2992,6 +2997,7 @@ else if (data == " Terms & Condition") {
          fieldID.value = 'checkID'+Date.now();
  
      checkDiv.appendChild(input);
+     checkDiv.appendChild(tandc);
      checkDiv.appendChild(inputype);
      checkDiv.appendChild(legend);
      
@@ -3038,6 +3044,8 @@ else if (data == " Terms & Condition") {
         <div class="modal-body">
         <label class="form-label"><b>label name: </b></label>
         <input class="form-control" id="checklabel-${idValueCheck}" type="text" value="${data}"> <br>
+        <label class="form-label"><b>Terms and Condition Content: </b></label>
+         <textarea class="form-control" id="termscondition-${idValueCheck}"></textarea> <br>
         <label class="form-label pt-3"><b>Required  </b></label>
         <input class="form-check" id="requiredInput-${idValueCheck}" type="checkbox">
         </div>
@@ -3054,6 +3062,8 @@ else if (data == " Terms & Condition") {
  
      function saveForm() {
     
+      let termsconditionCont = document.getElementById('termscondition-'+idValueCheck).value
+      tandcContent.value = termsconditionCont;
       let input = inputfield.value;
       checkLabel.textContent = input;
  
@@ -3093,7 +3103,8 @@ else if (data == " Terms & Condition") {
      let save = document.getElementById("saveButtonCheck-"+idValueCheck);
      let inputfield = document.getElementById("checklabel-"+idValueCheck);
      let checkLabel = document.getElementById(idValueCheck);
-     let requiredField = document.getElementById('requiredInput-'+idValueCheck)
+     let requiredField = document.getElementById('requiredInput-'+idValueCheck);
+     let tandcContent = document.getElementById('termsconditiontext');
      //let selectOption = document.getElementById("selectOption");
      //let selectval = selectOption.value;
      //let options = selectval.split('/n');

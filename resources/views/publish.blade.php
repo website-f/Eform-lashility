@@ -375,12 +375,52 @@
                           @if ($field['required'] == 'yes')
                           <input class="form-check-input val" type="checkbox" id="gridCheck1" name="termscondition" value="agree" required>
                           <label class="form-check-label" for="gridCheck1">
-                            {{ $field['label'] }}
+                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#verticalycentered-terms">
+                              {{ $field['label'] }}
+                            </button>
+                            <div class="modal fade" id="verticalycentered-terms" tabindex="-1">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Terms & Condition</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <textarea class="form-control" style="height: 500px" readonly>
+                                      {{$field['terms']}}
+                                    </textarea>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                   
+                                  </div>
+                                </div>
+                            </div>
                           </label>
                           @else
                           <input class="form-check-input val" type="checkbox" id="gridCheck1" name="termscondition" value="agree">
                           <label class="form-check-label" for="gridCheck1">
-                            {{ $field['label'] }}
+                            <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#verticalycentered-terms">
+                              {{ $field['label'] }}
+                            </button>
+                            <div class="modal fade" id="verticalycentered-terms" tabindex="-1">
+                              <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Terms & Condition</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <textarea class="form-control" style="height: 500px" readonly>
+                                      {{$field['terms']}}
+                                    </textarea>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                   
+                                  </div>
+                                </div>
+                            </div>
                           </label>
                           @endif
                         </div>
