@@ -51,7 +51,14 @@
                 <div class="card form-page" data-page="{{ $pageNumber }}">
                   <div class="card-body">
                     @if ($pageNumber === 1)
-                      <center><img style="padding-top: 30px; padding-bottom: 20px" width="300" height="120" src="{{ asset('images/Artboard-5.png') }}" alt=""></center>
+                    <label class="form-label"><b>Add Logo (optional)</b></label>
+                    <input type="hidden" class="form-logo-edit" value="{{$form->logo}}">
+                    <input class="form-control form-logo-create" type="file" onchange="previewImageFormLogo(event)">
+                    @if ($form->logo !== null)
+                    <center><img src="{{$form->logo}}" alt="No Logo" id="preview-formLogo" style="padding-top: 30px" width="700" height="300" class="img-fluid imgPreview"></center>
+                    @else
+                    <center><img src="#" alt="No Logo" id="preview-formLogo" style="padding-top: 30px" width="700" height="300" class="img-fluid imgPreview"></center>
+                    @endif
                       <input type="text" name="formType" class="form-control form-ID formFieldHide" value="{{ $form->id }}">
                       <input type="hidden" name="creator" class="form-creator" value="{{ Auth::user()->id }}">
                       <hr><br>
@@ -1334,6 +1341,10 @@
             <div class="col-12 pt-2">
               <label class="form-label" ><b>Form Type*</b></label>
               <input type="text" name="formType" class="form-control form-type" value="{{ $form->type }}">
+            </div>
+            <div class="col-12 pt-2">
+              <label class="form-label" ><b>Form Subtitle (optional)</b></label>
+              <input type="text" name="formSubtitle" class="form-control formSubtitle" value="{{ $form->subtitle }}">
             </div>
           </div>
          

@@ -21,7 +21,7 @@ function convertImageToBase64(file, formFields, fieldID, label, type, pageNumber
 }
 
 // Update the function to use Promise for image conversion
-/*function convertLogoImageToBase64(logoFile) {
+function convertLogoImageEditToBase64(logoFile) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(logoFile);
@@ -34,12 +34,13 @@ function convertImageToBase64(file, formFields, fieldID, label, type, pageNumber
       reject(error);
     };
   });
-}*/
+}
 
 async function saveEditFormData() {
     // Fetch all the form elements within the container
     const formPage = document.querySelectorAll(".form-page");
     const formType = document.querySelector('.form-type').value;
+    const formSub = document.querySelector('.formSubtitle').value;
     const ID = document.querySelector('.form-ID').value;
     const formCreator = document.querySelector('.form-creator').value;
     const approval = document.querySelector('select[name="approval"]').value;
@@ -48,20 +49,22 @@ async function saveEditFormData() {
     const notifyOption = []
     notifyOption.push(notify)
     const completeNotify = JSON.stringify(notifyOption);
- //const formLogo = document.querySelector('.form-logo');
-    //let logo = ''
-    //const logoImageConversionPromises = []
-    /*if (formLogo && formLogo.files.length > 0) {
+    let logo = ''
+    const logoImageConversionEditPromises = []
+    const formLogo = document.querySelector('.form-logo-create');
+    const formLogoEdit = document.querySelector('.form-logo-edit').value;
+    console.log(formLogo)
+    if (formLogo && formLogo.files.length > 0) {
       // If an image is selected, convert it to base64 using a Promise
       const logoFile = formLogo.files[0];
 
       // Create a promise for the image conversion and push it to the array
-      logoImageConversionPromises.push(
-        convertLogoImageToBase64(logoFile)
+      logoImageConversionEditPromises.push(
+        convertLogoImageEditToBase64(logoFile)
       );
     } else {
-      let logo = '';
-    }*/
+      logo = formLogoEdit;
+    }
     const formFields = [];
 
     const imageConversionPromises = [];
@@ -216,21 +219,21 @@ async function saveEditFormData() {
   }
 
   // Wait for all image conversion promises to complete
-  /*try {
-    const base64LogoImages = await Promise.all(logoImageConversionPromises);
+  try {
+    const base64LogoImages = await Promise.all(logoImageConversionEditPromises);
     if (base64LogoImages.length > 0) {
       logo = base64LogoImages[0];
     }
   } catch (error) {
     console.error('Image Conversion Error:', error);
-  }*/
+  }
     // Convert the formData array to JSON
     //const formDataJSON = JSON.stringify(formData);
     if (!formType || formFields.length === 0) {
         alert("form cant be empty")
     }
 
-    let forms = [formType, formFields, approval, approver, completeNotify]
+    let forms = [formType, formFields, approval, approver, completeNotify, logo, formSub]
     let formsComplete = JSON.stringify(forms)
 
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

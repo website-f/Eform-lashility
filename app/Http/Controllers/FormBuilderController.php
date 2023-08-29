@@ -225,14 +225,18 @@ class FormBuilderController extends Controller
                     }
                 }
                 if ($formData[2] == "No") {
+                    $form->logo = $formData[5];
                     $form->type = $formData[0];
+                    $form->subtitle = $formData[6];
                     $form->fields = json_encode($formFields);
                     $form->approval = $formData[2];
                     $form->notify = $formData[4];
                     $form->save();
                     return redirect("/forms");
                 } else {
+                    $form->logo = $formData[5];
                     $form->type = $formData[0];
+                    $form->subtitle = $formData[6];
                     $form->fields = json_encode($formFields);
                     $form->approval = $formData[2];
                     $form->approveBy = $formData[3];
