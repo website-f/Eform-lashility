@@ -32,7 +32,7 @@
   }
 
   /**
-   * Easy on scroll event listener 
+   * Easy on scroll event listener
    */
   const onscroll = (el, listener) => {
     el.addEventListener('scroll', listener)
@@ -56,6 +56,16 @@ const bodyElement = select('#main-body');
 if (toggleSidebarBtn) {
   on('click', '.toggle-sidebar-btn', function(e) {
     select('body').classList.toggle('toggle-sidebar');
+  });
+
+  document.addEventListener('click', function(event) {
+    const toggleButton = select('.toggle-sidebar-btn');
+    const sidebar = select('.sidebar');
+
+    // Check if the click target is not the toggle button or the sidebar
+    if (!toggleButton.contains(event.target) && !sidebar.contains(event.target)) {
+      select('body').classList.remove('toggle-sidebar');
+    }
   });
 }
 

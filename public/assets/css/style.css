@@ -15,7 +15,7 @@
 
 body {
   font-family: "Open Sans", sans-serif;
-  background: #f6f9ff; 
+  background: #f6f9ff;
   color: #444444;
 }
 
@@ -365,8 +365,8 @@ h6 {
   width: 100%; /* Make the container expand to the available width */
     display: flex;
     justify-content: center; /* Center the content horizontally */
-    align-items: center; 
-    
+    align-items: center;
+
   /* Toggle Sidebar Button */
   /* Search Bar */
 }
@@ -1471,12 +1471,12 @@ h6 {
 }
 
 .form-element {
-  
+
   padding: 5px;
   margin: 5px;
   cursor: pointer;
   font-weight: 500;
-  
+
 }
 
 .hover-effect {
@@ -1502,7 +1502,7 @@ h6 {
 
 .star-rating .hovered:before,
 .star-rating .selected:before {
-  
+
   color: #FFD700; /* Use the selected star icon from Font Awesome */
 }
 
@@ -1518,7 +1518,7 @@ h6 {
 /* Add padding around the stars */
 .star-rating i {
   padding: 4px;
-  
+
 }
 
 .star-rating i {
@@ -1581,6 +1581,17 @@ h6 {
     display: none
   }
 }
+
+/* Styles for tablet */
+@media (min-width: 768px) and (max-width: 1198px) {
+    .desktop-only {
+      display: block;
+    }
+
+    .formDummyImage {
+      display: none
+    }
+  }
 
 
 #loading-screen-published {

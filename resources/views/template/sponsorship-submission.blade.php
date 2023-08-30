@@ -25,6 +25,7 @@
                 <tr>
                   <th scope="col">#</th>
                   <th scope="col">#</th>
+                  <th scope="col">Action</th>
                   <th scope="col">Form Type</th>
                   <th scope="col">Submission date</th>
                   <th scope="col">Approval</th>
@@ -47,7 +48,7 @@
                     @endif
                   @endforeach
                   <th scope="col">Published By</th>
-                  <th scope="col">Action</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -55,6 +56,15 @@
                 <tr>
                     <td><input style="font-size: 19px" type="checkbox" class="select-checkbox" data-id="{{$item['id']}}"></td>
                     <th scope="row">{{$loop->iteration}}</th>
+                    <td>
+                        @if (Auth::user()->role->role == "SuperAdmin" || Auth::user()->role->role == "Admin"  )
+                        <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye-fill"></i></a>
+                        <a class="btn btn-outline-danger btn-sm" href="/submit-temp-del/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash3-fill"></i></a>
+                        @else
+                        <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye-fill"></i></a>
+                        @endif
+
+                      </td>
                     <td>{{$item['type']}}</td>
                     <td>{{$item['created_at']->format('d-m-Y')}}</td>
                     @if ($item['approval'] == 'pending')
@@ -105,15 +115,6 @@
                     @endforeach
                     @endif
                     <td>{{$item->published->name}}</td>
-                    <td>
-                      @if (Auth::user()->role->role == "SuperAdmin" || Auth::user()->role->role == "Admin"  )
-                      <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye-fill"></i></a>
-                      <a class="btn btn-outline-danger btn-sm" href="/submit-temp-del/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash3-fill"></i></a>
-                      @else
-                      <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye-fill"></i></a>
-                      @endif
-
-                    </td>
 
                   </tr>
                 @endforeach

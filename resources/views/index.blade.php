@@ -13,9 +13,9 @@
       <div class="row">
 
         <!-- Sales Card -->
-        <div class="col-xxl-12 col-md-6">
+        <div class="col-12">
           <div class="card info-card sales-card">
-
+<a href="/forms">
             <div class="card-body">
               <h5 class="card-title">Forms</h5>
 
@@ -29,7 +29,7 @@
                 </div>
               </div>
             </div>
-
+</a>
           </div>
         </div><!-- End Sales Card -->
 
@@ -77,9 +77,9 @@
     <!-- Right side columns -->
     <div class="col-lg-6">
           <!-- Revenue Card -->
-          <div class="col-xxl-12 col-md-6">
+          <div class="col-12">
            <div class="card info-card revenue-card">
-
+ <a href="/submitted" >
              <div class="card-body">
                <h5 class="card-title">Submission</h5>
 
@@ -94,7 +94,7 @@
                  </div>
                </div>
              </div>
-
+ </a>
            </div>
           </div><!-- End Revenue Card -->
       <!-- Website Traffic -->
