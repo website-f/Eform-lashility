@@ -35,9 +35,10 @@ class notifyNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $regardsMessage = 'Best regards from our team!';
+        $uniqueSubject = 'Form have been submitted ' . now();
         return (new MailMessage)
             ->from('jantzenform@gmail.com', 'Jantzen Form') // Sender details
-            ->subject('Form have been submitted')
+            ->subject($uniqueSubject)
             ->line('theres a form that have submitted by the user')
             ->action('View the Form', url('/'))
             ->line($regardsMessage);
