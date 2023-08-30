@@ -2874,149 +2874,160 @@ else if (data == " Search Location") {
 } /*==========================================TERMS AND CONDITION=============================================================================*/
 else if (data == " Terms & Condition") {
 
-     //create element for the div and all the label and input inside div with class form-control
-     const formElement = document.createElement("div");
-     formElement.classList.add("form-field")
-     formElement.setAttribute('draggable', 'true')
-     const legend = document.createElement('legend');
-     legend.textContent = data;
-     legend.classList.add("col-form-label")
-     legend.classList.add("form-check-label");
-     const idTime = Date.now() //set an unique id for each label
-     const idValueCheck = "checkLabel-"+idTime
-     legend.setAttribute("id", idValueCheck)
- 
-     const checkDiv = document.createElement("div");
-     const divTime = Date.now()
-     const idCheckDiv = "checkDiv-" +divTime
-     checkDiv.setAttribute("id", idCheckDiv)
-     checkDiv.classList.add("form-check");
-     checkDiv.classList.add("checkboxOptionBuild");
-     const input = document.createElement("input");
-     input.type = "checkbox";
-     input.value = "option";
-     input.name = "formBuildCheck";
-     input.classList.add("form-check-input");
-     input.setAttribute("id", "check");
+  //create element for the div and all the label and input inside div with class form-control
+  const formElement = document.createElement("div");
+  formElement.classList.add("form-field")
+  formElement.setAttribute('draggable', 'true')
+  const legend = document.createElement('legend');
+  legend.textContent = data;
+  legend.classList.add("col-form-label")
+  legend.classList.add("form-check-label");
+  const idTime = Date.now() //set an unique id for each label
+  const idValueCheck = "checkLabel-"+idTime
+  legend.setAttribute("id", idValueCheck)
 
-     const inputype = document.createElement("input")
-     inputype.type = "termscondition"
-     inputype.classList.add("typeForm")
-     inputype.classList.add("formFieldHide")
- 
-     const fieldID = document.createElement("input");
-         fieldID.type = "fieldID"
-         fieldID.classList.add("formFieldHide");
-         fieldID.value = 'checkID'+Date.now();
- 
-     checkDiv.appendChild(input);
-     checkDiv.appendChild(inputype);
-     checkDiv.appendChild(legend);
-     
- 
-     //edit button
-     const edit = document.createElement('button');
-     edit.classList.add("btn")
-     edit.classList.add("btn-outline-primary")
-     edit.classList.add("btn-sm")
-     edit.setAttribute("data-bs-toggle", "modal");
-     edit.setAttribute("data-bs-target", "#exampleModal-" + Date.now());
-     edit.textContent = "Edit"
- 
-     edit.addEventListener("click", function() {
-         openModal();
-       });
-     
- 
-       function openModal() {
-         const myModal = document.getElementById("exampleModal-" + Date.now());
-         const bootstrapModal = new bootstrap.Modal(myModal);
-         bootstrapModal.show();
-       }
- 
- 
-    //modal
-    const modalDiv = document.createElement('div')
-    modalDiv.classList.add("modal");
-    modalDiv.classList.add('fade');
-    modalDiv.setAttribute("role", "dialog");
-    modalDiv.setAttribute("id", "exampleModal-" + Date.now());
-    // Give a unique ID to the modalDiv
- 
-    // Add the modal content (you can customize this part as needed)
-    modalDiv.innerHTML = `
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">${data}</h5>
-          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-        <label class="form-label"><b>label name: </b></label>
-        <input class="form-control" id="checklabel-${idValueCheck}" type="text" value="${data}"> <br>
-        <label class="form-label pt-3"><b>Required  </b></label>
-        <input class="form-check" id="requiredInput-${idValueCheck}" type="checkbox">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveButtonCheck-${idValueCheck}">Save changes</button>
-        </div>
-      </div>
-    </div>
+  const checkDiv = document.createElement("div");
+  const divTime = Date.now()
+  const idCheckDiv = "checkDiv-" +divTime
+  checkDiv.setAttribute("id", idCheckDiv)
+  checkDiv.classList.add("form-check");
+  checkDiv.classList.add("checkboxOptionBuild");
+  const input = document.createElement("input");
+  input.type = "checkbox";
+  input.value = "option";
+  input.name = "formBuildCheck";
+  input.classList.add("form-check-input");
+  input.setAttribute("id", "check");
+
+  const tandc = document.createElement('input');
+  tandc.type = "hidden";
+  tandc.name = "termsconditiontext";
+  tandc.setAttribute("id", "termsconditiontext")
+
+  const inputype = document.createElement("input")
+  inputype.type = "termscondition"
+  inputype.classList.add("typeForm")
+  inputype.classList.add("formFieldHide")
+
+  const fieldID = document.createElement("input");
+      fieldID.type = "fieldID"
+      fieldID.classList.add("formFieldHide");
+      fieldID.value = 'checkID'+Date.now();
+
+  checkDiv.appendChild(input);
+  checkDiv.appendChild(tandc);
+  checkDiv.appendChild(inputype);
+  checkDiv.appendChild(legend);
   
-    `;
- 
-     formElement.appendChild(modalDiv);
- 
-     function saveForm() {
-    
-      let input = inputfield.value;
-      checkLabel.textContent = input;
- 
-     if (requiredField.checked) {
-       const textInput = document.getElementById('check');
-       textInput.required = true
-      } 
-      
+
+  //edit button
+  const edit = document.createElement('button');
+  edit.classList.add("btn")
+  edit.classList.add("btn-outline-primary")
+  edit.classList.add("btn-sm")
+  edit.setAttribute("data-bs-toggle", "modal");
+  edit.setAttribute("data-bs-target", "#exampleModal-" + Date.now());
+  edit.textContent = "Edit"
+
+  edit.addEventListener("click", function() {
+      openModal();
+    });
+  
+
+    function openModal() {
+      const myModal = document.getElementById("exampleModal-" + Date.now());
+      const bootstrapModal = new bootstrap.Modal(myModal);
+      bootstrapModal.show();
     }
+
+
+ //modal
+ const modalDiv = document.createElement('div')
+ modalDiv.classList.add("modal");
+ modalDiv.classList.add('fade');
+ modalDiv.setAttribute("role", "dialog");
+ modalDiv.setAttribute("id", "exampleModal-" + Date.now());
+ // Give a unique ID to the modalDiv
+
+ // Add the modal content (you can customize this part as needed)
+ modalDiv.innerHTML = `
+ <div class="modal-dialog" role="document">
+   <div class="modal-content">
+     <div class="modal-header">
+       <h5 class="modal-title" id="exampleModalLabel">${data}</h5>
+       <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+       </button>
+     </div>
+     <div class="modal-body">
+     <label class="form-label"><b>label name: </b></label>
+     <input class="form-control" id="checklabel-${idValueCheck}" type="text" value="${data}"> <br>
+     <label class="form-label"><b>Terms and Condition Content: </b></label>
+      <textarea class="form-control" rows="6" id="termscondition-${idValueCheck}"></textarea> <br>
+     <label class="form-label pt-3"><b>Required  </b></label>
+     <input class="form-check" id="requiredInput-${idValueCheck}" type="checkbox">
+     </div>
+     <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveButtonCheck-${idValueCheck}">Save changes</button>
+     </div>
+   </div>
+ </div>
+
+ `;
+
+  formElement.appendChild(modalDiv);
+
+  function saveForm() {
  
-    //delete button an function
-     const del = document.createElement('button');
-     del.classList.add("btn")
-     del.classList.add("btn-outline-danger")
-     del.classList.add("btn-sm")
-     //const i = document.createElement("i")
-     //i.classList.add("bi")
-     //i.classList.add("bi-trash3-fill")
-     //del.appendChild(i);
-     del.textContent ="Delete"
-     
-     del.addEventListener('click', function(e){
-       e.target.parentElement.remove()
-     
-     })
-     
-     //insert all element together
-     const container = document.querySelector('.form-builder')
-     formElement.appendChild(fieldID)
-     formElement.appendChild(checkDiv);
-     formElement.appendChild(edit);
-     formElement.appendChild(del);
-     container.appendChild(formElement);
- 
- 
-     //save edited modal
-     let save = document.getElementById("saveButtonCheck-"+idValueCheck);
-     let inputfield = document.getElementById("checklabel-"+idValueCheck);
-     let checkLabel = document.getElementById(idValueCheck);
-     let requiredField = document.getElementById('requiredInput-'+idValueCheck)
-     //let selectOption = document.getElementById("selectOption");
-     //let selectval = selectOption.value;
-     //let options = selectval.split('/n');
-     
-     save.addEventListener("click", saveForm);
+   let termsconditionCont = document.getElementById('termscondition-'+idValueCheck).value
+   tandcContent.value = termsconditionCont;
+   let input = inputfield.value;
+   checkLabel.textContent = input;
+
+  if (requiredField.checked) {
+    const textInput = document.getElementById('check');
+    textInput.required = true
+   } 
+   
+ }
+
+ //delete button an function
+  const del = document.createElement('button');
+  del.classList.add("btn")
+  del.classList.add("btn-outline-danger")
+  del.classList.add("btn-sm")
+  //const i = document.createElement("i")
+  //i.classList.add("bi")
+  //i.classList.add("bi-trash3-fill")
+  //del.appendChild(i);
+  del.textContent ="Delete"
+  
+  del.addEventListener('click', function(e){
+    e.target.parentElement.remove()
+  
+  })
+  
+  //insert all element together
+  const container = document.querySelector('.form-builder')
+  formElement.appendChild(fieldID)
+  formElement.appendChild(checkDiv);
+  formElement.appendChild(edit);
+  formElement.appendChild(del);
+  container.appendChild(formElement);
+
+
+  //save edited modal
+  let save = document.getElementById("saveButtonCheck-"+idValueCheck);
+  let inputfield = document.getElementById("checklabel-"+idValueCheck);
+  let checkLabel = document.getElementById(idValueCheck);
+  let requiredField = document.getElementById('requiredInput-'+idValueCheck);
+  let tandcContent = document.getElementById('termsconditiontext');
+  //let selectOption = document.getElementById("selectOption");
+  //let selectval = selectOption.value;
+  //let options = selectval.split('/n');
+  
+  save.addEventListener("click", saveForm);
 
 }
 
