@@ -36,6 +36,50 @@
                       <input type="date" class="form-control" required>
                     </div><br>
                     <div class="col-md-12">
+                      <label class="form-label"><b>Age</b></label>
+                      <input type="text" class="form-control" required>
+                    </div><br>
+                     <div class="col-md-12 fieldTypeTemp">
+                      <label class="form-label form-labelTemp"><b>Race</b></label>
+                      <input type="radio" id="checkval" class="formFieldHide inputTypeTemp">
+                       <div class="form-check">
+                          <input class="form-check-input" type="radio" name="race" id="gridCheck1" value="Malay">
+                          <label class="form-check-label">
+                            Malay
+                          </label>
+                        </div>
+
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="race" id="gridCheck2" value="Chinese">
+                          <label class="form-check-label">
+                            Chinese
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="race" id="gridCheck3" value="Indian">
+                          <label class="form-check-label">
+                            Indian
+                          </label>
+                        </div>
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="race" id="eventType" value="">
+                          <input type="text" placeholder="other" class="form-control" onchange="updateCheckboxValue1(this)">
+                        </div>
+                        <script>
+                          function updateCheckboxValue1(inputElement) {
+                              // Get the checkbox element by ID
+                              var checkbox = document.getElementById('eventType');
+
+                              // Set the value of the checkbox to the value of the text input
+                              checkbox.value = inputElement.value;
+                          }
+                      </script>
+                  </div><br>
+                    <div class="col-md-12">
+                      <label class="form-label"><b>Occupation</b></label>
+                      <input type="text" class="form-control" required>
+                    </div><br>
+                    <div class="col-md-12">
                       <label class="form-label"><b>Address</b></label>
                       <input type="text" class="form-control" >
                     </div><br>
@@ -51,40 +95,40 @@
                       <label class="form-label form-labelTemp"><b>How did you hear about us ?</b></label>
                       <input type="radio" class="formFieldHide inputTypeTemp">
                        <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck1" value="Website">
+                          <input class="form-check-input" type="radio" name="how" id="gridCheck5" value="Website">
                           <label class="form-check-label">
                             Website
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck2" value="Tiktok">
+                          <input class="form-check-input" type="radio" name="how" id="gridCheck6" value="Tiktok">
                           <label class="form-check-label">
                             Tiktok
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck1" value="Google/Social Media">
+                          <input class="form-check-input" type="radio" name="how" id="gridCheck7" value="Google/Social Media">
                           <label class="form-check-label">
                             Google/Social Media
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck2" value="Friends">
+                          <input class="form-check-input" type="radio" name="how" id="gridCheck8" value="Friends">
                           <label class="form-check-label">
                             Friends
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="eventType" value="">
-                          <input type="text" placeholder="other" class="form-control" onchange="updateCheckboxValue1(this)">
+                          <input class="form-check-input" type="radio" name="how" id="eventWhereType" value="">
+                          <input type="text" placeholder="other" class="form-control" onchange="updateCheckboxValue2(this)">
                         </div>
                         <script>
-                          function updateCheckboxValue1(inputElement) {
+                          function updateCheckboxValue2(inputElement) {
                               // Get the checkbox element by ID
-                              var checkbox = document.getElementById('eventType');
+                              var checkbox = document.getElementById('eventWhereType');
 
                               // Set the value of the checkbox to the value of the text input
                               checkbox.value = inputElement.value;
@@ -95,40 +139,40 @@
                     <label class="form-label form-labelTemp"><b>Visit Outlet</b></label>
                     <input type="radio" class="formFieldHide inputTypeTemp">
                      <div class="form-check">
-                        <input class="form-check-input" type="radio" id="gridCheck1" value="Bangsar Telawi">
+                        <input class="form-check-input" type="radio" name="outlet" id="gridCheck9" value="Bangsar Telawi">
                         <label class="form-check-label">
                           Bangsar Telawi
                         </label>
                       </div>
 
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" id="gridCheck2" value="Bangsar Shopping Mall">
+                        <input class="form-check-input" type="radio" name="outlet" id="gridCheck10" value="Bangsar Shopping Mall">
                         <label class="form-check-label">
                           Bangsar Shopping Mall
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" id="gridCheck1" value="IOI City Mall">
+                        <input class="form-check-input" type="radio" name="outlet" id="gridCheck11" value="IOI City Mall">
                         <label class="form-check-label">
                           IOI City Mall
                         </label>
                       </div>
 
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" id="gridCheck2" value="My Town">
+                        <input class="form-check-input" type="radio" name="outlet" id="gridCheck12" value="My Town">
                         <label class="form-check-label">
                           My Town
                         </label>
                       </div>
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" id="gridCheck1" value="Pavilion 2">
+                        <input class="form-check-input" type="radio" name="outlet" id="gridCheck13" value="Pavilion 2">
                         <label class="form-check-label">
                           Pavilion 2
                         </label>
                       </div>
 
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" id="gridCheck2" value="Camp">
+                        <input class="form-check-input" type="radio" name="outlet" id="gridCheck14" value="Camp">
                         <label class="form-check-label">
                          Setia City Mall
                         </label>
@@ -142,14 +186,14 @@
                       <label class="form-label form-labelTemp"><b>Is this your first time you have eyelash extensions/lash lift/brow lamination?</b></label>
                       <input type="radio" class="formFieldHide inputTypeTemp">
                        <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck1" value="Yes">
+                          <input class="form-check-input" type="radio" name="first" id="gridCheck15" value="Yes">
                           <label class="form-check-label">
                             Yes
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck2" value="No">
+                          <input class="form-check-input" type="radio" name="first" id="gridCheck16" value="No">
                           <label class="form-check-label">
                             No
                           </label>
@@ -159,26 +203,26 @@
                       <label class="form-label form-labelTemp"><b>Do you</b></label>
                       <input type="radio" class="formFieldHide inputTypeTemp">
                        <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck1" value="Curl">
+                          <input class="form-check-input" type="radio" name="do" id="gridCheck17" value="Curl">
                           <label class="form-check-label">
                             Curl
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck2" value="Perm">
+                          <input class="form-check-input" type="radio" name="do" id="gridCheck18" value="Perm">
                           <label class="form-check-label">
                             Perm
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck2" value="Tint your lashes">
+                          <input class="form-check-input" type="radio" name="do" id="gridCheck19" value="Tint your lashes">
                           <label class="form-check-label">
                             Tint your lashes
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck2" value="No">
+                          <input class="form-check-input" type="radio" name="do" id="gridCheck2" value="No">
                           <label class="form-check-label">
                             No
                           </label>
@@ -188,14 +232,14 @@
                       <label class="form-label form-labelTemp"><b>Are you getting your lash extensions. lash lift, or brow lamination applied for</b></label>
                       <input type="radio" class="formFieldHide inputTypeTemp">
                        <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck1" value="a special occasion">
+                          <input class="form-check-input" type="radio" name="are" id="gridCheck20" value="a special occasion">
                           <label class="form-check-label">
                             a special occasion
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck2" value="regular daily use">
+                          <input class="form-check-input" type="radio" name="are" id="gridCheck21" value="regular daily use">
                           <label class="form-check-label">
                             regular daily use
                           </label>
@@ -205,14 +249,14 @@
                       <label class="form-label form-labelTemp"><b>Do you habitually rub or pull your lashes for any reason ?</b></label>
                       <input type="radio" class="formFieldHide inputTypeTemp">
                        <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck1" value="Yes">
+                          <input class="form-check-input" type="radio" name="habit" id="gridCheck22" value="Yes">
                           <label class="form-check-label">
                             Yes
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck2" value="No">
+                          <input class="form-check-input" type="radio" name="habit" id="gridCheck23" value="No">
                           <label class="form-check-label">
                             No
                           </label>
@@ -222,14 +266,14 @@
                       <label class="form-label form-labelTemp"><b>Do you have or are you being treated for any eye illness or injury ?</b></label>
                       <input type="radio" class="formFieldHide inputTypeTemp">
                        <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck1" value="Yes">
+                          <input class="form-check-input" type="radio" name="have" id="gridCheck24" value="Yes">
                           <label class="form-check-label">
                             Yes
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck2" value="No">
+                          <input class="form-check-input" type="radio" name="have" id="gridCheck25" value="No">
                           <label class="form-check-label">
                             No
                           </label>
@@ -239,14 +283,14 @@
                       <label class="form-label form-labelTemp"><b>Do you able to keep your eye's closed and lie still for up 2 hours?</b></label>
                       <input type="radio" class="formFieldHide inputTypeTemp">
                        <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck1" value="Yes">
+                          <input class="form-check-input" type="radio" name="able" id="gridCheck26" value="Yes">
                           <label class="form-check-label">
                             Yes
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" id="gridCheck2" value="No">
+                          <input class="form-check-input" type="radio" name="able" id="gridCheck27" value="No">
                           <label class="form-check-label">
                             No
                           </label>
@@ -256,46 +300,46 @@
                       <label class="form-label form-labelTemp"><b>Please include any of the following options that apply to you</b></label>
                       <input type="checkbox" class="formFieldHide inputTypeTemp">
                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="gridCheck1" value="Lash Eye Surgery">
+                          <input class="form-check-input" type="checkbox" id="gridCheck28" value="Lash Eye Surgery">
                           <label class="form-check-label">
                             Lash Eye Surgery
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="gridCheck2" value="Permanent Eye Make Up">
+                          <input class="form-check-input" type="checkbox" id="gridCheck29" value="Permanent Eye Make Up">
                           <label class="form-check-label">
                             Permanent Eye Make Up
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="gridCheck1" value="Blepharoplasty (Eye Lift)">
+                          <input class="form-check-input" type="checkbox" id="gridCheck30" value="Blepharoplasty (Eye Lift)">
                           <label class="form-check-label" for="gridCheck1">
                             Blepharoplasty (Eye Lift)
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="gridCheck2" value="Allergies to adhesives or synthetics">
+                          <input class="form-check-input" type="checkbox" id="gridCheck31" value="Allergies to adhesives or synthetics">
                           <label class="form-check-label">
                             Allergies to adhesives or synthetics
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="gridCheck1" value="Hypersensitivity to cyanoacrylate or formaldehyde or certain adhesives/glues">
+                          <input class="form-check-input" type="checkbox" id="gridCheck32" value="Hypersensitivity to cyanoacrylate or formaldehyde or certain adhesives/glues">
                           <label class="form-check-label">
                             Hypersensitivity to cyanoacrylate or formaldehyde or certain adhesives/glues
                           </label>
                         </div>
 
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="gridCheck2" value="Major surgery within last 120 days">
+                          <input class="form-check-input" type="checkbox" id="gridCheck33" value="Major surgery within last 120 days">
                           <label class="form-check-label">
                            Major surgery within last 120 days
                           </label>
                         </div>
                         <div class="form-check">
-                          <input class="form-check-input" type="checkbox" id="gridCheck1" value="Cherntherapeutic agents used in cancer treatments">
+                          <input class="form-check-input" type="checkbox" id="gridCheck34" value="Cherntherapeutic agents used in cancer treatments">
                           <label class="form-check-label">
                             Cherntherapeutic agents used in cancer treatments
                           </label>
@@ -335,7 +379,7 @@
                     <div class="col-md-12 fieldTypeTemp">
                       <div class="form-check">
                         <input type="checkbox" class="formFieldHide inputTypeTempSign">
-                        <input class="form-check-input inputTypeTempSign" type="checkbox" id="gridCheck1" value="I agree to terms & conditions">
+                        <input class="form-check-input inputTypeTempSign" type="checkbox" id="gridCheck37" value="I agree to terms & conditions">
                         <label class="form-check-label form-labelTempSign">
                           <b>I AGREE TO THE FOLLOWING. </b>
                         </label>
@@ -390,102 +434,8 @@ g) This agreement will remain in effect of the procedure and all future procedur
   </div>
 </div>
 
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-<script>
-    // Function to get the current location
-    function getCurrentLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-                var latitude = position.coords.latitude;
-                var longitude = position.coords.longitude;
-                var currentLocation = [latitude, longitude];
 
-                // Display the coordinates
-                document.getElementById("coordinates").innerHTML = "Latitude: " + latitude + ", Longitude: " + longitude;
 
-                // Initialize the map
-                var map = L.map('map').setView(currentLocation, 15);
-
-                // Add a tile layer to the map (OpenStreetMap)
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                }).addTo(map);
-
-                // Add a marker for the current location
-                L.marker(currentLocation).addTo(map);
-            }, function(error) {
-                console.error("Error getting the current location: ", error);
-            });
-        } else {
-            console.error("Geolocation is not supported by this browser.");
-        }
-    }
-
-    // Call the function to get the current location when the button is clicked
-    document.getElementById("getLocationBtn").addEventListener("click", getCurrentLocation);
-</script>
-
-<script>
-    let currentPage = 1;
-    const formPages = document.querySelectorAll('.page');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('sub');
-    const resetBtn = document.getElementById('resetBtn');
-
-    function showPage(pageNum) {
-      formPages.forEach((page, index) => {
-        if (index + 1 === pageNum) {
-          page.style.display = 'block';
-        } else {
-          page.style.display = 'none';
-        }
-      });
-    }
-
-    function updateButtonVisibility() {
-      if (currentPage === 1) {
-        prevBtn.style.display = 'none';
-        nextBtn.style.display = 'block';
-        submitBtn.style.display = 'none';
-        resetBtn.style.display = 'none';
-      } else if (currentPage === formPages.length) {
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'none';
-        submitBtn.style.display = 'block';
-        resetBtn.style.display = 'block';
-      } else {
-        prevBtn.style.display = 'block';
-        nextBtn.style.display = 'block';
-        submitBtn.style.display = 'none';
-        resetBtn.style.display = 'none';
-      }
-    }
-    function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
-}
-    function nextPage() {
-      if (currentPage < formPages.length) {
-        currentPage++;
-        showPage(currentPage);
-        topFunction()
-        updateButtonVisibility();
-      }
-    }
-
-    function prevPage() {
-      if (currentPage > 1) {
-        currentPage--;
-        showPage(currentPage);
-        topFunction()
-        updateButtonVisibility();
-      }
-    }
-
-    showPage(currentPage);
-    updateButtonVisibility();
-  </script>
 
   <script>
     // Function to copy the link to the clipboard

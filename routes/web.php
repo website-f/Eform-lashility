@@ -60,6 +60,7 @@ Route::get('/ready-forms', [TemplateController::class, 'readyMade'])->middleware
 Route::get('/template', [TemplateController::class, 'template'])->middleware('auth');
 Route::get('/ready-made', [TemplateController::class, 'sponsor'])->middleware('auth');
 Route::get('/sponsor/{name}', [TemplateController::class, 'sponsorPublish']);
+Route::get('/submit-temp-del/{id}', [TemplateController::class, 'delSponsor'])->middleware('auth');
 Route::post('/submitTemp', [TemplateController::class, 'submitTemp']);
 Route::post('/submitTempSign', [TemplateController::class, 'submitTempSign']);
 Route::get('/sponsorship-submission', [TemplateController::class, 'sponsorshipSubmission'])->middleware('auth');
