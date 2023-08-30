@@ -159,6 +159,13 @@ async function saveEditFormData() {
           
                 formFields.push({ label, type, fieldID, youtubeLink, pageNumber})
               }
+              else if (type == "termscondition") {
+                let terms = document.querySelector(`input[id="termsandconditiontext-${fieldID}"]`).value;
+                console.log(terms)
+              
+                formFields.push({ label, type, terms, fieldID, pageNumber, required: 'yes'})
+              
+            }
               else if (type == "Heading") {
                 let subheading = document.querySelector(`p[id='${fieldID}'`).textContent
 

@@ -1238,63 +1238,68 @@
                               
                             </script>
                       @elseif ($field['type'] == 'termscondition')
-                             <div class="type form-field" title="text" draggable="true">
-                                 <div class="modal fade" role="dialog" id="exampleModal-{{$field['fieldID']}}">
-                                     <div class="modal-dialog" role="document">
-                                         <div class="modal-content">
-                                           <div class="modal-header">
-                                             <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                             <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                               <span aria-hidden="true">&times;</span>
-                                             </button>
-                                           </div>
-                                           <div class="modal-body">
-                                           <label class="form-label"><b>label name: </b></label>
-                                           <input class="form-control" id="labelInput-{{$field['fieldID']}}" type="text" value="{{$field['label']}}">
-                                           
-                                           </div>
-                                           <div class="modal-footer">
-                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveButtonText-{{$field['fieldID']}}">Save changes</button>
-                                           </div>
-                                         </div>
-                                     </div>
-                                 </div>
-                                
-                                 <div class="col-sm-10 input-group">
-                                    <input class="form-check-input" type="checkbox" id="{{$field['fieldID']}}" name="{{$field['fieldID']}}" value="Agree">
-                                    <label class="col-sm-10 col-form-label" id="termscond-{{$field['fieldID']}}">{{$field['label']}}</label>
-                                    
-                                     <input type="{{$field['type']}}" readonly id="textType" class="form-control typeForm formFieldHide">
-                                     <input type="fieldID"  class="form-control formFieldHide" value="{{$field['fieldID']}}">
-                                     <div class="input-group-append">
-                                         <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$field['fieldID']}}">
-                                         Edit
-                                         </button>
-                                         <button class="btn btn-outline-danger btn-sm" id="{{$field['fieldID']}}" onclick="deleteThis(event)">Delete</button>
-                                     </div>
-                                 </div>
-                             </div>
-                             <script>
-                               function deleteThis(event) {
-                                 event.target.parentElement.parentElement.parentElement.remove()
-                               }
-         
-                                 let save{{$field['fieldID']}}= document.getElementById("saveButtonText-{{$field['fieldID']}}");
-                                 let inputfield{{$field['fieldID']}} = document.getElementById("labelInput-{{$field['fieldID']}}");
-                                 let textInpLabel{{$field['fieldID']}} = document.getElementById("termscond-{{$field['fieldID']}}");
-         
-                                 save{{$field['fieldID']}}.addEventListener("click", function() {
-         
-                                 console.log(inputfield{{$field['fieldID']}}.value)
-                                 textInpLabel{{$field['fieldID']}}.textContent = inputfield{{$field['fieldID']}}.value;
-         
-         
-                                 })
-                                  
-         
-                               
-                             </script>
+                      <div class="type form-field" title="text" draggable="true">
+                        <div class="modal fade" role="dialog" id="exampleModal-{{$field['fieldID']}}">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                  <label class="form-label"><b>label name: </b></label>
+                                  <input class="form-control" id="labelInput-{{$field['fieldID']}}" type="text" value="{{$field['label']}}">
+                                  <label class="form-label"><b>Terms and Condition Content: </b></label>
+                                   <textarea class="form-control" rows="6" id="termscondition-{{$field['fieldID']}}">{{$field['terms']}}</textarea> <br>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveButtonText-{{$field['fieldID']}}">Save changes</button>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="col-sm-10 input-group">
+                           <input class="form-check-input" type="checkbox" id="{{$field['fieldID']}}" name="{{$field['fieldID']}}" value="Agree">
+                           <label class="col-sm-10 col-form-label" id="termscond-{{$field['fieldID']}}">{{$field['label']}}</label>
+                           <input type="hidden" id="termsandconditiontext-{{$field['fieldID']}}" value="{{$field['terms']}}">
+                           
+                            <input type="{{$field['type']}}" readonly id="textType" class="form-control typeForm formFieldHide">
+                            <input type="fieldID"  class="form-control formFieldHide" value="{{$field['fieldID']}}">
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal-{{$field['fieldID']}}">
+                                Edit
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" id="{{$field['fieldID']}}" onclick="deleteThis(event)">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                      function deleteThis(event) {
+                        event.target.parentElement.parentElement.parentElement.remove()
+                      }
+
+                        let save{{$field['fieldID']}}= document.getElementById("saveButtonText-{{$field['fieldID']}}");
+                        let inputfield{{$field['fieldID']}} = document.getElementById("labelInput-{{$field['fieldID']}}");
+                        let textInpLabel{{$field['fieldID']}} = document.getElementById("termscond-{{$field['fieldID']}}");
+                        let tandc{{$field['fieldID']}} = document.getElementById("termsandconditiontext-{{$field['fieldID']}}");
+                        let tc{{$field['fieldID']}} = document.getElementById("termscondition-{{$field['fieldID']}}");
+
+                        save{{$field['fieldID']}}.addEventListener("click", function() {
+
+
+                        textInpLabel{{$field['fieldID']}}.textContent = inputfield{{$field['fieldID']}}.value;
+                        tandc{{$field['fieldID']}}.value = tc{{$field['fieldID']}}.value
+
+
+                        })
+                         
+
+                      
+                    </script>
                         @endif
                         @endif
                       @endforeach
