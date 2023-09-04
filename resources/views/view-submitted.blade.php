@@ -259,7 +259,6 @@
                  </div>
                </div><!-- End Vertically centered Modal-->
                @if ($submitted->subtitle == null & $submitted->logo == null)
-                   @if ($submitted->logo == null)
                    <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{asset('images/lash.jpg')}}" alt=""></center>
                    <h5 class="card-title text-center formType">{{$submitted['type']}}</h5>
                 @else
