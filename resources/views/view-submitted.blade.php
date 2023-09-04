@@ -111,7 +111,7 @@
                                         <label class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                         <div class="col-sm-8">
                                        @foreach ($field['value'] as $item)
-                                           <p>- {{$item}}</p>
+                                       <button type="button" class="btn btnTagCheck btn-sm">{{$item}}</button>
                                        @endforeach
                                         </div>
                                       </div>
@@ -338,9 +338,28 @@
                                 <label class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                 <div class="col-sm-8">
                                @foreach ($field['value'] as $item)
-                                   <p>- {{$item}}</p>
+                               <button type="button" class="btn btnTagCheck btn-sm">{{$item}}</button>
                                @endforeach
                                 </div>
+                                <script>
+                                  // Function to generate a random RGB color
+                                  function getRandomRGBColor() {
+                                      const r = Math.floor(Math.random() * 256); // Red component (0-255)
+                                      const g = Math.floor(Math.random() * 256); // Green component (0-255)
+                                      const b = Math.floor(Math.random() * 256); // Blue component (0-255)
+                                  
+                                      return `rgba(${r}, ${g}, ${b}, 0.5)`; // Fixed alpha value (0.5)
+                                  }
+                                  
+                                  // Get all buttons with the "btn" class
+                                  const buttonCheck = document.querySelectorAll('.btnTagCheck');
+                                  
+                                  // Loop through each button and set a random background color
+                                  buttonCheck.forEach((button) => {
+                                      button.style.backgroundColor = getRandomRGBColor();
+                                  });
+                  
+                                </script>
                               </div>
                             @elseif ($field['fieldType'] === 'radio')
                               <div class="row mb-3">
