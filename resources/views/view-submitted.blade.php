@@ -119,7 +119,7 @@
                                       <div class="row mb-3">
                                         <label class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                         <div class="col-sm-8">
-                                          <p>{{$field['value']}}</p>
+                                          <button type="button" class="btn btnTagCheck btn-sm">{{$field['value']}}</button>
                                          </div>
                                         </div>
                                     @elseif ($field['fieldType'] === 'text datetime')
@@ -365,7 +365,7 @@
                               <div class="row mb-3">
                                 <label class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                 <div class="col-sm-8">
-                                  <p>{{$field['value']}}</p>
+                                  <button type="button" class="btn btnTagCheck btn-sm">{{$field['value']}}</button>
                                  </div>
                                 </div>
                             @elseif ($field['fieldType'] === 'text datetime')
