@@ -24,8 +24,14 @@
                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                      </div>
                      <div class="modal-body card-exportPDF">
+                      @if ($submitted->subtitle == null & $submitted->logo == null)
                       <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{asset('images/lash.jpg')}}" alt=""></center>
                       <h5 class="card-title text-center formType">{{$submitted['type']}}</h5>
+                      @else
+                      <center><img class="img-fluid" style="padding-top: 30px" width="300" height="100" src="{{$submitted->logo}}" alt=""></center>
+                      <h3 class="pt-3 text-center" style="color: #001689">{{$submitted->type}}</h3>
+                      <p style="font-size: 13px" class="pt-0 text-center">{{$submitted->subtitle}}</p>
+                      @endif
                       <hr>
                       <form>
                           @php
@@ -248,8 +254,22 @@
                    </div>
                  </div>
                </div><!-- End Vertically centered Modal-->
-               <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{asset('images/lash.jpg')}}" alt=""></center>
-              <h5 class="card-title text-center formType">{{$submitted['type']}}</h5>
+               @if ($submitted->subtitle == null & $submitted->logo == null)
+                   @if ($submitted->logo == null)
+                   <center></center>
+                   @else
+                   <center><img class="img-fluid" style="padding-top: 30px" width="300" height="100" src="{{$submitted->logo}}" alt=""></center>
+                   @endif
+                <h5 class="card-title text-center formType">{{$submitted['type']}}</h5>
+                @else
+                   @if ($submitted->logo == null)
+                   <center></center>
+                   @else
+                   <center><img class="img-fluid" style="padding-top: 30px" width="300" height="100" src="{{$submitted->logo}}" alt=""></center>
+                   @endif
+                <h3 class="pt-3 text-center" style="color: #001689">{{$submitted->type}}</h3>
+                <p style="font-size: 13px" class="pt-0 text-center">{{$submitted->subtitle}}</p>
+                @endif
               <hr>
               <form>
                   @php

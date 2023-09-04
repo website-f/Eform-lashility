@@ -29,9 +29,10 @@
             <center><img style="padding-top: 30px" width="500" height="300" src="{{$forms->logo}}" alt=""></center>
             @else
             @endif
-            <h3 class="pt-3 text-center formTypeTemp">{{$forms->type}} Form</h3>
-            <p style="font-size: 13px" class="pt-0 text-center formTypeTemp">{{$forms->subtitle}}</p>
+            <h3 class="pt-3 text-center formType">{{$forms->type}} Form</h3>
+            <p style="font-size: 13px" class="pt-0 text-center formSub">{{$forms->subtitle}}</p>
                   <input type="hidden" class="formPublisher" id="idInput" value="{{$user->id}}">
+                  <input type="hidden" class="formLogoSubmit" id="idInput" value="{{$forms->logo}}">
                   <input type="approval" name="approval" class="formFieldHide formApproval" id="approval" value="{{$forms->approval}}">
                   <input type="approver" name="approver" class="formFieldHide formApprover" id="approver" value="{{$forms->approveBy}}">
                   @php

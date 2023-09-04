@@ -23,7 +23,8 @@
         </div>-->
         <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{asset('images/lash.jpg')}}" alt=""></center>
         <h3 class="pt-3 text-center formTypeTemp">INTAKE & CONSENT FORM</h3>
-        <p style="font-size: 13px" class="pt-0 text-center formTypeTemp">Eyelash Extensions | Keratin Lash lift | Brow Lamination</p>
+        <p style="font-size: 13px" class="pt-0 text-center formSub">Eyelash Extensions | Keratin Lash lift | Brow Lamination</p>
+        <input type="hidden" id="idInput" class="formLogo" value="/images/lash.jpg">
               <input type="hidden" id="idInput" class="formPublisher" value="">
               <input type="approval" name="approval" id="approval" class="formFieldHide" value="No">
               <hr>

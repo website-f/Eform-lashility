@@ -273,7 +273,9 @@ class FormBuilderController extends Controller
         $notifyArray = explode(',', $formJsonNotify[0]);
 
         $form = new Submitted;
+        $form->logo = $formData[8];
         $form->type = $formData[0];
+        $form->subtitle = $formData[7];
         $form->approval = $formData[2];
         $form->publisher_id = $formData[3];
 

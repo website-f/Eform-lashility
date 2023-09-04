@@ -72,6 +72,8 @@ function convertImageTempToBase64(File, label, fieldType, submitedForm) {
 async function saveTempSubmit() {
     const submitedForm = [];
     const formType = document.querySelector('.formTypeTemp').textContent;
+    const formSubtitle = document.querySelector('.formSub').textContent;
+    const formLogo = document.querySelector('.formLogo').value;
     const formPublisher = document.querySelector('.formPublisher').value;
     //const field = document.querySelector('.page-content');
     const fieldType = document.querySelectorAll('.fieldTypeTemp');
@@ -212,7 +214,7 @@ async function saveTempSubmit() {
       submitedForm.push({ label: "Approval", value: "Pending", fieldType: "approval" });
   } */
 
-    let submit = [formType, submitedForm, approval, formPublisher];
+    let submit = [formType, submitedForm, approval, formPublisher, formSubtitle, formLogo];
     const complete = JSON.stringify(submit);
 
     console.log(complete);

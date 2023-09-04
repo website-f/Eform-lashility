@@ -23,7 +23,7 @@
           <span id="copyStatus" class="ms-3" style="display: none;">Link Copied!</span>
         </div>
         @if ($forms->logo !== null)
-        <center><img style="padding-top: 30px" width="500" height="300" src="{{$forms->logo}}" alt=""></center>
+        <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{$forms->logo}}" alt=""></center>
         @else
         @endif
               <h5 class="card-title text-center formType"><span>(Created by: {{$forms->user->name}})</span></h5>

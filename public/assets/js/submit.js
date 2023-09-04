@@ -76,6 +76,8 @@ function convertImageToBase64(File, label, fieldType, submitedForm) {
 async function saveSubmit(event) {
     const submitedForm = [];
     const formType = document.querySelector('.formType').textContent;
+    const formSubtitle = document.querySelector('.formSub').textContent;
+    const formLogo = document.querySelector('.formLogoSubmit').value;
     const formPublisher = document.querySelector('.formPublisher').value;
     const field = document.querySelector('.page-content');
     const fieldType = document.querySelectorAll('.fieldType');
@@ -251,7 +253,7 @@ console.log(notify)
     }
    
 
-    let submit = [formType, submitedForm, approval, formPublisher, approver, completeNotify, userEmail];
+    let submit = [formType, submitedForm, approval, formPublisher, approver, completeNotify, userEmail, formSubtitle, formLogo];
     const complete = JSON.stringify(submit);
 
     console.log(complete);
