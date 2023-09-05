@@ -6,6 +6,7 @@ use App\Models\Form;
 use App\Models\Submitted;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Notifications\notifyNotification;
 use Illuminate\Support\Facades\Notification;
@@ -58,7 +59,9 @@ class TemplateController extends Controller
         unset($field);
 
        // Replace with the desired recipient email address
-            Notification::route('mail', 'Thehairtric@gmail.com')
+            /*Notification::route('mail', 'Thehairtric@gmail.com')
+                ->notify(new notifyNotification()); */
+                Notification::route('mail', 'fitri@jantzen.com')
                 ->notify(new notifyNotification());
 
         $form = new Submitted;
@@ -141,5 +144,79 @@ class TemplateController extends Controller
             $item->slug = Str::slug($item->type, '-');
             $item->save();
         });
+    }
+
+    public function report() {
+        $submitted = Submitted::all();
+        $form = Form::orderBy('created_at', 'desc')->get();
+        return view('report', ['submitted' => $submitted, 'form' => $form]);
+    }
+
+    public function reportView($type) {
+        if ($type == "INTAKE & CONSENT FORM") {
+            $submitType = $type;
+            $submittedAll = Submitted::where('type', $type)->get();
+            $chartsData = [];
+        } else {
+            $submitType = $type;
+            $submittedAll = Submitted::where('type', $type." Form")->get();
+            $chartsData = [];
+        }
+        
+        return view('report-view', ['submittedAll' => $submittedAll, 'submitType' => $submitType, 'chartsData' => $chartsData]);
+    }
+
+    public function generateReport(Request $request, $type) 
+    {
+        // Validate and process the form input, including group_by, start_date, end_date, etc.
+        $groupBysArray = $request->input('group_by');
+        // Explode the input string into an array
+        $groupBys = explode(',', $groupBysArray);
+        // Trim each value to remove any leading or trailing spaces
+        $groupBys = array_map('trim', $groupBys);
+
+        $startDate = $request->input('start_date');
+        $endDate = $request->input('end_date');
+        $startDate = date('Y-m-d 00:00:00', strtotime($startDate));
+        $endDate = date('Y-m-d 23:59:59', strtotime($endDate));
+
+        if ($type == "INTAKE & CONSENT FORM") {
+            $submitType = $type;
+            $submitted = Submitted::where('type', $type)->whereBetween('created_at', [$startDate, $endDate])->get();
+            $submittedAll = Submitted::where('type', $type)->get();
+        } else {
+            $submitType = $type;
+            $submitted = Submitted::where('type', $type." Form")->whereBetween('created_at', [$startDate, $endDate])->get();
+            $submittedAll = Submitted::where('type', $type." Form")->get();
+        }
+    
+        $chartsData = [];
+        if (empty($groupBys) || (count($groupBys) === 1 && $groupBys[0] === "")) {
+            
+            $chartsData = null;
+
+            return view('report-view', [
+                'chartsData' => $chartsData,
+                'submitType' => $submitType,
+                'submitted' => $submitted,
+                'submittedAll' => $submittedAll,
+            ]);
+        } else {
+            foreach ($groupBys as $groupBy) {
+            
+                $chartsData[] = [
+                    'group_by' => $groupBy,
+                    'chartLabels' => $groupBy,
+                ];
+            }
+        
+            return view('report-view', [
+                'chartsData' => $chartsData,
+                'submitType' => $submitType,
+                'submitted' => $submitted,
+                'submittedAll' => $submittedAll,
+            ]);
+        }
+    
     }
 }

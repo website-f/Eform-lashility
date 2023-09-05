@@ -84,3 +84,8 @@ Route::delete('/trash-form-delete/{id}', [RecycleController::class, 'trashFormDe
 Route::get('/trash-submitted', [RecycleController::class, 'trashSubmitted'])->middleware('auth');
 Route::get('/trash-submitted-restore/{id}', [RecycleController::class, 'trashSubmittedRestore'])->middleware('auth');
 Route::get('/trash-submitted-delete/{id}', [RecycleController::class, 'trashSubmittedDelete'])->middleware('auth');
+
+//Report Routes
+Route::get('/report', [TemplateController::class, 'report'])->middleware('auth');
+Route::get('/report-view/{type}', [TemplateController::class, 'reportView'])->middleware('auth');
+Route::post('/generate-report/{type}', [TemplateController::class, 'generateReport'])->middleware('auth');

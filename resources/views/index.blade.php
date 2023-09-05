@@ -115,13 +115,26 @@
             </thead>
             <tbody>
               @foreach ($submitted as $item)
+              @php
+                      $fields = json_decode($item->fields, true);
+              @endphp
               <tr>
                   <th scope="row">{{$loop->iteration}}</th>
                   <td>{{$item['type']}}</td>
                   @if ($item['usermail'] !== null)
                      <td>{{$item['usermail']}}</td>
                   @else
-                     <td>No Email *</td>
+                      @php $emailFieldExists = false @endphp
+                      @foreach ($fields as $field)
+                          @if ($field['fieldType'] == 'email')
+                              <td>{{$field['value']}}</td>
+                              @php $emailFieldExists = true @endphp
+                              @break
+                          @endif
+                      @endforeach
+                      @unless ($emailFieldExists)
+                          <td>No Email</td>
+                      @endunless
                   @endif
                   <td>{{$item['created_at']->format('d-m-Y')}}</td>
                   <td>{{$item['created_at']->format('h:i')}}</td>

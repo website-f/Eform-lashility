@@ -30,6 +30,7 @@
   <link href="{{asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/simple-datatables/style.css')}}" rel="stylesheet">
   <link href="{{asset('assets/vendor/daterangepicker/daterangepicker.css')}}" rel="stylesheet">
+  <link href="{{asset('assets/vendor/select2/css/select2.min.css')}}" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 
   <!-- Template Main CSS File -->
@@ -96,6 +97,12 @@
       <a class="nav-link {{ Request::is('/') ? ' ' : 'collapsed' }}" href="/">
         <i class="bi bi-house-fill"></i>
         <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+    <li class="nav-item">
+      <a class="nav-link {{ Request::is('/report') ? ' ' : 'collapsed' }}" href="/report">
+        <i class="bi bi-clipboard-data"></i>
+        <span>Report</span>
       </a>
     </li><!-- End Dashboard Nav -->
 
@@ -321,11 +328,46 @@
     // Convert the content to PDF using html2pdf
     html2pdf().from(contentDiv).set(options).save();
   }
+
+  function exportReportToPDF() {
+    const contentDiv = document.querySelector('.card-exportReportPDF');
+    contentDiv.s
+
+    if (!contentDiv) {
+      alert('No content to export.');
+      return;
+    }
+
+    // Convert the content to PDF using html2pdf
+   const options = {
+     margin: 5,
+     filename: 'report.pdf',
+     image: { type: 'jpeg', quality: 0.98 },
+     html2canvas: { scale: 1 },
+     jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+     background: 'white', // Set the background color to white
+   };
+
+    // Convert the content to PDF using html2pdf
+    html2pdf().from(contentDiv).set(options).save();
+  }
 </script>
 <script>
   $(function () {
       $('[data-bs-toggle="tooltip"]').tooltip();
   });
+</script>
+<script>
+  $(document).ready(function() { 
+    $("#e7").select2(); 
+
+    $('#e7').on('change', function() {
+                var selectedValues = $(this).val();
+                $('#selectedValuesData').val(selectedValues);
+            });
+    });
+
+    $(document).ready(function() { $("#e1").select2(); });
 </script>
 
 </body>

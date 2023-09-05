@@ -27,14 +27,27 @@
               <tbody>
                 @if (Auth::user()->role->role == "SuperAdmin" || Auth::user()->role->role == "Admin")
                 @foreach ($submitted as $item)
+                @php
+                      $fields = json_decode($item->fields, true);
+                @endphp
                 <tr>
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>{{$item['type']}}</td>
                     @if ($item['usermail'] !== null)
                        <td>{{$item['usermail']}}</td>
                     @else
-                        <td>No Email Given</td>
-                    @endif
+                       @php $emailFieldExists = false @endphp
+                       @foreach ($fields as $field)
+                           @if ($field['fieldType'] == 'email')
+                               <td>{{$field['value']}}</td>
+                               @php $emailFieldExists = true @endphp
+                               @break
+                           @endif
+                       @endforeach
+                       @unless ($emailFieldExists)
+                           <td>No Email</td>
+                       @endunless
+                   @endif
                     <td>{{$item['created_at']->format('d-m-Y')}}</td>
                     <td>
                       <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye-fill"></i></a>
