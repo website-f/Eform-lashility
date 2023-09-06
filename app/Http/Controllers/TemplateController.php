@@ -167,7 +167,14 @@ class TemplateController extends Controller
             $chartsData = [];
         }
         
-        return view('report-view', ['submittedAll' => $submittedAll, 'submitted' => $submitted, 'submitType' => $submitType, 'chartsData' => $chartsData]);
+        return view('report-view', [
+            'submittedAll' => $submittedAll, 
+            'submitted' => $submitted, 
+            'submitType' => $submitType, 
+            'chartsData' => $chartsData,
+            'startdate' => "",
+            'enddate' => "",
+        ]);
     }
 
     public function generateReport(Request $request, $type) 
