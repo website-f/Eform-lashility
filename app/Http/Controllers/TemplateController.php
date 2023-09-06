@@ -59,11 +59,9 @@ class TemplateController extends Controller
         unset($field);
 
        // Replace with the desired recipient email address
-            /*Notification::route('mail', 'Thehairtric@gmail.com')
-                ->notify(new notifyNotification()); */
-                Notification::route('mail', 'fitri@jantzen.com')
-                ->notify(new notifyNotification());
-
+            Notification::route('mail', 'Thehairtric@gmail.com')
+                ->notify(new notifyNotification()); 
+                
         $form = new Submitted;
         $form->logo= $formData[5];
         $form->type = $formData[0];
