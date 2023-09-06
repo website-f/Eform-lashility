@@ -63,7 +63,7 @@
                       <div class="modal-body card-exportReportPDF">
                         <div class="text-center">
                         <img src="{{asset('images/Artboard-5.png')}}" alt="" class="img-fluid" width="200px" height="300px">
-                        <h2>General Report</h2> <br>
+                        <h2>{{$submitType}} Report</h2> <br>
                         <p>From {{$startdate}} to {{$enddate}}</p> <br>
                         </div>
                         <div class="row text-center">
