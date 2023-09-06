@@ -12,7 +12,7 @@
           <div class="card-body">
             <h5 class="card-title">Filter</h5>
 
-            <form action="/generate-report/{{$submitType}}" method="POST" class="row g-3">
+            <form action="/generate-report/{{$submitSlug}}" method="POST" class="row g-3">
               @csrf
               <div class="col-md-3">
                 <label class="form-label">From</label>

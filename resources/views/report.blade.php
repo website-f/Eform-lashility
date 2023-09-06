@@ -56,7 +56,7 @@
                         $submittedCount = $submitted->where('type', $forms->type.' Form')->count();
                         $formType = $forms->type.' Form';
                     @endphp
-              <h5 class=""><a href="/report-view/{{$forms->type}}"><b>{{$forms->type}} Form</b></a></h5>
+              <h5 class=""><a href="/report-view/{{$forms->slug}}"><b>{{$forms->type}} Form</b></a></h5>
               <span style="font-size: 12px">{{$submittedCount}} Submission</span>
           </div>
 

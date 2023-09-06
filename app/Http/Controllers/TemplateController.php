@@ -150,23 +150,31 @@ class TemplateController extends Controller
         return view('report', ['submitted' => $submitted, 'form' => $form]);
     }
 
-    public function reportView($type) {
+    public function reportView($slug) {
         $startDate = date('Y-m-d 00:00:00');
         $endDate = date('Y-m-d 23:59:59');
+        if ($slug == "INTAKE & CONSENT FORM") {
+            $type = Submitted::where('type', $slug)->value('type');
+        } else {
+            $type = Submitted::where('slug', $slug."-form")->value('type');
+        }
         if ($type == "INTAKE & CONSENT FORM") {
             $submitType = $type;
+            $submitSlug = $slug;
             $submitted = Submitted::where('type', $type)->whereBetween('created_at', [$startDate, $endDate])->get();
             $submittedAll = Submitted::where('type', $type)->get();
             $chartsData = [];
         } else {
             $submitType = $type;
-            $submitted = Submitted::where('type', $type." Form")->whereBetween('created_at', [$startDate, $endDate])->get();
-            $submittedAll = Submitted::where('type', $type." Form")->get();
+            $submitSlug = $slug;
+            $submitted = Submitted::where('type', $type)->whereBetween('created_at', [$startDate, $endDate])->get();
+            $submittedAll = Submitted::where('type', $type)->get();
             $chartsData = [];
         }
         
         return view('report-view', [
             'submittedAll' => $submittedAll, 
+            'submitSlug' => $submitSlug,
             'submitted' => $submitted, 
             'submitType' => $submitType, 
             'chartsData' => $chartsData,
@@ -175,7 +183,7 @@ class TemplateController extends Controller
         ]);
     }
 
-    public function generateReport(Request $request, $type) 
+    public function generateReport(Request $request, $slug) 
     {
         // Validate and process the form input, including group_by, start_date, end_date, etc.
         $groupBysArray = $request->input('group_by');
@@ -190,15 +198,22 @@ class TemplateController extends Controller
         $endDate = date('Y-m-d 23:59:59', strtotime($endDate));
         $startReportDate = date('d-m-Y', strtotime($startDate));
         $endReportDate = date('d-m-Y', strtotime($endDate));
+        if ($slug == "INTAKE & CONSENT FORM") {
+            $type = Submitted::where('type', $slug)->value('type');
+        } else {
+            $type = Submitted::where('slug', $slug."-form")->value('type');
+        }
 
         if ($type == "INTAKE & CONSENT FORM") {
             $submitType = $type;
+            $submitSlug = $slug;
             $submitted = Submitted::where('type', $type)->whereBetween('created_at', [$startDate, $endDate])->get();
             $submittedAll = Submitted::where('type', $type)->get();
         } else {
             $submitType = $type;
-            $submitted = Submitted::where('type', $type." Form")->whereBetween('created_at', [$startDate, $endDate])->get();
-            $submittedAll = Submitted::where('type', $type." Form")->get();
+            $submitSlug = $slug;
+            $submitted = Submitted::where('type', $type)->whereBetween('created_at', [$startDate, $endDate])->get();
+            $submittedAll = Submitted::where('type', $type)->get();
         }
     
         $chartsData = [];
@@ -213,6 +228,7 @@ class TemplateController extends Controller
                 'submittedAll' => $submittedAll,
                 'startdate' => $startReportDate,
                 'enddate' => $endReportDate,
+                'submitSlug' => $submitSlug,
             ]);
         } else {
             foreach ($groupBys as $groupBy) {
@@ -230,6 +246,7 @@ class TemplateController extends Controller
                 'submittedAll' => $submittedAll,
                 'startdate' => $startReportDate,
                 'enddate' => $endReportDate,
+                'submitSlug' => $submitSlug,
             ]);
         }
     
