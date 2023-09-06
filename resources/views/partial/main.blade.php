@@ -84,11 +84,11 @@
   <ul class="sidebar-nav" id="sidebar-nav">
     @auth
     <div class="d-flex align-items-center justify-content-center">
-      <h2 class="pt-2" style="font-weight: bold;">E-FORM</h2>
+      <img src="{{asset('images/Artboard-5.png')}}" alt="" class="img-fluid" width="200px" height="300px">
 
     </div><br>
     <div class="d-flex align-items-center justify-content-center">
-      <a href="/form-builder" class="btn btn-primary btn-lg btn-block">Create Form</a>
+      <a style="background-color: #FB1363; color: white;" href="/form-builder" class="btn btn-lg btn-block">Create Form</a>
     </div><br><br>
     @endauth
 
@@ -343,7 +343,7 @@
      margin: 5,
      filename: 'report.pdf',
      image: { type: 'jpeg', quality: 0.98 },
-     html2canvas: { scale: 1 },
+     html2canvas: { scale: 2 },
      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
      background: 'white', // Set the background color to white
    };

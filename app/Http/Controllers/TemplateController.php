@@ -153,17 +153,21 @@ class TemplateController extends Controller
     }
 
     public function reportView($type) {
+        $startDate = date('Y-m-d 00:00:00');
+        $endDate = date('Y-m-d 23:59:59');
         if ($type == "INTAKE & CONSENT FORM") {
             $submitType = $type;
+            $submitted = Submitted::where('type', $type)->whereBetween('created_at', [$startDate, $endDate])->get();
             $submittedAll = Submitted::where('type', $type)->get();
             $chartsData = [];
         } else {
             $submitType = $type;
+            $submitted = Submitted::where('type', $type." Form")->whereBetween('created_at', [$startDate, $endDate])->get();
             $submittedAll = Submitted::where('type', $type." Form")->get();
             $chartsData = [];
         }
         
-        return view('report-view', ['submittedAll' => $submittedAll, 'submitType' => $submitType, 'chartsData' => $chartsData]);
+        return view('report-view', ['submittedAll' => $submittedAll, 'submitted' => $submitted, 'submitType' => $submitType, 'chartsData' => $chartsData]);
     }
 
     public function generateReport(Request $request, $type) 
@@ -179,6 +183,8 @@ class TemplateController extends Controller
         $endDate = $request->input('end_date');
         $startDate = date('Y-m-d 00:00:00', strtotime($startDate));
         $endDate = date('Y-m-d 23:59:59', strtotime($endDate));
+        $startReportDate = date('d-m-Y', strtotime($startDate));
+        $endReportDate = date('d-m-Y', strtotime($endDate));
 
         if ($type == "INTAKE & CONSENT FORM") {
             $submitType = $type;
@@ -200,6 +206,8 @@ class TemplateController extends Controller
                 'submitType' => $submitType,
                 'submitted' => $submitted,
                 'submittedAll' => $submittedAll,
+                'startdate' => $startReportDate,
+                'enddate' => $endReportDate,
             ]);
         } else {
             foreach ($groupBys as $groupBy) {
@@ -215,6 +223,8 @@ class TemplateController extends Controller
                 'submitType' => $submitType,
                 'submitted' => $submitted,
                 'submittedAll' => $submittedAll,
+                'startdate' => $startReportDate,
+                'enddate' => $endReportDate,
             ]);
         }
     

@@ -54,91 +54,604 @@
                   Export to PDF
                 </button>
                 <div class="modal fade" id="verticalycenteredreport" tabindex="-1">
-                  <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h5 class="modal-title">Clear</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                      <div class="modal-body">
+                      <div class="modal-body card-exportReportPDF">
+                        <div class="text-center">
+                        <img src="{{asset('images/Artboard-5.png')}}" alt="" class="img-fluid" width="200px" height="300px">
+                        <h2>General Report</h2> <br>
+                        <p>From {{$startdate}} to {{$enddate}}</p> <br>
+                        </div>
+                        <div class="row text-center">
+                        @if ($chartsData !== null)
+                        @foreach ($chartsData as $index => $item)
+                        @php
+                        $raceCounts = [];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == $item['chartLabels']) {
+                                        $race = $field['value'];
+                                        // Increment the count for this race in the $raceCounts array
+                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-12">
+                        <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">{{$item['chartLabels']}}</h5>
+                        
+                          <!-- Pie Chart -->
+                          @php
+                              $sanitizedLabelc = preg_replace('/[^a-zA-Z0-9-_]/', '_', $item['chartLabels']);
+                          @endphp
+                          <div id="{{$sanitizedLabelc}}-c"></div>
+                        
+                          <script>
+                              const seriesDatac_{{$index}} = {!! json_encode(array_values($raceCounts)) !!};
+                              const labelc_{{$index}} = {!! json_encode(array_keys($raceCounts)) !!};
+                          
+                              document.addEventListener("DOMContentLoaded", () => {
+                                  new ApexCharts(document.querySelector("#{{$sanitizedLabelc}}-c"), {
+                                      series: seriesDatac_{{$index}},
+                                      chart: {
+                                          height: 350,
+                                          type: 'pie',
+                                          toolbar: {
+                                              show: true
+                                          }
+                                      },
+                                      labels: labelc_{{$index}}
+                                  }).render();
+                              });
+                          </script>
+                          
+                          <!-- End Pie Chart -->
+                        
+                        </div>
+                        </div>
+                        </div>
+                        @endforeach
+                        @else
                         <!-- Preset Report Number 1 -------------------------------------------------------------->
-@php
-$ageCounts = [
-    '10-20' => 0,
-    '20-30' => 0,
-    '30-40' => 0,
-    '40-50' => 0,
-    '50++' => 0,
-];
-@endphp
-
-@foreach ($submitted as $model)
-    @php
-        $fields = json_decode($model->fields, true);
-        foreach ($fields as $field) {
-            if ($field['label'] == "Age") {
-                $age = (int)$field['value'];
-                // Determine the age range and increment the count in $ageCounts
-                if ($age >= 10 && $age < 20) {
-                    $ageCounts['10-20']++;
-                } elseif ($age >= 20 && $age < 30) {
-                    $ageCounts['20-30']++;
-                } elseif ($age >= 30 && $age < 40) {
-                    $ageCounts['30-40']++;
-                } elseif ($age >= 40 && $age < 50) {
-                    $ageCounts['40-50']++;
-                } else {
-                    $ageCounts['50++']++;
-                }
-            }
-        }
-    @endphp
-@endforeach
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Age</h5>
-       
-         <!-- Bar Chart -->
-      <div id="AgeDistributionc"></div>
-       
-         <script>
-             const ageRangesc = {!! json_encode(array_keys($ageCounts)) !!};
-             const ageCountsDatac = {!! json_encode(array_values($ageCounts)) !!};
-         
-             document.addEventListener("DOMContentLoaded", () => {
-                 new ApexCharts(document.querySelector("#AgeDistributionc"), {
-                     series: [{
-                         name: "Age",
-                         data: ageCountsDatac
-                     }],
-                     chart: {
-                         height: 350,
-                         type: 'bar',
-                         toolbar: {
-                             show: true
-                         }
-                     },
-                     plotOptions: {
-                         bar: {
-                             borderRadius: 4
-                         }
-                     },
-                     xaxis: {
-                         categories: ageRangesc
-                     },
-                     labels: {
-                         show: true
-                     }
-                 }).render();
-             });
-         </script>
-         
-         <!-- End Bar Chart -->
-       
-    </div>
-  </div>
-
-
+                        @php
+                        $ageCounts = [
+                            '10-20' => 0,
+                            '20-30' => 0,
+                            '30-40' => 0,
+                            '40-50' => 0,
+                            '50++' => 0,
+                        ];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == "Age") {
+                                        $age = (int)$field['value'];
+                                        // Determine the age range and increment the count in $ageCounts
+                                        if ($age >= 10 && $age < 20) {
+                                            $ageCounts['10-20']++;
+                                        } elseif ($age >= 20 && $age < 30) {
+                                            $ageCounts['20-30']++;
+                                        } elseif ($age >= 30 && $age < 40) {
+                                            $ageCounts['30-40']++;
+                                        } elseif ($age >= 40 && $age < 50) {
+                                            $ageCounts['40-50']++;
+                                        } else {
+                                            $ageCounts['50++']++;
+                                        }
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        
+                        <div class="col-lg-12">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Age</h5>
+                               
+                                 <!-- Bar Chart -->
+                              <div id="AgeDistributionc"></div>
+                               
+                                 <script>
+                                     const ageRangesc = {!! json_encode(array_keys($ageCounts)) !!};
+                                     const ageCountsDatac = {!! json_encode(array_values($ageCounts)) !!};
+                                 
+                                     document.addEventListener("DOMContentLoaded", () => {
+                                         new ApexCharts(document.querySelector("#AgeDistributionc"), {
+                                             series: [{
+                                                 name: "Age",
+                                                 data: ageCountsDatac
+                                             }],
+                                             chart: {
+                                                 height: 350,
+                                                 type: 'bar',
+                                                 toolbar: {
+                                                     show: true
+                                                 }
+                                             },
+                                             plotOptions: {
+                                                 bar: {
+                                                     borderRadius: 4
+                                                 }
+                                             },
+                                             xaxis: {
+                                                 categories: ageRangesc
+                                             },
+                                             labels: {
+                                                 show: true
+                                             }
+                                         }).render();
+                                     });
+                                 </script>
+                                 
+                                 <!-- End Bar Chart -->
+                               
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <!-- Preset Report Number 2 -------------------------------------------------------------->
+                        @php
+                        $raceCounts = [];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == "Race") {
+                                        $race = $field['value'];
+                                        // Increment the count for this race in the $raceCounts array
+                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-6">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Race</h5>
+                               
+                                 <!-- Pie Chart -->
+                              <div id="Racec"></div>
+                               
+                                 <script>
+                                     const seriesDatac = {!! json_encode(array_values($raceCounts)) !!};
+                                     const labelsc = {!! json_encode(array_keys($raceCounts)) !!};
+                                 
+                                     document.addEventListener("DOMContentLoaded", () => {
+                                         new ApexCharts(document.querySelector("#Racec"), {
+                                             series: seriesDatac,
+                                             chart: {
+                                                 height: 350,
+                                                 type: 'pie',
+                                                 toolbar: {
+                                                     show: true
+                                                 }
+                                             },
+                                             labels: labelsc
+                                         }).render();
+                                     });
+                                 </script>
+                                 
+                                 <!-- End Pie Chart -->
+                               
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Preset Report Number 3 -------------------------------------------------------------->
+                        @php
+                        $raceCounts = [];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == "How did you hear about us ?") {
+                                        $race = $field['value'];
+                                        // Increment the count for this race in the $raceCounts array
+                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-6">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">How did you hear about us ?</h5>
+                               
+                                 <!-- Pie Chart -->
+                              <div id="hearAboutUsc"></div>
+                               
+                                 <script>
+                                     const seriesData1c = {!! json_encode(array_values($raceCounts)) !!};
+                                     const labels1c = {!! json_encode(array_keys($raceCounts)) !!};
+                                 
+                                     document.addEventListener("DOMContentLoaded", () => {
+                                         new ApexCharts(document.querySelector("#hearAboutUsc"), {
+                                             series: seriesData1c,
+                                             chart: {
+                                                 height: 350,
+                                                 type: 'donut',
+                                                 toolbar: {
+                                                     show: true
+                                                 }
+                                             },
+                                             labels: labels1c
+                                         }).render();
+                                     });
+                                 </script>
+                                 
+                                 <!-- End Pie Chart -->
+                               
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Preset Report Number 4 -------------------------------------------------------------->
+                        @php
+                        $raceCounts = [];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == "Visit Outlet") {
+                                        $race = $field['value'];
+                                        // Increment the count for this race in the $raceCounts array
+                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-12">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Visit Outlet</h5>
+                               
+                                 <!-- Pie Chart -->
+                              <div id="outletc"></div>
+                                 <script>
+                                  const seriesData2c = {!! json_encode(array_values($raceCounts)) !!};
+                                  const labels2c = {!! json_encode(array_keys($raceCounts)) !!};
+                                  document.addEventListener("DOMContentLoaded", () => {
+                                    new ApexCharts(document.querySelector("#outletc"), {
+                                      series: [{
+                                        data: seriesData2c
+                                      }],
+                                      chart: {
+                                        type: 'bar',
+                                        height: 350
+                                      },
+                                      plotOptions: {
+                                        bar: {
+                                          borderRadius: 4,
+                                          horizontal: true,
+                                        }
+                                      },
+                                      dataLabels: {
+                                        enabled: false
+                                      },
+                                      xaxis: {
+                                        categories: labels2c,
+                                      }
+                                    }).render();
+                                  });
+                                </script>
+                                 
+                                 <!-- End Pie Chart -->
+                               
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Preset Report Number 5 -------------------------------------------------------------->
+                        @php
+                        $raceCounts = [];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == "Is this your first time you have eyelash extensions/lash lift/brow lamination?") {
+                                        $race = $field['value'];
+                                        // Increment the count for this race in the $raceCounts array
+                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-6">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Is this your first time you have eyelash extensions/lash lift/brow lamination?</h5>
+                               
+                                 <!-- Pie Chart -->
+                              <div id="firstTimec"></div>
+                               
+                                 <script>
+                                     const seriesData3c = {!! json_encode(array_values($raceCounts)) !!};
+                                     const labels3c = {!! json_encode(array_keys($raceCounts)) !!};
+                                 
+                                     document.addEventListener("DOMContentLoaded", () => {
+                                         new ApexCharts(document.querySelector("#firstTimec"), {
+                                             series: seriesData3c,
+                                             chart: {
+                                                 height: 350,
+                                                 type: 'pie',
+                                                 toolbar: {
+                                                     show: true
+                                                 }
+                                             },
+                                             labels: labels3c
+                                         }).render();
+                                     });
+                                 </script>
+                                 
+                                 <!-- End Pie Chart -->
+                               
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Preset Report Number 6 -------------------------------------------------------------->
+                        @php
+                        $raceCounts = [];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == "Are you getting your lash extensions. lash lift, or brow lamination applied for") {
+                                        $race = $field['value'];
+                                        // Increment the count for this race in the $raceCounts array
+                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-6">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Are you getting your lash extensions. lash lift, or brow lamination applied for</h5>
+                               
+                                 <!-- Pie Chart -->
+                              <div id="extc"></div>
+                               
+                                 <script>
+                                     const seriesData4c = {!! json_encode(array_values($raceCounts)) !!};
+                                     const labels4c = {!! json_encode(array_keys($raceCounts)) !!};
+                                 
+                                     document.addEventListener("DOMContentLoaded", () => {
+                                         new ApexCharts(document.querySelector("#extc"), {
+                                             series: seriesData4c,
+                                             chart: {
+                                                 height: 350,
+                                                 type: 'pie',
+                                                 toolbar: {
+                                                     show: true
+                                                 }
+                                             },
+                                             labels: labels4c
+                                         }).render();
+                                     });
+                                 </script>
+                                 
+                                 <!-- End Pie Chart -->
+                               
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Preset Report Number 7 -------------------------------------------------------------->
+                        @php
+                        $raceCounts = [];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == "Do you habitually rub or pull your lashes for any reason ?") {
+                                        $race = $field['value'];
+                                        // Increment the count for this race in the $raceCounts array
+                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-6">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Do you habitually rub or pull your lashes for any reason ?</h5>
+                               
+                                 <!-- Pie Chart -->
+                              <div id="habitc"></div>
+                               
+                                 <script>
+                                     const seriesData5c = {!! json_encode(array_values($raceCounts)) !!};
+                                     const labels5c = {!! json_encode(array_keys($raceCounts)) !!};
+                                 
+                                     document.addEventListener("DOMContentLoaded", () => {
+                                         new ApexCharts(document.querySelector("#habitc"), {
+                                             series: seriesData5c,
+                                             chart: {
+                                                 height: 350,
+                                                 type: 'pie',
+                                                 toolbar: {
+                                                     show: true
+                                                 }
+                                             },
+                                             labels: labels5c
+                                         }).render();
+                                     });
+                                 </script>
+                                 
+                                 <!-- End Pie Chart -->
+                               
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Preset Report Number 8 -------------------------------------------------------------->
+                        @php
+                        $raceCounts = [];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == "Do you have or are you being treated for any eye illness or injury ?") {
+                                        $race = $field['value'];
+                                        // Increment the count for this race in the $raceCounts array
+                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-6">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Do you have or are you being treated for any eye illness or injury ?</h5>
+                               
+                                 <!-- Pie Chart -->
+                              <div id="injuryc"></div>
+                               
+                                 <script>
+                                     const seriesData6c = {!! json_encode(array_values($raceCounts)) !!};
+                                     const labels6c = {!! json_encode(array_keys($raceCounts)) !!};
+                                 
+                                     document.addEventListener("DOMContentLoaded", () => {
+                                         new ApexCharts(document.querySelector("#injuryc"), {
+                                             series: seriesData6c,
+                                             chart: {
+                                                 height: 350,
+                                                 type: 'pie',
+                                                 toolbar: {
+                                                     show: true
+                                                 }
+                                             },
+                                             labels: labels6c
+                                         }).render();
+                                     });
+                                 </script>
+                                 
+                                 <!-- End Pie Chart -->
+                               
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Preset Report Number 9 -------------------------------------------------------------->
+                        @php
+                        $raceCounts = [];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == "Do you able to keep your eye's closed and lie still for up 2 hours?") {
+                                        $race = $field['value'];
+                                        // Increment the count for this race in the $raceCounts array
+                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-6">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Do you able to keep your eye's closed and lie still for up 2 hours?</h5>
+                               
+                                 <!-- Pie Chart -->
+                              <div id="closedc"></div>
+                               
+                                 <script>
+                                     const seriesData7c = {!! json_encode(array_values($raceCounts)) !!};
+                                     const labels7c = {!! json_encode(array_keys($raceCounts)) !!};
+                                 
+                                     document.addEventListener("DOMContentLoaded", () => {
+                                         new ApexCharts(document.querySelector("#closedc"), {
+                                             series: seriesData7c,
+                                             chart: {
+                                                 height: 350,
+                                                 type: 'pie',
+                                                 toolbar: {
+                                                     show: true
+                                                 }
+                                             },
+                                             labels: labels7c                 }).render();
+                                     });
+                                 </script>
+                                 
+                                 <!-- End Pie Chart -->
+                               
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Preset Report Number 10 -------------------------------------------------------------->
+                        @php
+                        $raceCounts = [];
+                        @endphp
+                        
+                        @foreach ($submitted as $model)
+                            @php
+                                $fields = json_decode($model->fields, true);
+                                foreach ($fields as $field) {
+                                    if ($field['label'] == "Do you") {
+                                        $race = $field['value'];
+                                        // Increment the count for this race in the $raceCounts array
+                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                    }
+                                }
+                            @endphp
+                        @endforeach
+                        <div class="col-lg-6">
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Do you</h5>
+                               
+                                 <!-- Pie Chart -->
+                              <div id="doc"></div>
+                               
+                                 <script>
+                                     const seriesData8c = {!! json_encode(array_values($raceCounts)) !!};
+                                     const labels8c = {!! json_encode(array_keys($raceCounts)) !!};
+                                 
+                                     document.addEventListener("DOMContentLoaded", () => {
+                                         new ApexCharts(document.querySelector("#doc"), {
+                                             series: seriesData8c,
+                                             chart: {
+                                                 height: 350,
+                                                 type: 'pie',
+                                                 toolbar: {
+                                                     show: true
+                                                 }
+                                             },
+                                             labels: labels8c
+                                            }).render();
+                                     });
+                                 </script>
+                                 
+                                 <!-- End Pie Chart -->
+                               
+                            </div>
+                          </div>
+                        </div>
+                        @endif
+                      </div>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
