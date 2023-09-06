@@ -80,7 +80,16 @@
                                     if ($field['label'] == $item['chartLabels']) {
                                         $race = $field['value'];
                                         // Increment the count for this race in the $raceCounts array
-                                        $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                        if (is_array($race)) {
+                                            // Handle array values (e.g., checkboxes)
+                                            foreach ($race as $checkboxValue) {
+                                                // Increment the count for each checkbox value
+                                                $raceCounts[$checkboxValue] = ($raceCounts[$checkboxValue] ?? 0) + 1;
+                                            }
+                                        } else {
+                                            // Handle string values
+                                            $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                                        }
                                     }
                                 }
                             @endphp
@@ -679,7 +688,16 @@ $raceCounts = [];
             if ($field['label'] == $item['chartLabels']) {
                 $race = $field['value'];
                 // Increment the count for this race in the $raceCounts array
-                $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                if (is_array($race)) {
+                    // Handle array values (e.g., checkboxes)
+                    foreach ($race as $checkboxValue) {
+                        // Increment the count for each checkbox value
+                        $raceCounts[$checkboxValue] = ($raceCounts[$checkboxValue] ?? 0) + 1;
+                    }
+                } else {
+                    // Handle string values
+                    $raceCounts[$race] = ($raceCounts[$race] ?? 0) + 1;
+                }
             }
         }
     @endphp
