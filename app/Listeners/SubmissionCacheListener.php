@@ -24,6 +24,6 @@ class SubmissionCacheListener
     {
         Cache::forget('submission');
 
-        Cache::forever('submission', Submitted::all());
+        Cache::forever('submission', Submitted::orderBy('created_at', 'desc')->get());
     }
 }

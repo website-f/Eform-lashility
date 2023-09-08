@@ -24,7 +24,7 @@ class FormCacheListener
     {
         Cache::forget('forms');
 
-        Cache::forever('forms', Form::all());
+        Cache::forever('forms', Form::orderBy('created_at', 'desc')->get());
 
     }
 }
