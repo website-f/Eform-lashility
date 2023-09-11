@@ -45,7 +45,12 @@
                           @if (is_array($fields))
                               <div class="card-body">
                                 @foreach ($fields as $field)
-                                  @if ($field['fieldType'] === 'text')
+                                @if ($field['fieldType'] === 'Heading')
+                            <hr>
+                              <h2>{{ $field['label'] }}</h2>
+                              <p>{{$field['value']}}</p>
+                            <hr>
+                                  @elseif ($field['fieldType'] === 'text')
                                       <div class="row mb-3">
                                         <label for="inputText" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
                                         <div class="col-sm-8">

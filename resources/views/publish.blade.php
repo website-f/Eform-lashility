@@ -72,8 +72,11 @@
                       <div class="card-body page-content"  style="display: none;">
                         @foreach ($fields as $field)
                         @if ($field['type'] === 'Heading')
-                        <h2 class="text-center">{{$field['label']}}</h2>
-                        <p class="text-center">{{$field['subheading']}}</p>
+                        <div class="col-12 pt-2 fieldType">
+                        <h2 class="text-center form-label">{{$field['label']}}</h2>
+                        <p class="text-center" id="headingSubVal">{{$field['subheading']}}</p>
+                        <input type="{{$field['type']}}" class="inputType formFieldHide">
+                        </div>
                         <hr>
                           @elseif ($field['type'] === 'text')
                               <div class="col-12 pt-2 fieldType">

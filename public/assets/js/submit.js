@@ -109,6 +109,10 @@ console.log(notify)
             submitedForm.push({ label, value, fieldType });
             
         } 
+        else if (fieldType == 'Heading') {
+          const value = fieldsType.querySelector("#headingSubVal").textContent;
+          submitedForm.push({ label, value, fieldType });
+      }
         if (fieldType == 'email') {
           const Invalue = fieldsType.querySelector('input[name="email"]');
           console.log(Invalue)
