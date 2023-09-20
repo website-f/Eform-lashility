@@ -13,7 +13,7 @@
         <div class="card">
           <div class="card-body overflow-auto">
             <a href="/add-user" class="btn btn-success" style="margin-top: 10px">Add User <i class="bi bi-plus-lg"></i></a>
-
+            <div class="table-responsive">
             <!-- Table with stripped rows -->
             <table class="table datatable">
               <thead>
@@ -61,6 +61,7 @@
               </tbody>
             </table>
             <!-- End Table with stripped rows -->
+            </div>
 
           </div>
         </div>

@@ -3031,7 +3031,21 @@ else if (data == " Terms & Condition") {
 
 }
 
-    
+const containers = document.querySelector('.form-builder');
+const dragg = containers.querySelectorAll(".form-field")
+dragg.forEach(draggable => {
+  draggable.addEventListener('dragstart', (e) => {
+      draggable.classList.add('dragopacity');
+      selected = e.target
+      console.log(selected)
+  })
+
+  draggable.addEventListener('dragend', ()=>{
+      draggable.classList.remove('dragopacity');
+
+
+  })
+})
     
   
 }

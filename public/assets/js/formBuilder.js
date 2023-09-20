@@ -2,6 +2,22 @@
 
 const draggers = document.querySelectorAll('.form-element');
 const container = document.querySelector('.form-builder')
+let selected;
+
+function getDragAfterElement(container, y) {
+  const draggableElements = [...container.querySelectorAll('.form-field:not(.dragopacity)')]
+
+  return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect()
+      const offset = y - box.top - box.height / 2
+      if(offset < 0 && offset > closest.offset) {
+          return {offset: offset, element: child}
+      } else {
+          return closest
+      }
+
+  }, {offset: Number.NEGATIVE_INFINITY}).element
+}
 
 
   draggers.forEach((hoverContainer) => {
@@ -38,36 +54,14 @@ function drag(event) {
   // Function to allow dropping
   function allowDrop(event) {
     event.preventDefault();
-    const container = event.target.closest('.form-builder')
-    function getDragAfterElement(container, y) {
-      const draggableElements = [...container.querySelectorAll('.form-field:not(.dragopacity)')]
-    
-      return draggableElements.reduce((closest, child) => {
-          const box = child.getBoundingClientRect()
-          const offset = y - box.top - box.height / 2
-          if(offset < 0 && offset > closest.offset) {
-              return {offset: offset, element: child}
-          } else {
-              return closest
-          }
-    
-      }, {offset: Number.NEGATIVE_INFINITY}).element
-    }
-    const afterElement = getDragAfterElement(container, event.clientY)
-    const draggable = container.querySelector('.dragopacity')
+    const containers = event.target.closest('.form-builder')
+    const afterElement = getDragAfterElement(containers, event.clientY)
+    const draggable = containers.querySelector('.dragopacity')
     if (afterElement == null) {
-        container.appendChild(draggable)
+        containers.appendChild(draggable)
     } else {
-        container.insertBefore(draggable, afterElement)
+        containers.insertBefore(draggable, afterElement)
     }
-
-
-
-
-
-
-
-
     /*
     const draggingItem = container.querySelector(".dragopacity")
     const siblings = [...container.querySelectorAll('.form-field:not(.dragopacity)')];
@@ -77,11 +71,6 @@ function drag(event) {
     });
     
     container.insertBefore(draggingItem, nextSibling);*/
-
-
-
-
-  
   }
 
   // Function to handle dropping
@@ -242,7 +231,12 @@ function drag(event) {
         buttonDiv.appendChild(del);
         inputDiv.appendChild(buttonDiv)
         formElement.appendChild(inputDiv);
-        container.appendChild(formElement)
+        const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }    
       
 
 
@@ -406,7 +400,12 @@ function drag(event) {
         buttonDiv.appendChild(del);
         textareaDiv.appendChild(buttonDiv)
         formElement.appendChild(textareaDiv);
-        container.appendChild(formElement);
+        const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
         let save = document.getElementById("saveButtonTextArea-"+idValueTextArea);
@@ -553,7 +552,12 @@ function drag(event) {
        buttonDiv.appendChild(del);
        fileDiv.appendChild(buttonDiv)
        formElement.appendChild(fileDiv);
-       container.appendChild(formElement);
+       const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
        //save edited modal
@@ -690,7 +694,12 @@ function drag(event) {
        buttonDiv.appendChild(del);
        dateDiv.appendChild(buttonDiv)
        formElement.appendChild(dateDiv);
-       container.appendChild(formElement);
+       const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
        //save edited modal
@@ -825,7 +834,12 @@ function drag(event) {
        buttonDiv.appendChild(del);
        timeDiv.appendChild(buttonDiv)
        formElement.appendChild(timeDiv);
-       container.appendChild(formElement);
+       const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
        //save edited modal
@@ -994,7 +1008,12 @@ function drag(event) {
        formElement.appendChild(selectDiv);
        formElement.appendChild(edit);
        formElement.appendChild(del);
-       container.appendChild(formElement);
+       const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
        //save edited modal
@@ -1155,7 +1174,7 @@ function drag(event) {
           newInput.classList.add("form-check-input");
           newInput.setAttribute("id", idValueRadio)
           newInput.value = text.trim();
-          newInput.name = "formBuildRadio";
+          newInput.name = "formBuildRadio-"+idValueRadio;
           newInput.classList.add("typeForm");
           newRadioDiv.appendChild(newInput);
 
@@ -1198,7 +1217,12 @@ function drag(event) {
       formElement.appendChild(radioDiv);
       formElement.appendChild(edit);
       formElement.appendChild(del);
-      container.appendChild(formElement);
+      const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
       //save edited modal
@@ -1395,7 +1419,12 @@ function drag(event) {
     formElement.appendChild(checkDiv);
     formElement.appendChild(edit);
     formElement.appendChild(del);
-    container.appendChild(formElement);
+    const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
     //save edited modal
@@ -1546,8 +1575,12 @@ function drag(event) {
     buttonDiv.appendChild(del);
     inputDiv.appendChild(buttonDiv)
     formElement.appendChild(inputDiv);
-    
-    container.appendChild(formElement);
+    const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
     //save edited modal
@@ -1686,7 +1719,12 @@ function drag(event) {
     buttonDiv.appendChild(del);
     inputDiv.appendChild(buttonDiv)
     formElement.appendChild(inputDiv);
-    container.appendChild(formElement);
+    const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
     //save edited modal
     let save = document.getElementById("saveButtonText-"+idValueDateTime);
@@ -1844,7 +1882,12 @@ function drag(event) {
     buttonDiv.appendChild(del);
     inputDiv.appendChild(buttonDiv)
     formElement.appendChild(inputDiv);
-    container.appendChild(formElement);
+    const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
     //save edited modal
     let save = document.getElementById("saveButtonText-"+idValueRating);
@@ -2013,7 +2056,12 @@ function drag(event) {
     buttonDiv.appendChild(del);
     inputDiv.appendChild(buttonDiv)
     formElement.appendChild(inputDiv);
-    container.appendChild(formElement);
+    const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
     //save edited modal
     let save = document.getElementById("saveButtonText-"+idValueYoutube);
@@ -2178,8 +2226,12 @@ function drag(event) {
     inputDiv.appendChild(buttonDiv)
     formElement.appendChild(inputDiv);
     formElement.appendChild(hr);
-    
-    container.appendChild(formElement);
+    const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
     //save edited modal
@@ -2345,7 +2397,12 @@ const imgPrevID = 'imgPrev'+Date.now()
     inputDiv.appendChild(buttonDiv);
     formElement.appendChild(imgpreview);
     formElement.appendChild(inputDiv);
-    container.appendChild(formElement);
+    const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
     //save edited modal
@@ -2631,7 +2688,12 @@ const imgPrevID = 'imgPrev'+Date.now()
   formElement.appendChild(checkDiv4);
   formElement.appendChild(edit);
   formElement.appendChild(del);
-  container.appendChild(formElement);
+  const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
   //save edited modal
@@ -2779,7 +2841,12 @@ else if (data == " Signature") {
   buttonDiv.appendChild(del);
   inputDiv.appendChild(buttonDiv);
   formElement.appendChild(inputDiv);
-  container.appendChild(formElement);
+  const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
 
 
   //save edited modal
@@ -2932,7 +2999,12 @@ else if (data == " Search Location") {
     buttonDiv.appendChild(del);
     inputDiv.appendChild(buttonDiv)
     formElement.appendChild(inputDiv);
-    container.appendChild(formElement)
+    const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
   
 
 
@@ -2981,15 +3053,15 @@ else if (data == " Terms & Condition") {
      input.classList.add("form-check-input");
      input.setAttribute("id", "check");
 
-     const inputype = document.createElement("input")
-     inputype.type = "termscondition"
-     inputype.classList.add("typeForm")
-     inputype.classList.add("formFieldHide")
-
      const tandc = document.createElement('input');
      tandc.type = "hidden";
      tandc.name = "termsconditiontext";
      tandc.setAttribute("id", "termsconditiontext")
+
+     const inputype = document.createElement("input")
+     inputype.type = "termscondition"
+     inputype.classList.add("typeForm")
+     inputype.classList.add("formFieldHide")
  
      const fieldID = document.createElement("input");
          fieldID.type = "fieldID"
@@ -3045,7 +3117,7 @@ else if (data == " Terms & Condition") {
         <label class="form-label"><b>label name: </b></label>
         <input class="form-control" id="checklabel-${idValueCheck}" type="text" value="${data}"> <br>
         <label class="form-label"><b>Terms and Condition Content: </b></label>
-         <textarea class="form-control" id="termscondition-${idValueCheck}"></textarea> <br>
+         <textarea class="form-control" rows="6" id="termscondition-${idValueCheck}"></textarea> <br>
         <label class="form-label pt-3"><b>Required  </b></label>
         <input class="form-check" id="requiredInput-${idValueCheck}" type="checkbox">
         </div>
@@ -3096,7 +3168,12 @@ else if (data == " Terms & Condition") {
      formElement.appendChild(checkDiv);
      formElement.appendChild(edit);
      formElement.appendChild(del);
-     container.appendChild(formElement);
+     const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
  
  
      //save edited modal
@@ -3111,17 +3188,206 @@ else if (data == " Terms & Condition") {
      
      save.addEventListener("click", saveForm);
 
+} /*==========================================Salesperson=============================================================================*/
+else if (data == " Salesperson"){
+
+   //create element for the div and all the label and input inside div with class form-control
+   const formElement = document.createElement("div");
+   formElement.classList.add("form-field")
+   formElement.setAttribute('draggable', 'true')
+   const label = document.createElement('label');
+   label.textContent = data;
+   label.classList.add("col-form-label")
+   label.classList.add("labelBold")
+   const idTime = Date.now() //set an unique id for each label
+   const idValueSelect = "salesInputLabel-"+idTime
+   label.setAttribute("id", idValueSelect)
+
+   const selectDiv = document.createElement("div");
+   const select = document.createElement("select");
+   select.classList.add("form-select");
+   select.classList.add("sales");
+   select.setAttribute("name", "select");
+   select.setAttribute("type", "select");
+   select.setAttribute("id", "select");
+   select.setAttribute("aria-label", "Default select example")
+   const option = document.createElement("option")
+   option.textContent = "Select";
+   option.value = option.textContent;
+
+   const fieldID = document.createElement("input");
+    fieldID.type = "fieldID"
+    fieldID.classList.add("formFieldHide");
+    fieldID.value = 'select'+Date.now();
+
+    const sales= document.createElement("input");
+    sales.classList.add("typeForm");
+    sales.type = "salesperson"
+    sales.classList.add("formFieldHide");
+  
+
+   select.appendChild(option);
+   
+   selectDiv.appendChild(select);
+   selectDiv.appendChild(fieldID)
+   selectDiv.appendChild(sales)
+
+   let allOptionTexts = '';
+   for (let i = 0; i < select.options.length; i++) {
+     allOptionTexts += select.options[i].textContent + '\n';
+   }
+  
+   
+
+
+   //edit button
+   const edit = document.createElement('button');
+   edit.classList.add("btn")
+   edit.classList.add("btn-outline-primary")
+   edit.classList.add("btn-sm")
+   edit.setAttribute("data-bs-toggle", "modal");
+   edit.setAttribute("data-bs-target", "#exampleModal-" + Date.now());
+   edit.textContent = "Edit"
+
+   edit.addEventListener("click", function() {
+       openModal();
+     });
+   
+
+     function openModal() {
+       const myModal = document.getElementById("exampleModal-" + Date.now());
+       const bootstrapModal = new bootstrap.Modal(myModal);
+       bootstrapModal.show();
+     }
+
+
+  //modal
+  const modalDiv = document.createElement('div')
+  modalDiv.classList.add("modal");
+  modalDiv.classList.add('fade');
+  modalDiv.setAttribute("role", "dialog");
+  modalDiv.setAttribute("id", "exampleModal-" + Date.now());
+  // Give a unique ID to the modalDiv
+
+  // Add the modal content (you can customize this part as needed)
+  modalDiv.innerHTML = `
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">${data}</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <label class="label-control"><b>label name: </b></label>
+      <input class="form-control" id="selectlabel-${idValueSelect}" type="text" value="${data}"> <br>
+      <label class="label-control"><b>Select Option: </b></label>
+      <div class="alert alert-primary" role="alert">Type the salesperson name in and press 'ENTER' to add another option</div>
+      <textarea class="form-control" id="selectOption-${idValueSelect}"></textarea>
+      <label class="form-label pt-3"><b>Required  </b></label>
+      <input class="form-check" id="requiredInput-${idValueSelect}" type="checkbox">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="saveButtonSelect-${idValueSelect}">Save changes</button>
+      </div>
+    </div>
+  </div>
+
+  `;
+
+   formElement.appendChild(modalDiv);
+
+   function saveForm() {
+  
+    let input = inputfield.value;
+    selectLabel.textContent = input;
+
+    const selectOption = document.getElementById("selectOption-"+idValueSelect);
+    const options = selectOption.value.trim().split('\n');
+  
+    // Remove all existing options from the select element
+    while (select.options.length > 0) {
+      select.options[0].remove();
+    }
+  
+    // Update or add new options based on the textarea content
+    options.forEach((text) => {
+      if (text.trim() !== '') {
+        const newOption = document.createElement('option');
+        newOption.textContent = text.trim();
+        newOption.value = text.trim(); // You can set the option value to the same as the text, or provide a different value as needed.
+        select.appendChild(newOption);
+      }
+    });
+
+    if (requiredField.checked) {
+      const textInput = document.getElementById('select');
+      textInput.required = true
+     } 
+    
+  }
+
+  //delete button an function
+   const del = document.createElement('button');
+   del.classList.add("btn")
+   del.classList.add("btn-outline-danger")
+   del.classList.add("btn-sm")
+   //const i = document.createElement("i")
+   //i.classList.add("bi")
+   //i.classList.add("bi-trash3-fill")
+   //del.appendChild(i);
+   del.textContent ="Delete"
+   
+   del.addEventListener('click', function(e){
+    e.target.parentElement.remove()
+    //console.log(e.target.parentElement)
+   })
+   
+   //insert all element together
+   const container = event.target.closest('.form-builder')
+   formElement.appendChild(label);
+   formElement.appendChild(selectDiv);
+   formElement.appendChild(edit);
+   formElement.appendChild(del);
+   const afterElement = getDragAfterElement(container, event.clientY)
+        if (afterElement == null) {
+            container.appendChild(formElement)
+        } else {
+            container.insertBefore(formElement, afterElement)
+        }  
+
+
+   //save edited modal
+   let save = document.getElementById("saveButtonSelect-"+idValueSelect);
+   let inputfield = document.getElementById("selectlabel-"+idValueSelect);
+   let selectLabel = document.getElementById(idValueSelect);
+   let requiredField = document.getElementById('requiredInput-'+idValueSelect)
+   //let selectOption = document.getElementById("selectOption");
+   //let selectval = selectOption.value;
+   //let options = selectval.split('/n');
+   
+   save.addEventListener("click", saveForm);
+} else {
+  const containers = event.target.closest('.form-builder')
+ const afterElement = getDragAfterElement(containers, event.clientY)
+ if (afterElement == null) {
+     containers.appendChild(selected)
+ } else {
+     containers.insertBefore(selected, afterElement)
+ }    
 }
     
 
 
-const container = event.target.closest('.form-builder')
-const dragg = container.querySelectorAll(".form-field")
+const containers = event.target.closest('.form-builder')
+const dragg = containers.querySelectorAll(".form-field")
 dragg.forEach(draggable => {
-  draggable.addEventListener('dragstart', () => {
+  draggable.addEventListener('dragstart', (e) => {
       draggable.classList.add('dragopacity');
-
-
+      selected = e.target
+      console.log(selected)
   })
 
   draggable.addEventListener('dragend', ()=>{

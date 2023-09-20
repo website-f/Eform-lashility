@@ -10,7 +10,7 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Datatables</h5>
-
+            <div class="table-responsive">
             <!-- Table with stripped rows -->
             <table class="table datatable">
               <thead>
@@ -62,6 +62,7 @@
               </tbody>
             </table>
             <!-- End Table with stripped rows -->
+            </div>
 
           </div>
         </div>
