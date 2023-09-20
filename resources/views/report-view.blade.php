@@ -106,21 +106,15 @@
                           <div id="{{$sanitizedLabelc}}-c"></div>
                         
                           <script>
-                              const seriesDatac_{{$index}} = {!! json_encode(array_values($raceCounts)) !!};
+                             const seriesDatac_{{$index}} = {!! json_encode(array_values($raceCounts)) !!};
                               const labelc_{{$index}} = {!! json_encode(array_keys($raceCounts)) !!};
+                              let chart_{{$index}};
+                              let chartc_{{$index}};
                           
                               document.addEventListener("DOMContentLoaded", () => {
-                                  new ApexCharts(document.querySelector("#{{$sanitizedLabelc}}-c"), {
-                                      series: seriesDatac_{{$index}},
-                                      chart: {
-                                          height: 350,
-                                          type: 'pie',
-                                          toolbar: {
-                                              show: true
-                                          }
-                                      },
-                                      labels: labelc_{{$index}}
-                                  }).render();
+
+                                  chartc_{{$index}} = new ApexCharts(document.querySelector("#{{$sanitizedLabelc}}-c"), getChartConfigc("pie"));
+                                  chartc_{{$index}}.render();
                               });
                           </script>
                           
@@ -706,6 +700,12 @@ $raceCounts = [];
 <div class="card">
 <div class="card-body">
   <h5 class="card-title">{{$item['chartLabels']}}</h5>
+  <label>Chart type</label>
+  <select id="chartTypeSec_{{$index}}">
+    <option value="pie">pie</option>
+    <option value="donut">donut</option>
+    <option value="bar">bar</option>
+  </select>
 
   <!-- Pie Chart -->
   @php
@@ -716,20 +716,133 @@ $raceCounts = [];
   <script>
       const seriesData_{{$index}} = {!! json_encode(array_values($raceCounts)) !!};
       const labels_{{$index}} = {!! json_encode(array_keys($raceCounts)) !!};
-  
+      const chartTypeSec_{{$index}} = document.getElementById("chartTypeSec_{{$index}}")
+
       document.addEventListener("DOMContentLoaded", () => {
-          new ApexCharts(document.querySelector("#{{$sanitizedLabel}}"), {
-              series: seriesData_{{$index}},
-              chart: {
-                  height: 350,
-                  type: 'pie',
-                  toolbar: {
-                      show: true
-                  }
-              },
-              labels: labels_{{$index}}
-          }).render();
-      });
+        chart_{{$index}} = new ApexCharts(document.querySelector("#{{$sanitizedLabel}}"), getChartConfig("pie"));
+        chart_{{$index}}.render();
+
+      });     
+
+      chartTypeSec_{{$index}}.addEventListener('change', handleChartTypeChange_{{$index}});
+
+        function handleChartTypeChange_{{$index}}() {
+           const selectedChartType = chartTypeSec_{{$index}}.value
+   
+           const chartConfig = getChartConfig(selectedChartType);
+
+           const chartConfigc = getChartConfigc(selectedChartType);
+   
+           chart_{{$index}}.updateOptions(chartConfig)
+           chartc_{{$index}}.updateOptions(chartConfigc)
+        }
+
+        function getChartConfig(chartConf) {
+          if (chartConf == "pie") {
+            return {
+            series: seriesData_{{$index}},
+            chart: {
+                height: 350,
+                type: chartConf,
+                toolbar: {
+                    show: true
+                }
+            },
+            labels: labels_{{$index}}
+        }
+          } else if (chartConf == "donut") {
+            return {
+            series: seriesData_{{$index}},
+            chart: {
+                height: 350,
+                type: chartConf,
+                toolbar: {
+                    show: true
+                }
+            },
+            labels: labels_{{$index}}
+        }
+          } else if (chartConf == "bar") {
+            return {
+                     series: [{
+                         name: "Age",
+                         data: seriesData_{{$index}}
+                     }],
+                     chart: {
+                         height: 350,
+                         type: 'bar',
+                         toolbar: {
+                             show: true
+                         }
+                     },
+                     plotOptions: {
+                         bar: {
+                             borderRadius: 4
+                         }
+                     },
+                     xaxis: {
+                         categories: labels_{{$index}}
+                     },
+                     labels: {
+                         show: true
+                     }
+                 }
+          }
+        }
+
+        function getChartConfigc(chartConf) {
+          if (chartConf == "pie") {
+            return {
+            series: seriesDatac_{{$index}},
+            chart: {
+                height: 350,
+                type: chartConf,
+                toolbar: {
+                    show: true
+                }
+            },
+            labels: labelc_{{$index}}
+        }
+          } else if (chartConf == "donut") {
+            return {
+            series: seriesDatac_{{$index}},
+            chart: {
+                height: 350,
+                type: chartConf,
+                toolbar: {
+                    show: true
+                }
+            },
+            labels: labelc_{{$index}}
+        }
+          } else if (chartConf == "bar") {
+            return {
+                     series: [{
+                         name: "Age",
+                         data: seriesDatac_{{$index}}
+                     }],
+                     chart: {
+                         height: 350,
+                         type: 'bar',
+                         toolbar: {
+                             show: true
+                         }
+                     },
+                     plotOptions: {
+                         bar: {
+                             borderRadius: 4
+                         }
+                     },
+                     xaxis: {
+                         categories: labelc_{{$index}}
+                     },
+                     labels: {
+                         show: true
+                     }
+                 }
+          }
+        }
+
   </script>
   
   <!-- End Pie Chart -->
