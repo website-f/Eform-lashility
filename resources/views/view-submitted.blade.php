@@ -81,15 +81,27 @@
                                   @elseif ($field['fieldType'] === 'file allFile')
                                       <div class="row mb-3">
                                         <label for="inputNumber" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
-                                        <div class="col-sm-8">
-                                          @if ($field['value'] == "No File")
-                                          No File Given
-                                          @else
-                                          <a href="{{asset($field['value'])}}">View File</a>
-                                          @endif
-
-                                         </div>
-                                      </div>
+                                        
+                                            @if ($field['value'] == "No File")
+                                            <div class="col-sm-8">
+                                                No File Given
+                                            </div>
+                                            @else
+                                            @if (pathinfo($field['value'], PATHINFO_EXTENSION) === 'jpg' || pathinfo($field['value'], PATHINFO_EXTENSION) === 'jpeg' || pathinfo($field['value'], PATHINFO_EXTENSION) === 'png' || pathinfo($field['value'], PATHINFO_EXTENSION) === 'gif')
+                                            <div class="col-sm-8">
+                                              <div class="row">
+                                                  <div class="col-5">
+                                                    <img class="img-fluid" src="{{ asset($field['value']) }}" alt="Image">
+                                                  </div>
+                                              </div>
+                                            </div>
+                                                @else
+                                                <div class="col-sm-8">
+                                                    <a href="{{ asset($field['value']) }}" target="_blank">View File</a>
+                                                </div>
+                                                @endif
+                                            @endif
+                                        
                                   @elseif ($field['fieldType'] === 'date')
                                       <div class="row mb-3">
                                         <label for="inputDate" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
@@ -308,15 +320,27 @@
                           @elseif ($field['fieldType'] === 'file allFile')
                               <div class="row mb-3">
                                 <label for="inputNumber" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
-                                <div class="col-sm-8">
-                                  @if ($field['value'] == "No File")
-                                  No File Given
-                                  @else
-                                  <a href="{{asset($field['value'])}}">View File</a>
-                                  @endif
-
-                                 </div>
-                              </div>
+                                
+                                    @if ($field['value'] == "No File")
+                                    <div class="col-sm-8">
+                                        No File Given
+                                    </div>
+                                    @else
+                                    @if (pathinfo($field['value'], PATHINFO_EXTENSION) === 'jpg' || pathinfo($field['value'], PATHINFO_EXTENSION) === 'jpeg' || pathinfo($field['value'], PATHINFO_EXTENSION) === 'png' || pathinfo($field['value'], PATHINFO_EXTENSION) === 'gif')
+                                    <div class="col-sm-8">
+                                      <div class="row">
+                                          <div class="col-5">
+                                            <img class="img-fluid" src="{{ asset($field['value']) }}" alt="Image">
+                                          </div>
+                                      </div>
+                                    </div>
+                                        @else
+                                        <div class="col-sm-8">
+                                            <a href="{{ asset($field['value']) }}" target="_blank">View File</a>
+                                        </div>
+                                        @endif
+                                    @endif
+                                
                           @elseif ($field['fieldType'] === 'date')
                               <div class="row mb-3">
                                 <label for="inputDate" class="col-sm-4 col-form-label"><b>{{ $field['label'] }}</b> :</label>
