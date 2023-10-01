@@ -76,7 +76,7 @@
 
               <li class="nav-item dropdown p-1">
 
-                <a class="btn btn-outline-primary btn-sm" href="/submitted-based/{{$formType}}">
+                <a class="btn btn-outline-primary btn-sm" href="/submitted-based/{{$forms->slug}}">
                   <i class="bi bi-envelope-exclamation-fill"></i>
                  Inbox
                 </a><!-- End Messages Icon -->

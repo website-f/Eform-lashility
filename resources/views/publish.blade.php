@@ -26,7 +26,7 @@
           <form id="myForm">
             @foreach ($form as $forms)
             @if ($forms->logo !== null)
-            <center><img style="padding-top: 30px" width="500" height="300" src="{{$forms->logo}}" alt=""></center>
+            <center><img style="padding-top: 30px" width="200" height="200" src="{{$forms->logo}}" alt=""></center>
             @else
             @endif
             <h3 class="pt-3 text-center formType">{{$forms->type}} Form</h3>

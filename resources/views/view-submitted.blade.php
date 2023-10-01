@@ -25,13 +25,13 @@
                      </div>
                      <div class="modal-body card-exportPDF">
                       @if ($submitted->subtitle == null & $submitted->logo == null)
-                      <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{asset('images/lash.jpg')}}" alt=""></center>
+                      <center><img class="img-fluid" style="padding-top: 30px" width="200" height="200" src="{{asset('images/lash.jpg')}}" alt=""></center>
                       <h5 class="card-title text-center formType">{{$submitted['type']}}</h5>
                       @else
                       @if ($submitted->logo == null)
                       <center></center>
                       @else
-                      <center><img class="img-fluid" style="padding-top: 30px" width="400" height="100" src="{{asset($submitted->logo)}}" alt=""></center>
+                      <center><img class="img-fluid" style="padding-top: 30px" width="200" height="200" src="{{asset($submitted->logo)}}" alt=""></center>
                       @endif
                       <h3 class="pt-3 text-center" style="color: #001689">{{$submitted->type}}</h3>
                       <p style="font-size: 13px" class="pt-0 text-center">{{$submitted->subtitle}}</p>
@@ -264,13 +264,13 @@
                  </div>
                </div><!-- End Vertically centered Modal-->
                @if ($submitted->subtitle == null & $submitted->logo == null)
-                   <center><img class="img-fluid" style="padding-top: 30px" width="500" height="300" src="{{asset('images/lash.jpg')}}" alt=""></center>
+                   <center><img class="img-fluid" style="padding-top: 30px" width="200" height="200" src="{{asset('images/lash.jpg')}}" alt=""></center>
                    <h5 class="card-title text-center formType">{{$submitted['type']}}</h5>
                 @else
                    @if ($submitted->logo == null)
                    <center></center>
                    @else
-                   <center><img class="img-fluid" style="padding-top: 30px" width="400" height="100" src="{{asset($submitted->logo)}}" alt=""></center>
+                   <center><img class="img-fluid" style="padding-top: 30px" width="200" height="200" src="{{asset($submitted->logo)}}" alt=""></center>
                    @endif
                 <h3 class="pt-3 text-center" style="color: #001689">{{$submitted->type}}</h3>
                 <p style="font-size: 13px" class="pt-0 text-center">{{$submitted->subtitle}}</p>

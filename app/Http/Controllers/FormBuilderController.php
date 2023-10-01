@@ -367,8 +367,8 @@ class FormBuilderController extends Controller
     }
 
     public function submittedBased($formType) {
-
-        $submitted = Submitted::with('published')->where('type', $formType)->orderBy('created_at', 'desc')->get();
+        $slugprefix = $formType . "-form";
+        $submitted = Submitted::with('published')->where('slug','LIKE', "$slugprefix%")->orderBy('created_at', 'desc')->get();
         return view('submitted-based', ['submitted'=> $submitted]);
     }
 
