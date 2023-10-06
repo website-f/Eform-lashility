@@ -14,9 +14,9 @@ class approvalNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($formId)
     {
-        //
+        $this->formId = $formId;
     }
 
     /**
@@ -37,12 +37,12 @@ class approvalNotification extends Notification
         
         $logoUrl = asset('images/logo.png'); // Generate the logo URL
         $regardsMessage = 'Best regards from our team!';
-
+        $formUrl = url("/submitted-view/{$this->formId}");
         return (new MailMessage)
             ->from('jantzenform@gmail.com', 'Jantzen Form') // Sender details
             ->subject('Waiting for Approval')
             ->line('A form has been submitted and waiting for your approval')
-            ->action('View the Form', url('/'))
+            ->action('View the Form', $formUrl)
             ->line($regardsMessage);
             
     }

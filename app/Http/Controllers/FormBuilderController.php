@@ -306,14 +306,13 @@ class FormBuilderController extends Controller
         unset($field);
 
         if ($formData[2] == "pending") {
-            $recipientEmail = $formData[4]; // Replace with the desired recipient email address
-            Notification::route('mail', $recipientEmail)
-                ->notify(new approvalNotification());
-
             $form->fields = json_encode($formFields) ;
             $form->usermail = $formData[6];
             $form->notify = $formNotify;
             $form->save();
+            $recipientEmail = $formData[4]; // Replace with the desired recipient email address
+            Notification::route('mail', $recipientEmail)
+                ->notify(new approvalNotification($form->id));
             return redirect("/thankyou");
         }
 
@@ -380,16 +379,13 @@ class FormBuilderController extends Controller
         $submitted->approval = "Approved";
         $submitted->save();
 
-        $usermail = $submitted->usermail;
-        Notification::route('mail', $usermail)
-                ->notify(new userNotifyNotification());
         $notify = $submitted->notify;
         $notifyJson = json_decode($notify);
         $notifyArray = explode(',', $notifyJson[0]);
 
         foreach ($notifyArray as $email) {
             Notification::route('mail', $email)
-                ->notify(new approvedNotification());
+                ->notify(new approvedNotification($submitted->id));
         }
         return redirect('forms');
     }
