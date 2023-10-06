@@ -57,10 +57,6 @@ class TemplateController extends Controller
         }
 
         unset($field);
-
-       // Replace with the desired recipient email address
-            Notification::route('mail', 'Thehairtric@gmail.com')
-                ->notify(new notifyNotification()); 
                 
         $form = new Submitted;
         $form->logo= $formData[5];
@@ -70,6 +66,10 @@ class TemplateController extends Controller
         $form->approval = $formData[2];
         $form->publisher_id = $formData[3];
         $form->save();
+
+        // Replace with the desired recipient email address
+        Notification::route('mail', 'Thehairtric@gmail.com')
+        ->notify(new notifyNotificationTemplate($form->id, $formData[0])); 
         return redirect("/thankyou");
 
     }

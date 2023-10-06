@@ -8,17 +8,16 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Carbon;
 
-class notifyNotification extends Notification
+class notifyNotificationTemplate extends Notification
 {
     use Queueable;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct($formId, $pdfContent, $formTitle)
+    public function __construct($formId, $formTitle)
     {
         $this->formId = $formId;
-        $this->pdf = $pdfContent;
         $this->formTitle = $formTitle;
     }
 
@@ -43,11 +42,8 @@ class notifyNotification extends Notification
         return (new MailMessage)
             ->from('jantzenform@gmail.com', 'Jantzen Form') // Sender details
             ->subject($uniqueSubject)
-            ->line('Theres a form that have submitted by the user. You can view the submission by clicking the button below or view the attachment.')
+            ->line('Theres a form that have submitted by the user. You can view the submission by clicking the button below.')
             ->action('View the Form', $formUrl)
-            ->attachData($this->pdf, 'submitted_form.pdf', [
-                'mime' => 'application/pdf',
-            ])
             ->line($regardsMessage);
     }
 

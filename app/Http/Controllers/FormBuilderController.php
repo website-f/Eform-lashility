@@ -263,15 +263,9 @@ class FormBuilderController extends Controller
     public function submit(Request $request)
     {
         $formData = $request->input('formData');
-
         $formFields = $formData[1];
-        $formJsonField = json_encode($formFields);
-
         $formNotify = $formData[5];
-        $formJsonNotify = json_decode($formNotify);
-
-        $notifyArray = explode(',', $formJsonNotify[0]);
-
+        $notifyArray = explode(',', json_decode($formNotify)[0]);
         $form = new Submitted;
         $form->logo = $formData[8];
         $form->type = $formData[0];
@@ -315,6 +309,7 @@ class FormBuilderController extends Controller
             $recipientEmail = $formData[4]; // Replace with the desired recipient email address
             Notification::route('mail', $recipientEmail)
                 ->notify(new approvalNotification());
+
             $form->fields = json_encode($formFields) ;
             $form->usermail = $formData[6];
             $form->notify = $formNotify;
@@ -322,12 +317,7 @@ class FormBuilderController extends Controller
             return redirect("/thankyou");
         }
 
-        foreach ($notifyArray as $email) {
-            Notification::route('mail', $email)
-                ->notify(new notifyNotification());
-        }
-
-        $pdf = PDF::loadView('form-pdf', ['formData' => json_encode($formFields)]);
+        $pdf = PDF::loadView('form-pdf', ['formData' => json_encode($formFields), 'formTitle' => $formData[0]]);
 
         if(isset($formData[6])) {
             Notification::route('mail', $formData[6])
@@ -340,8 +330,12 @@ class FormBuilderController extends Controller
 
         $form->fields = json_encode($formFields) ;
         $form->save();
-        return redirect("/thankyou");
 
+        foreach ($notifyArray as $email) {
+            Notification::route('mail', $email)
+                ->notify(new notifyNotification($form->id, $pdf->output(), $formData[0]));
+        }
+        return redirect("/thankyou");
     }
 
 

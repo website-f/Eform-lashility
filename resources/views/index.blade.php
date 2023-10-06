@@ -5,104 +5,84 @@
 @auth
 
 <section class="section dashboard">
-    <div class="row">
-    @if (Auth::user()->role->role == "Admin" || Auth::user()->role->role == "SuperAdmin")
+  @if (Auth::user()->role->role == "Admin" || Auth::user()->role->role == "SuperAdmin")
+  <div class="row">
+    <!-- Sales Card -->
+    <div class="col-lg-4 ">
+      <div class="card info-card sales-card">
+        <a href="/forms">
+        <div class="card-body">
+          <h5 class="card-title">Forms</h5>
 
-     <!-- Left side columns -->
-     <div class="col-lg-6">
-      <div class="row">
-
-        <!-- Sales Card -->
-        <div class="col-12">
-          <div class="card info-card sales-card">
-<a href="/forms">
-            <div class="card-body">
-              <h5 class="card-title">Forms</h5>
-
-              <div class="d-flex align-items-center">
-                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                  <i class="bi bi-pencil-square"></i>
-                </div>
-                <div class="ps-3">
-                  <h6 class="text-primary pt-1 fw-bold">{{$forms->count()}}</h6>
-
-                </div>
-              </div>
+          <div class="d-flex align-items-center">
+            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+              <i class="bi bi-pencil-square"></i>
             </div>
-</a>
-          </div>
-        </div><!-- End Sales Card -->
-
-
-
-        <!-- Recent Sales -->
-        <div class="col-12">
-          <div class="card recent-sales overflow-auto">
-
-            <div class="card-body">
-              <h5 class="card-title">Recent Created Forms</h5>
-
-              <table class="table table-borderless datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Form Title</th>
-                    <th scope="col">Created Date</th>
-                    <th scope="col">Created Time</th>
-                    <th scope="col">Action</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  @foreach ($forms as $item)
-                  <tr>
-                      <th scope="row">{{$loop->iteration}}</th>
-                      <td>{{$item['type']}}</td>
-                      <td>{{$item['created_at']->format('d-m-Y')}}</td>
-                      <td>{{$item['created_at']->format('h:i')}}</td>
-                      <td><a class="btn btn-outline-primary" href="/form-view/{{$item->id}}">View</a></td>
-                    </tr>
-                  @endforeach
-                </tbody>
-              </table>
+            <div class="ps-3">
+              <h6 class="text-primary pt-1 fw-bold">{{$forms->count()}}</h6>
 
             </div>
-
           </div>
-        </div><!-- End Recent Sales -->
-
+        </div>
+       </a>
       </div>
-    </div><!-- End Left side columns -->
+    </div><!-- End Sales Card -->
 
-    <!-- Right side columns -->
-    <div class="col-lg-6">
-          <!-- Revenue Card -->
-          <div class="col-12">
-           <div class="card info-card revenue-card">
- <a href="/submitted" >
-             <div class="card-body">
-               <h5 class="card-title">Submission</h5>
+    <!-- Revenue Card -->
+    <div class="col-lg-4">
+      <div class="card info-card revenue-card overflow-auto">
+      <a href="/submitted">
+        <div class="card-body">
+          <h5 class="card-title">Submission</h5>
 
-               <div class="d-flex align-items-center">
-                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                   <i class="bi bi-layout-text-window"></i>
-                 </div>
-                 <div class="ps-3">
-                   <h6 class="text-success pt-1 fw-bold">{{$submitted->count()}}</h6>
+          <div class="d-flex align-items-center">
+            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+              <i class="bi bi-layout-text-window"></i>
+            </div>
+            <div class="ps-3">
+              <h6 class="text-success pt-1 fw-bold">{{$submitted->count()}}</h6>
 
 
-                 </div>
-               </div>
-             </div>
- </a>
-           </div>
-          </div><!-- End Revenue Card -->
+            </div>
+          </div>
+        </div>
+       </a>
+      </div>
+     </div><!-- End Revenue Card -->
+
+     <!-- Sales Card -->
+    <div class="col-lg-4 ">
+      <div class="card info-card customers-card">
+        <a href="/trash-form">
+        <div class="card-body">
+          <h5 class="card-title">My Forms</h5>
+
+          <div class="d-flex align-items-center">
+            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+              <i class="bi bi-trash"></i>
+            </div>
+            <div class="ps-3">
+              <h6 class="text-primary pt-1 fw-bold">{{$myform->count()}}</h6>
+
+            </div>
+          </div>
+        </div>
+       </a>
+      </div>
+    </div><!-- End Sales Card -->
+
+  </div>
+    <div class="row">
+      
+      <!-- Right side columns -->
+    <div class="col-lg-12">
       <!-- Website Traffic -->
       <div class="card">
 
-        <div class="card-body pb-0 overflow-auto">
+        <div class="card-body pb-0">
           <h5 class="card-title">Recent Submission</h5>
 
+          <div class="table-responsive">
           <table class="table table-borderless datatable">
             <thead>
               <tr>
@@ -142,6 +122,7 @@
               @endforeach
             </tbody>
           </table>
+          </div>
 
 
         </div>
@@ -150,6 +131,49 @@
 
 
     </div><!-- End Right side columns -->
+
+    
+     <!-- Left side columns -->
+     <div class="col-lg-12">
+      <div class="row">
+        <!-- Recent Sales -->
+        <div class="col-12">
+          <div class="card recent-sales overflow-auto">
+
+            <div class="card-body">
+              <h5 class="card-title">Recent Created Forms</h5>
+
+              <table class="table table-borderless datatable">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Form Type</th>
+                    <th scope="col">Created Date</th>
+                    <th scope="col">Created Time</th>
+                    <th scope="col">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  @foreach ($forms as $item)
+                  <tr>
+                      <th scope="row">{{$loop->iteration}}</th>
+                      <td>{{$item['type']}}</td>
+                      <td>{{$item['created_at']->format('d-m-Y')}}</td>
+                      <td>{{$item['created_at']->format('h:i')}}</td>
+                      <td><a class="btn btn-outline-primary" href="/form-view/{{$item->id}}">View</a></td>
+                    </tr>
+                  @endforeach
+                </tbody>
+              </table>
+
+            </div>
+
+          </div>
+        </div><!-- End Recent Sales -->
+
+      </div>
+    </div><!-- End Left side columns -->
 
     @else
 
