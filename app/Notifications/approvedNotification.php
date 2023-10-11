@@ -14,9 +14,9 @@ class approvedNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct($formId)
     {
-        //
+        $this->formId = $formId;
     }
 
     /**
@@ -35,11 +35,12 @@ class approvedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $regardsMessage = 'Best regards from our team!';
+        $formUrl = url("/submitted-view/{$this->formId}");
         return (new MailMessage)
             ->from('jantzenform@gmail.com', 'Jantzen Form') // Sender details
             ->subject('Form have been approved')
             ->line('there is a form that have approved, please view it for your reference')
-            ->action('View the Form', url('/'))
+            ->action('View the Form', $formUrl)
             ->line($regardsMessage);
     }
 
