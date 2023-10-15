@@ -38,7 +38,7 @@ class notifyNotificationTemplate extends Notification
     {
         $regardsMessage = 'Best regards from our team!';
         $uniqueSubject = 'Form with form title ' . $this->formTitle . ' have been submitted ' . now()->format('d-m-Y');
-        $formUrl = url("/submitted-view/{$this->formId}");
+        $formUrl = url("/submission/{$this->formId}");
         return (new MailMessage)
             ->from('jantzenform@gmail.com', 'Jantzen Form') // Sender details
             ->subject($uniqueSubject)

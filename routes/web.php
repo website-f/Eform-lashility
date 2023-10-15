@@ -54,6 +54,7 @@ Route::get('/approval-submission/{formType}', [FormBuilderController::class, 'su
 Route::get('/thankyou', [FormBuilderController::class, 'thankyou']);
 Route::get('/approve/{id}', [FormBuilderController::class, 'approved'])->middleware('auth');
 Route::get('/reject/{id}', [FormBuilderController::class, 'rejected'])->middleware('auth');
+Route::get('/submission/{id}', [FormBuilderController::class, 'submission']);
 
 //Ready Made and template Routes
 Route::get('/ready-forms', [TemplateController::class, 'readyMade'])->middleware('auth');

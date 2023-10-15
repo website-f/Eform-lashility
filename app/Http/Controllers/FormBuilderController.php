@@ -316,7 +316,7 @@ class FormBuilderController extends Controller
             return redirect("/thankyou");
         }
 
-        $pdf = PDF::loadView('form-pdf', ['formData' => json_encode($formFields), 'formTitle' => $formData[0]]);
+        //$pdf = PDF::loadView('form-pdf', ['formData' => json_encode($formFields), 'formTitle' => $formData[0]]);
 
         if(isset($formData[6])) {
             Notification::route('mail', $formData[6])
@@ -332,7 +332,7 @@ class FormBuilderController extends Controller
 
         foreach ($notifyArray as $email) {
             Notification::route('mail', $email)
-                ->notify(new notifyNotification($form->id, $pdf->output(), $formData[0]));
+                ->notify(new notifyNotification($form->id, $formData[0]));
         }
         return redirect("/thankyou");
     }
@@ -395,6 +395,11 @@ class FormBuilderController extends Controller
         $submitted->approval = "Rejected";
         $submitted->save();
         return redirect('forms');
+    }
+
+    public function submission($id) {
+        $submitted = Submitted::findOrFail($id);
+        return view('partial.submission-main', ['submitted'=> $submitted]);
     }
 
 
