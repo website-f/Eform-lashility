@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Notifications\notifyNotification;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\notifyNotificationTemplate;
 
 class TemplateController extends Controller
 {
@@ -57,7 +58,7 @@ class TemplateController extends Controller
         }
 
         unset($field);
-                
+
         $form = new Submitted;
         $form->logo= $formData[5];
         $form->type = $formData[0];
@@ -69,7 +70,7 @@ class TemplateController extends Controller
 
         // Replace with the desired recipient email address
         Notification::route('mail', 'Thehairtric@gmail.com')
-        ->notify(new notifyNotificationTemplate($form->id, $formData[0])); 
+        ->notify(new notifyNotificationTemplate($form->id, $formData[0]));
         return redirect("/thankyou");
 
     }
@@ -171,19 +172,19 @@ class TemplateController extends Controller
             $submittedAll = Submitted::where('type', $type)->get();
             $chartsData = [];
         }
-        
+
         return view('report-view', [
-            'submittedAll' => $submittedAll, 
+            'submittedAll' => $submittedAll,
             'submitSlug' => $submitSlug,
-            'submitted' => $submitted, 
-            'submitType' => $submitType, 
+            'submitted' => $submitted,
+            'submitType' => $submitType,
             'chartsData' => $chartsData,
             'startdate' => "",
             'enddate' => "",
         ]);
     }
 
-    public function generateReport(Request $request, $slug) 
+    public function generateReport(Request $request, $slug)
     {
         // Validate and process the form input, including group_by, start_date, end_date, etc.
         $groupBysArray = $request->input('group_by');
@@ -215,10 +216,10 @@ class TemplateController extends Controller
             $submitted = Submitted::where('type', $type)->whereBetween('created_at', [$startDate, $endDate])->get();
             $submittedAll = Submitted::where('type', $type)->get();
         }
-    
+
         $chartsData = [];
         if (empty($groupBys) || (count($groupBys) === 1 && $groupBys[0] === "")) {
-            
+
             $chartsData = null;
 
             return view('report-view', [
@@ -232,13 +233,13 @@ class TemplateController extends Controller
             ]);
         } else {
             foreach ($groupBys as $groupBy) {
-            
+
                 $chartsData[] = [
                     'group_by' => $groupBy,
                     'chartLabels' => $groupBy,
                 ];
             }
-        
+
             return view('report-view', [
                 'chartsData' => $chartsData,
                 'submitType' => $submitType,
@@ -249,6 +250,6 @@ class TemplateController extends Controller
                 'submitSlug' => $submitSlug,
             ]);
         }
-    
+
     }
 }
