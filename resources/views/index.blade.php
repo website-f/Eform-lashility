@@ -53,16 +53,16 @@
      <!-- Sales Card -->
     <div class="col-lg-4 ">
       <div class="card info-card customers-card">
-        <a href="/trash-form">
+        <a href="/myforms/{{Auth::user()->id}}">
         <div class="card-body">
           <h5 class="card-title">My Forms</h5>
 
           <div class="d-flex align-items-center">
             <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-              <i class="bi bi-trash"></i>
+              <i class="bi bi-file-earmark-text"></i>
             </div>
             <div class="ps-3">
-              <h6 class="text-primary pt-1 fw-bold">{{$myform->count()}}</h6>
+              <h6 class="text-danger pt-1 fw-bold">{{$myform->count()}}</h6>
 
             </div>
           </div>

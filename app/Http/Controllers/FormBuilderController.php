@@ -359,6 +359,18 @@ class FormBuilderController extends Controller
         return redirect('/submitted');
     }
 
+    public function submittedBasedDelete($id, $type) {
+        $form = str_replace("Form", "", $type);
+        $fType = Form::where('type', $form)->first();
+        $submitted = Submitted::findOrFail($id);
+        $submitted->delete();
+        if($submitted) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Successfully remove Submission');
+        }
+        return redirect('/submitted-based/'.$fType->slug);
+    }
+
     public function submittedBased($formType) {
         $slugprefix = $formType . "-form";
         $submitted = Submitted::with('published')->where('slug','LIKE', "$slugprefix%")->orderBy('created_at', 'desc')->get();
@@ -400,6 +412,17 @@ class FormBuilderController extends Controller
     public function submission($id) {
         $submitted = Submitted::findOrFail($id);
         return view('partial.submission-main', ['submitted'=> $submitted]);
+    }
+
+    public function deleteSelectedSubmission(Request $request) {
+        $selectedItems = $request->input('items');
+        $submitted = Submitted::whereIn('id', $selectedItems);
+        $submitted->delete();
+        if($submitted) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Successfully deleted Submission');
+        }
+        return redirect('/trash-submitted');
     }
 
 

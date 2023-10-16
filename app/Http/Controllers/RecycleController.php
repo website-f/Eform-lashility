@@ -70,4 +70,15 @@ class RecycleController extends Controller
         }
         return redirect('/submitted');
     }
+
+    public function deleteSelected(Request $request) {
+        $selectedItems = $request->input('items');
+        $submitted = Submitted::withTrashed()->whereIn('id', $selectedItems);
+        $submitted->forceDelete();
+        if($submitted) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'Successfully deleted Submission');
+        }
+        return redirect('/trash-submitted');
+    }
 }

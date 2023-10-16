@@ -17,7 +17,27 @@
             <div class="form-check form-switch" style="margin-left: 30px; margin-bottom: 20px">
               <input style="font-size: 21px" class="form-check-input" type="checkbox" id="selectAllCheckbox">
               <label style="font-size: 18px" class="form-check-label" for="flexSwitchCheckChecked"><b>Select All</b></label>
-
+              <button style="margin-left: 10px" class="btn btn-outline-success" onclick="exportToExcel()">Export to Excel</button>
+              <button style="margin-left: 10px" type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#verticalycentered-selected-trash">
+                Delete
+              </button>
+              <div class="modal fade" id="verticalycentered-selected-trash" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Delete</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                     Delete all selected submission ?
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button id="delete-selected-submitted-based" class="btn btn-danger">Confirm</button>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- End Vertically centered Modal-->
             </div>
 
 
@@ -56,12 +76,12 @@
               <tbody>
                 @foreach ($submitted as $item)
                 <tr>
-                    <td><input style="font-size: 19px" type="checkbox" class="select-checkbox" data-id="{{$item['id']}}"></td>
+                    <td><input style="font-size: 19px" type="checkbox" class="select-checkbox" data-id="{{$item['id']}}" value="{{$item['id']}}"></td>
                     <th scope="row">{{$loop->iteration}}</th>
                     <td>
                         @if (Auth::user()->role->role == "SuperAdmin" || Auth::user()->role->role == "Admin"  )
                         <a class="btn btn-outline-primary btn-sm" href="/submitted-view/{{$item['id']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="View"><i class="bi bi-eye-fill"></i></a>
-                        <a class="btn btn-outline-danger btn-sm" href="#" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash3-fill"></i></a>
+                        <a class="btn btn-outline-danger btn-sm" href="/submitted-based-delete/{{$item['id']}}/{{$item['type']}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"><i class="bi bi-trash3-fill"></i></a>
                         @else
                         <p>No Action</p>
                         @endif
@@ -111,7 +131,6 @@
               </tbody>
 
             </table>
-            <button class="btn btn-outline-success" onclick="exportToExcel()">Export to Excel</button>
             <!-- End Table with stripped rows -->
             </div>
           </div>
@@ -123,6 +142,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
 
 <script>
+  const deleteButton = document.getElementById("delete-selected-submitted-based");
 function getFormattedDate(dateString) {
   const date = new Date(dateString);
   const day = date.getDate().toString().padStart(2, '0');
@@ -208,11 +228,33 @@ function exportToExcel() {
   document.body.removeChild(a);
 }
 
+// Delete selected items when the Delete Selected button is clicked
+deleteButton.addEventListener("click", function () {
+    const checkboxes = document.querySelectorAll('.select-checkbox');
+        const selectedItems = Array.from(checkboxes)
+            .filter((checkbox) => checkbox.checked)
+            .map((checkbox) => checkbox.value);
 
-
-
-
-
+        // Send the selected item IDs to the server for deletion using AJAX
+        if (selectedItems.length > 0) {
+            // You can use fetch or XMLHttpRequest to send a request to the server
+            // Here's a simplified example using fetch:
+            fetch("/delete-items-submitted", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                },
+                body: JSON.stringify({ items: selectedItems }),
+            })
+            .then((response) => {
+                if (response.ok) {
+                    // Handle successful deletion (e.g., remove the deleted rows from the table)
+                    location.reload(); // Refresh the page
+                }
+            });
+        }
+    });
 
 </script>
 

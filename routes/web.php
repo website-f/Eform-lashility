@@ -49,12 +49,14 @@ Route::post('/submit', [FormBuilderController::class, 'submit']);
 Route::get('/submitted', [FormBuilderController::class, 'submittedView'])->middleware('auth');
 Route::get('/submitted-view/{id}', [FormBuilderController::class, 'submittedDetails'])->middleware('auth');
 Route::get('/submitted-delete/{id}', [FormBuilderController::class, 'submittedDelete'])->middleware('auth');
+Route::get('/submitted-based-delete/{id}/{type}', [FormBuilderController::class, 'submittedBasedDelete'])->middleware('auth');
 Route::get('/submitted-based/{formType}', [FormBuilderController::class, 'submittedBased'])->middleware('auth')->where('formType', '[\w\s\-_\/]+');
 Route::get('/approval-submission/{formType}', [FormBuilderController::class, 'submittedPending'])->middleware('auth');
 Route::get('/thankyou', [FormBuilderController::class, 'thankyou']);
 Route::get('/approve/{id}', [FormBuilderController::class, 'approved'])->middleware('auth');
 Route::get('/reject/{id}', [FormBuilderController::class, 'rejected'])->middleware('auth');
 Route::get('/submission/{id}', [FormBuilderController::class, 'submission']);
+Route::post('/delete-items-submitted', [FormBuilderController::class, 'deleteSelectedSubmission'])->middleware('auth');
 
 //Ready Made and template Routes
 Route::get('/ready-forms', [TemplateController::class, 'readyMade'])->middleware('auth');
@@ -85,6 +87,7 @@ Route::delete('/trash-form-delete/{id}', [RecycleController::class, 'trashFormDe
 Route::get('/trash-submitted', [RecycleController::class, 'trashSubmitted'])->middleware('auth');
 Route::get('/trash-submitted-restore/{id}', [RecycleController::class, 'trashSubmittedRestore'])->middleware('auth');
 Route::get('/trash-submitted-delete/{id}', [RecycleController::class, 'trashSubmittedDelete'])->middleware('auth');
+Route::post('/delete-items-trash', [RecycleController::class, 'deleteSelected'])->middleware('auth');
 
 //Report Routes
 Route::get('/report', [TemplateController::class, 'report'])->middleware('auth');
