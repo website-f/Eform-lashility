@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RecycleController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\FormBuilderController;
+use App\Http\Controllers\DocumentationController;
 
 /*
 |--------------------------------------------------------------------------
