@@ -196,12 +196,12 @@
       </li>
   </ul>
 </li>
-    <!--<li class="nav-item">
-      <a class="nav-link {{ Request::is('/documentation') ? ' ' : 'collapsed' }}" href="/">
-        <i class="bi bi-mortarboard-fill"></i>
-        <span>Documentation</span>
-      </a>
-    </li> End Dashboard Nav -->
+<li class="nav-item">
+  <a class="nav-link {{ Request::is('/guideline') ? ' ' : 'collapsed' }}" href="/guideline">
+    <i class="bi bi-mortarboard-fill"></i>
+    <span>Guidelines</span>
+  </a>
+</li>
    @endauth
   </ul>
 

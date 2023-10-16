@@ -93,3 +93,6 @@ Route::post('/delete-items-trash', [RecycleController::class, 'deleteSelected'])
 Route::get('/report', [TemplateController::class, 'report'])->middleware('auth');
 Route::get('/report-view/{slug}', [TemplateController::class, 'reportView'])->middleware('auth');
 Route::post('/generate-report/{slug}', [TemplateController::class, 'generateReport'])->middleware('auth');
+
+//Guidelines Routes
+Route::get('/guideline', [DocumentationController::class, 'guideline'])->middleware('auth');
