@@ -178,6 +178,13 @@
                         </label>
                       </div>
 
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="outlet" id="gridCheck13" value="Publika">
+                        <label class="form-check-label">
+                          Publika
+                        </label>
+                      </div>
+
                   </div><br>
                     <hr>
                     <h2>Questions</h2>

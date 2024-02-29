@@ -179,9 +179,16 @@
                       </div>
 
                       <div class="form-check">
-                        <input class="form-check-input" type="radio" name="outlet" id="gridCheck2" value="Camp">
+                        <input class="form-check-input" type="radio" name="outlet" id="gridCheck2" value="Setia City Mall">
                         <label class="form-check-label">
                          Setia City Mall
+                        </label>
+                      </div>
+
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="outlet" id="gridCheck2" value="Publika">
+                        <label class="form-check-label">
+                         Publika
                         </label>
                       </div>
 
