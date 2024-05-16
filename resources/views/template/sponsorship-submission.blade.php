@@ -141,43 +141,34 @@ function getFormattedDate(dateString) {
   return `${day}-${month}-${year}`;
 }
 
-function getSelectedRows() {
-  const checkboxes = document.querySelectorAll('.select-checkbox:checked');
-  const selectedRows = [];
+function getAllRows() {
+  const submitted = @json($submitted);
+  const allRows = [];
 
-  checkboxes.forEach(checkbox => {
-    const rowId = parseInt(checkbox.dataset.id);
-    const submitted = @json($submitted); // Parse the rowId as an integer
-    // Assuming your submitted data is an array of objects with 'id' as the unique identifier
-    const selectedRow = submitted.find(item => item.id === rowId);
-    if (selectedRow) {
-      // Parse the 'fields' property as a JSON object
-      selectedRow.fields = JSON.parse(selectedRow.fields);
+  submitted.forEach(item => {
+    item.fields = JSON.parse(item.fields);
+    const newRow = { type: item.type, created_at: getFormattedDate(item.created_at) };
 
-      const newRow = { type: selectedRow.type, created_at: getFormattedDate(selectedRow.created_at) };
+    item.fields.forEach(field => {
+      if (field.fieldType === 'location') {
+        let locationInfo = '';
+        field.value.forEach(loc => {
+          if (loc.searchInput != null && loc.locationName != null && loc.coordinates != null) {
+            locationInfo += `- Search Input: ${loc.searchInput} | Location Name: ${loc.locationName} | Coordinates: ${loc.coordinates}\n`;
+          }
+        });
+        newRow[field.label] = locationInfo;
+      } else if (Array.isArray(field.value)) {
+        newRow[field.label] = field.value.join(', ');
+      } else {
+        newRow[field.label] = field.value;
+      }
+    });
 
-      // Extract field data and format it for the table head and values
-      selectedRow.fields.forEach(field => {
-        if (field.fieldType === 'location') {
-          let locationInfo = '';
-          field.value.forEach(loc => {
-            if (loc.searchInput != null && loc.locationName != null && loc.coordinates != null) {
-              locationInfo += `- Search Input: ${loc.searchInput} | Location Name: ${loc.locationName} | Coordinates: ${loc.coordinates}\\n`;
-            }
-          });
-          newRow[field.label] = locationInfo;
-        } else if (Array.isArray(field.value)) {
-          newRow[field.label] = field.value.join(', ');
-        } else {
-          newRow[field.label] = field.value;
-        }
-      });
-
-      selectedRows.push(newRow);
-    }
+    allRows.push(newRow);
   });
 
-  return selectedRows;
+  return allRows;
 }
 
 document.getElementById('selectAllCheckbox').addEventListener('change', function () {
@@ -188,23 +179,20 @@ document.getElementById('selectAllCheckbox').addEventListener('change', function
 });
 
 function exportToExcel() {
-  const selectedRows = getSelectedRows();
-  console.log(selectedRows);
+  const selectedAll = document.getElementById('selectAllCheckbox').checked;
+  const rows = selectedAll ? getAllRows() : getSelectedRows();
 
-  if (selectedRows.length === 0) {
+  if (rows.length === 0) {
     alert('Please select at least one row to export.');
     return;
   }
 
-  const rows = [Object.keys(selectedRows[0])]; // Headers
-  selectedRows.forEach(row => {
-    const values = Object.values(row);
-    rows.push(values);
-  });
+  const headers = Object.keys(rows[0]);
+  const data = [headers, ...rows.map(row => headers.map(header => row[header]))];
 
   const sheetName = 'Sheet1';
   const workbook = XLSX.utils.book_new();
-  const worksheet = XLSX.utils.aoa_to_sheet(rows);
+  const worksheet = XLSX.utils.aoa_to_sheet(data);
 
   XLSX.utils.book_append_sheet(workbook, worksheet, sheetName);
 
@@ -225,13 +213,8 @@ function exportToExcel() {
   document.body.removeChild(a);
 }
 
-
-
-
-
-
-
 </script>
+
 
 
 @endsection
